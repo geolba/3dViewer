@@ -1,0 +1,620 @@
+﻿@charset "UTF-8";
+
+/* fonts */
+/*@font-face {
+    font-family: Hamburger;
+    src: url(../font/Hamburger.ttf);
+}*/
+
+@charset "UTF-8";
+
+html, body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, fieldset, input, hr {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em, th, a {
+    font-weight: normal;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+fieldset, img, hr {
+    border: none;
+    outline: none;
+}
+
+caption, th {
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td {
+    vertical-align: top;
+}
+
+a {
+    color: #000;
+}
+
+h1 {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+
+
+
+
+/* Temp styles */
+#mainWindow {
+    height: 100%;
+    width: 100%;
+}
+
+
+.content, .sidebar, .footer {
+    border-top: none;
+}
+
+/* Core styles */
+#banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    width: 100%;
+    /*padding: 0 30px 0 30px;*/
+    background-color: rgb(94,94,94); /*helles grau laut Schiegl */
+    z-index: 5;
+}
+
+#headerArea {
+    /*position: relative;
+    height: 100%;
+    width: 100%;*/
+    position: absolute;
+    height: auto;
+    width: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    /*margin:30px;*/
+    margin: 0 30px 0 30px;
+    overflow: visible;
+}
+
+
+#logoArea {
+    float: left;
+    width: 170px;
+    height: 100%;
+    line-height: 60px;
+    text-align: left;
+}
+
+    #logoArea img {
+        vertical-align: bottom;
+    }
+
+#titleArea {
+    position: absolute;
+    left: 170px;
+    right: 270px;
+    float: left;
+    height: 100%;
+    line-height: 60px;
+    text-align: left;
+    /*background-color: blue;*/
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+#subtitle, #subtitle:visited, #subtitle:active, #subtitle:hover {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    vertical-align: sub;
+    line-height: 20px;
+}
+
+#searchArea {
+    position: relative;
+    float: right;
+    width: 270px;
+    height: 100%;
+}
+
+#search {
+    height: 28px;
+    position: absolute;
+    /*top: 25%;*/
+    top: 16px;
+    right: 0;
+    /*margin-left: -100px;*/
+    /*height: 100%;*/
+    width: 225px;
+}
+
+.selected {
+    height: 35px;
+    background: #c4c4c4;
+}
+
+#mainWindow > .content {
+    position: fixed;
+    top: 60px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: auto;
+}
+
+.sidebar {
+    position: relative; /* needed for stacking */
+    /*width: 20%;*/
+    height: 100%;
+    border-top: none;
+}
+
+    .sidebar.left {
+        /*background-color: rgb(244,244,244);*/
+        float: left;
+        border-left: none;
+        /*display: table-cell;*/
+        width: 30%;
+        min-width: 200px;
+        height: 100%;
+    }
+
+#leftPane {
+    /*font-size: 0.9em;*/
+    font-size: 12px;
+    color: black;
+    /*overflow-y:auto;*/
+}
+
+#wrapper {
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    bottom: 75px;
+    overflow-y: auto;
+}
+
+/*#legendHeader {
+    padding: 0 30px 5px 30px;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+#legendHeaderText {
+    font-size: 16px;
+    font-weight: bold;
+}*/
+
+
+#mapTool {
+    padding: 15px 30px 5px 30px;
+}
+
+/*.borehole {
+    background-image: url("img/buttons.png");
+    background-repeat: no-repeat;
+    background-position: -48px 0;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+}*/
+
+
+
+#descriptionPanel {
+    max-height: 60%;
+    overflow: auto;
+    width: 100%;
+}
+
+.descriptionDesktop {
+    padding: 15px 30px 15px 30px;
+    text-align: justify;
+}
+
+#legendPanel {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.legendDesktop {
+    padding: 15px 30px 15px 30px;
+}
+
+#slicerPanel {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.slicerDesktop {
+    padding: 15px 30px 15px 30px;
+}
+/* Relativer Tooltip */
+span.tooltip {
+    position: relative;
+    text-decoration: none;
+    font-weight: bolder;
+    color: #444444;
+    cursor: pointer;
+    overflow: visible;
+    font-size: 8px;
+}
+
+
+#logoPanel {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+    #logoPanel > a > img {
+        padding-left: 30px;
+        max-height: 100%;
+        max-width: 90%;
+    }
+/*.clearfix {
+    clear: both;
+}*/
+
+.sidebar.right {
+    border: none;
+    max-width: calc(100% - 200px);
+    width: 70%;
+    /*min-width:400px;*/
+    float: left;
+}
+
+#div_map {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#webgl {
+    height: auto;
+    width: auto;
+    background-color: rgb(253,253,253);
+    /*margin:30px 30px 30px 0;*/
+}
+
+/*#webgl canvas{
+   background-color: #48D1CC;
+}*/
+
+.mapDesktop {
+    overflow: hidden;
+    position: absolute;
+    bottom: 30px;
+    top: 30px;
+    left: 0;
+    right: 30px;
+}
+
+#inset {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: none;
+    width: 120px;
+    height: 120px;
+}
+
+#helpButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #666666;
+    cursor: help;
+}
+
+#bottomPane {
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.9, rgb(94, 94, 94)), color-stop(1, rgb(0, 0, 0)) );
+    background-image: -o-linear-gradient(top, rgb(94, 94, 94) 90%, rgb(0, 0, 0) 100%);
+    background-image: -moz-linear-gradient(top, rgb(94, 94, 94) 90%, rgb(0, 0, 0) 100%);
+    background-image: -webkit-linear-gradient(top, rgb(94, 94, 94) 90%, rgb(0, 0, 0) 100%);
+    background-image: -ms-linear-gradient(top, rgb(94, 94, 94) 90%, rgb(0, 0, 0) 100%);
+    background-image: linear-gradient(to top, rgb(94, 94, 94) 90%, rgb(0, 0, 0) 100%);
+    height: 60px;
+    /*color: #fff;*/
+    color: #ccc;
+    font-size: 11px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#ownerArea {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+#fText {
+    float: left;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+    #fText span {
+        vertical-align: middle;
+        /*line-height: 14px;*/
+    }
+
+.tabSpace {
+    float: left;
+    width: 15px;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+}
+
+#creativeCommons {
+    float: left;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+    #creativeCommons span, #creativeCommons img {
+        vertical-align: middle;
+        /*line-height: 10px;*/
+    }
+
+    #creativeCommons a:link, #creativeCommons a:visited, #creativeCommons a:hover, #creativeCommons a:active {
+        vertical-align: middle;
+         color: #ccc;
+        text-decoration: none;
+    }
+
+#socialButtons {
+    position: relative;
+    vertical-align: middle;
+    height: 100%;
+    line-height: 60px;
+    float: right;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+    #socialButtons a, #socialButtons div {
+        vertical-align: middle;
+        line-height: 15px;
+    }
+
+.share-twitter {
+    border: 1px solid #00CDCD;
+    padding: 2px 10px;
+    background-color: #48D1CC;
+    color: #ffffff;
+    /*-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;*/
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.share-google {
+    border: 1px solid #D8472A;
+    padding: 2px 10px;
+    background-color: #D8472A;
+    color: #ffffff;
+    /*-moz-border-radius: 4px;
+    -webkit-border-radius:4px;
+    -khtml-border-radius:4px;*/
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.share-facebook {
+    border: 1px solid #3B5898;
+    padding: 2px 10px;
+    margin-right: 10px;
+    background-color: #3B5898;
+    color: #FFFFFF;
+    /*-moz-border-radius: 4px;
+    -webkit-border-radius:4px;
+    -khtml-border-radius:4px;*/
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+#progressArea {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    z-index: 30;
+}
+
+.loading {
+    position: absolute;
+    /*z-index: 65536;*/
+     z-index: 999999;
+}
+
+.loading-content {
+    width: 100%;
+    min-height: 75px;
+    height: 100%;
+    background: rgba(160, 160, 160, 0.5);
+    text-align: center;
+    color: rgb(240, 240, 240);
+    font-size: 25px;
+}
+
+
+
+
+/* Z-index of #mask must lower than #boxes .window */
+#mask {
+    position: absolute;
+    z-index: 9000;
+    background-color: #000;
+    display: none;
+}
+
+#popup .window {
+    position: fixed;
+    /*width:440px;
+  height:200px;*/
+    max-width: 480px;
+    min-width: 300px;
+    display: none;
+    z-index: 9999;
+    padding: 10px;
+    /*width:375px; 
+  height:203px;*/
+    background-color: #ffffff;
+    border: solid gray;
+    border-width: 1px 2px 2px;
+    border-radius: 3px;
+}
+/* Customize your modal window here, you can add background image too */
+/*#popup #dialog {
+  width:375px; 
+  height:203px;
+   padding:10px;
+  background-color:#ffffff;
+}*/
+
+#popupbar {
+    background: dimgray;
+    color: white;
+    padding-left: 4px;
+    height: 18px;
+}
+
+#popup .close {
+    color: rgb(220, 220, 220);
+    background: gray;
+    border: 1px solid darkgray;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
+
+#popupbody {
+    background-color: white;
+    padding: 2px 5px 2px;
+    max-height: 500px;
+    overflow: auto;
+}
+/* pageinfo */
+#pageinfo {
+    font-size: small;
+}
+
+    #pageinfo h1 {
+        background-color: gray;
+        color: white;
+        font-size: small;
+        font-weight: normal;
+        margin-top: 5px;
+        margin-bottom: 3px;
+        padding: 1px;
+        padding-left: 6px;
+    }
+
+.license {
+    font-size: xx-small;
+}
+
+
+
+/* attributes */
+table.layer tr {
+    background-color: #eeeeee;
+}
+
+table.coords tr {
+    background-color: #eeeeee;
+}
+
+table.attrs tr:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
+
+table.attrs tr td:first-child {
+    width: 40%;
+}
+
+@import url("legend.css");
+@import url("popup.css");
+@import url("borehole.css");
+@import url("controls.css");
+@import url("rangeslider.css");
+@import url("slicer.css");

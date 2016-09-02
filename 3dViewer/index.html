@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>3D Viewer</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link href="content/img/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+ 
+    <!--<link rel="stylesheet" type="text/css" href="content/concat.min.css" />-->
+
+    <link rel='stylesheet' type='text/css' href='content/page.css' />  
+    <link rel='stylesheet' type='text/css' href='content/mobile_dialog.css' />  
+    <link rel="stylesheet" type="text/css" href="content/legend.css" />
+    <link rel="stylesheet" type="text/css" href="content/popup.css" />
+    <link rel="stylesheet" type="text/css" href="content/borehole.css" />
+    <link rel="stylesheet" type="text/css" href="content/controls.css" />
+    <link rel="stylesheet" type="text/css" href="content/rangeslider.css" />
+    <link rel="stylesheet" type="text/css" href="content/slicer.css" />
+
+   
+</head>
+<body>
+
+    <!--<div class='fm_basemap_list fm_overlay'>
+        <div class='gba_close'></div>
+        <div id='basemapList' class='fm_handle'></div>
+    </div>-->
+
+    <div id="mainWindow">
+
+        <header>
+            <div id="headerArea">
+                <div id="legendHeaderText" class='fm_title_bar'></div>
+            </div>
+        </header>
+
+        <nav>
+            <div class='div_nav'>
+                <!-- float left elements ohne gba_trigger und braucht auch kein data-panel  -->
+                <a href="http://www.geologie.ac.at/forschung-entwicklung/geologische-3d-modellierung/" target="_blank" class='home_button gba_button'>
+                    <span class='fm_icon fm_home_icon'></span>
+                    <span class='fm_icon_text text_show'>GBA</span>
+                </a>
+                <a href='#' class='basemap_button gba_button'>
+                    <span class='fm_icon fm_basemap_icon'></span>
+                    <span class='fm_icon_text text_show'>Basemap</span>
+                </a>
+                <a href='#' class='about_button gba_button'>
+                    <span class='fm_icon fm_about_icon'></span>
+                    <span class='fm_icon_text text_show'>About</span>
+                </a>
+
+
+
+                <!-- float right elements are displayed in reverse order -->
+                <a href='#' class='description_button gba_trigger gba_button float_right' data-panel='description_panel'>
+                    <span class='fm_icon fm_details_icon'></span>
+                    <span class='fm_icon_text'>Details</span>
+                </a>
+
+                <a href='#' class='legend_button gba_trigger gba_button float_right' data-panel='legend_panel'>
+                    <span class='fm_icon fm_legend_icon'></span>
+                    <span class='fm_icon_text'>Legend</span>
+                </a>
+                <a href='#' class='slicer_button gba_trigger gba_button float_right' data-panel='slicer_panel'>
+                    <span class='fm_icon fm_slicer_icon'></span>
+                    <span class='fm_icon_text'>Slicer</span>
+                </a>
+                <a href='#' class='share_button gba_trigger gba_button float_right' data-panel='share_panel'>
+                    <span class='fm_icon fm_share_icon'></span>
+                    <span class='fm_icon_text'>Share</span>
+                </a>
+
+            </div>
+        </nav>
+
+        <div class='main'>
+
+            <div class='sidebar_right'>
+                <div class='gba_close hide_closebtn'>
+                    <!--<span title="Schließen">Close</span>-->
+                    <!--<i class="gba_close_icon"></i>-->
+                </div>
+                <div id="wrapper">
+                    <div class='fm_container'>
+
+                        <div class='description_panel gba_panel noselect'>
+                            <span>
+                                Mithilfe der Webapplikation „3D Geology“ können geologische 3D Modelle interaktiv durch einen Web Viewer dreidimensional erkundet werden.
+                                Via Maussteuerung lässt sich das 3D Modell hin- und herdrehen (linke Maustaste), verschieben (rechte Maustaste),
+                                sowie hinein- und heraus zoomen (Mausrad). Über ein Bohrungstool lassen sich virtuelle Bohrprofile an jeder Position des 3D Modells generieren,
+                                welche am linken Rand des View-Fensters angezeigt werden.
+                                Mithilfe eines Slicers können aus dem dargestellten 3D Modell anhand von Schiebereglern
+                                virtuelle Profilschnitte in x-Ebene (Nord-Süd-Schnitt) und y-Ebene (Ost-West-Schnitt) abgefragt werden.
+                            </span>
+                        </div>
+
+                        <div id='legendDiv' class='legend_panel gba_panel noselect'></div> <!-- Map Legend -->
+
+
+                        <div class="slicer_panel gba_panel noselect">
+
+                            <div class="panel-section section-view">
+                                <h4>View</h4>
+                                <div id="feature-camera-views" class="feature-wrapper inline-block">
+                                    <select id='searchText' class="radius noselect" title='Ansicht auswählen'>
+                                        <option value=" " selected disabled>
+                                            --Auswählen--
+                                        </option>
+                                        <option value="left">Left view</option>
+                                        <option value="right">Right view</option>
+                                        <option value="front">Front view</option>
+                                        <option value="back">Back view</option>
+                                        <option value="bottom">Bottom view</option>
+                                    </select>
+                                </div>
+                                <!--<div id="feature-bg-color" class="feature-wrapper  inline-block">
+                                    <label>Bg color</label>
+                                    <input id="ftbgcolor" type="color" name="bgcolor" value="#ffffff" autocomplete="off">
+                                </div>-->
+
+                                <div id="feature-fullscreen" class="feature-wrapper inline-block">
+                                    <input type="checkbox" id="chkFullscreen" autocomplete="off">
+                                    <label for="chkFullscreen" class="button small radius noselect">Fullscreen</label>
+                                </div>
+                                <div id="feature-wireframe" class="feature-wrapper inline-block">
+                                    <input id="chkWireframe" autocomplete="off" type="checkbox">
+                                    <label for="chkWireframe" class="button small radius noselect">Wireframe</label>
+                                </div>
+                                <div id="feature-screenshot" class="feature-wrapper inline-block">
+                                    <a id="btnScreenshot" class="button small radius noselect">Export image</a>
+                                </div>
+
+                            </div>
+
+                            <div class="panel-section section-functions">
+                                <h4>Functions</h4>
+                                <div id="feature-grid" class="feature-wrapper inline-block">
+                                    <input type="checkbox" id="chkGrid" autocomplete="off">
+                                    <label for="chkGrid" class="button small radius">Grid</label>
+                                </div>
+                            </div>
+
+                            <div class="panel-section section-view">
+                                <h4>Slicer</h4>
+                                <div class="feature-wrapper feature-slicer inline-block">
+                                    <div id="range-slider"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class='share_panel gba_panel noselect'>
+                            <p>Embed code:</p>
+                            <textarea class='fm_embed_code'></textarea>
+                            <p>Social media:</p>
+                            <div id="socialButtons"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="logoPanel" class="box">
+                    <a class=logoPic href="http://www.geologie.ac.at/" target="_blank"><img src="content/img/gbalogo_schriftzug.png" alt="gbalogo"></a>
+                </div>
+            </div>
+
+            <div class='fm_center_content'>
+                <div id="div_map">
+                    <div id="webgl" class="mapDesktop">
+                        <div id="inset"></div>
+                        <div id="progressArea">
+                            <img id="loadingImg" alt="" src="images/map/loading.gif" style="display:none;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <div id="creativeCommons">
+                <span id=footerText></span> |
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/at/" target="_blank" class="noselect">Nutzungsbedingungen | </a>
+                <a target="_blank" href="3dviewer_disclaimer.html" class="noselect">Haftungsausschluss |</a>
+                <a target="_blank" href="Bedienung.html" class="noselect">Bedienungshinweis | </a>
+                <a href="#" rel="clemens.porpaczy#/#geologie.ac.at" class="email noselect">Kontakt</a>
+            </div>
+        </footer>
+
+
+
+    </div>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/require.js" data-main="scripts/main"></script>
+
+    <!--<script src="dist/config.js"></script>
+    <script src="dist/require.js" data-main="dist/main"></script>-->
+</body>
+</html>

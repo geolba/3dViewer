@@ -1,0 +1,81 @@
+﻿@charset "UTF-8";
+
+/*.gbaLegendService {
+    padding-bottom: 20px;
+}*/
+
+.gbaLegendServiceLabel {
+    font-weight: bold;
+}
+
+.gbaLegendLayerLabel {
+    padding-top: 5px;
+}
+
+
+.checkboxFive {
+position: relative;
+width:35px;
+}
+input[type=checkbox] {
+      position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height:1px; 
+    width:1px;   
+    padding:0;
+    border:0;
+}
+
+
+ /**Create the box for the checkbox*/ 
+.checkboxFive label {
+    cursor: pointer;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+/* Display the tick inside the checkbox */
+.checkboxFive label:after {
+    opacity: 0.2;
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    background: transparent;
+    top: 3px;
+    left: 3px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+/**
+
+ * Create the hover event of the tick
+
+ */
+
+.checkboxFive label:hover::after {
+opacity: 0.5;
+}
+
+/**
+
+ * Create the checkbox state for the tick
+
+ */
+
+.checkboxFive input[type=checkbox]:checked + label:after {
+opacity: 1;
+}
+
+

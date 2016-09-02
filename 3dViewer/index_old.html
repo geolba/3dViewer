@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Viewer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=7,IE=9,IE=10" />-->
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <meta content="de-at" http-equiv="Content-Language" />
+    <link href="content/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!--<link rel="stylesheet" type="text/css" href="content/concat.min.css" />-->
+
+    <link rel="stylesheet" type="text/css" href="content/page-layout.css" />
+    <link rel="stylesheet" type="text/css" href="content/legend.css" />
+    <link rel="stylesheet" type="text/css" href="content/popup.css" />
+    <link rel="stylesheet" type="text/css" href="content/borehole.css" />
+    <link rel="stylesheet" type="text/css" href="content/controls.css" />
+    <link rel="stylesheet" type="text/css" href="content/rangeslider.css" />
+    <link rel="stylesheet" type="text/css" href="content/slicer.css" />
+</head>
+<body>
+
+
+
+    <div id="mainWindow">
+
+        <div id="banner" class="header">
+            <div id="headerArea">
+                <div id="logoArea">
+                    <a href="http://www.geologie.ac.at/forschung-entwicklung/geologische-3d-modellierung/" target="_blank">
+
+                        <img src="content/img/3Dgeology.png" alt="ws_logo">
+
+                    </a>
+                </div>
+                <div id="titleArea">
+                    <a id="subtitle"></a>
+                </div>
+                <div id="searchArea">
+                    <div id="search"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="main" class="content">
+            <div id="leftPane" class="sidebar left">
+                <div id="wrapper">
+                    <div style="position:relative;height:100%;width:100%;">
+                        <div id="legendHeader">
+                            <div id="legendHeaderText"></div>
+                        </div>
+                        <div id="descriptionPanel">
+                            <!--<div id="description" class="descriptionDesktop">
+                                <div id="descriptionText"></div>
+                            </div>-->
+                            <div id="description" class="descriptionDesktop">
+                                <span>
+                                    Mithilfe der Webapplikation „3D Geology“ können geologische 3D Modelle interaktiv durch einen Web Viewer dreidimensional erkundet werden.
+                                    Via Maussteuerung lässt sich das 3D Modell hin- und herdrehen (linke Maustaste), verschieben (rechte Maustaste),
+                                    sowie hinein- und heraus zoomen (Mausrad). Über ein Bohrungstool lassen sich virtuelle Bohrprofile an jeder Position des 3D Modells generieren,
+                                    welche am linken Rand des View-Fensters angezeigt werden.
+                                    Mithilfe eines Slicers können aus dem dargestellten 3D Modell anhand von Schiebereglern
+                                    virtuelle Profilschnitte in x-Ebene (Nord-Süd-Schnitt) und y-Ebene (Ost-West-Schnitt) abgefragt werden.
+                                </span>
+                            </div>
+                        </div>
+                        <div id="legendPanel" class="box">
+                            <div id="legendDiv" class="legendDesktop">
+                            </div>
+                        </div>
+
+                        <div id="slicerPanel" class="box">
+                            <div id="range-slider" class="slicerDesktop"></div>
+                        </div>                       
+                    </div>
+                </div>
+                <div id="logoPanel" class="box">
+                    <a class=logoPic href="http://www.geologie.ac.at/" target="_blank"><img src="content/img/gbalogo_schriftzug.png" alt="gbalogo"></a>
+                </div>
+            </div>
+            <div id="right-bar" class="sidebar right">
+                <div id="div_map">
+                    <div id="webgl" class="mapDesktop">
+                      
+                        <!--<div id="scalebar"></div>-->
+                        <!--<div id="helpButton" name="modal"><h1>?</h1></div>-->
+                        <div id="inset"></div>
+                        <div id="progressArea">
+                            <img id="loadingImg" alt="" src="images/map/start.gif" style="display:none;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bottomPane" class="footer">
+            <div id="ownerArea">
+                <div id="fText"><span id=footerText></span></div>
+                <div class="tabSpace"></div>
+                <div id="creativeCommons">
+                    <span class="noselect">&copy; <script> document.write(new Date().getFullYear());</script> | </span>
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/at/" target="_blank" class="noselect">Nutzungsbedingungen | </a>
+                    <a target="_blank" href="3dviewer_disclaimer.html" class="noselect">Haftungsausschluss |</a>
+                    <a target="_blank" href="Bedienung.html" class="noselect">Bedienungshinweis | </a>
+                    <a href="#" rel="clemens.porpaczy.#/#geologie.ac.at" class="email noselect">Kontakt</a>                  
+                </div>
+                <!--<a target="_blank" href="3dviewer_disclaimer.html">Haftungsausschluss</a>-->
+                <div id="socialButtons">
+                    <a class="share-facebook" target="_blank" href="' + facebook_url + '" rel="nofollow">Facebook</a>
+                    <a class="share-twitter" target="_blank" data-lang="de" href="' + twitterUrl + '" rel="nofollow">Twitter</a>
+                    <a class="share-google" target="_blank" href="' + google_url + '">Google+</a>
+                    <div class="fb-share-button" data-href="http://gisgba.geologie.ac.at/gbaviewer/" data-type="button_count"></div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Kick it off - data-main attribute tells require.js to load scripts/main.js after require.js loads. -->
+    <!--<script src="scripts/config.js"></script>
+    <script src="scripts/require.js" data-main="scripts/main"></script>-->
+    <script src="dist/config.js"></script>
+    <script src="dist/require.js" data-main="dist/main"></script>
+
+</body>
+</html>

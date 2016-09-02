@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{026472F1-F2D5-4E63-A0AC-547BAFE6F059}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_3dViewer</RootNamespace>
+    <AssemblyName>3dViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3dviewer_disclaimer.html" />
+    <Content Include="content\borehole.css" />
+    <Content Include="content\concat.min.css" />
+    <Content Include="content\controls.css" />
+    <Content Include="content\icons\basemap-w.png" />
+    <Content Include="content\icons\basemap.png" />
+    <Content Include="content\img\border.png" />
+    <Content Include="content\img\help.png" />
+    <Content Include="content\img\home.png" />
+    <Content Include="content\img\16.png" />
+    <Content Include="content\img\24.png" />
+    <Content Include="content\img\242.png" />
+    <Content Include="content\img\3Dgeology.png" />
+    <Content Include="content\img\cc_logo.png" />
+    <Content Include="content\img\drill.png" />
+    <Content Include="content\img\drill2.png" />
+    <Content Include="content\img\gbalogo_schriftzug.png" />
+    <Content Include="content\img\layer.png" />
+    <Content Include="content\img\leftMouse.png" />
+    <Content Include="content\img\middleMouse.png" />
+    <Content Include="content\img\print.png" />
+    <Content Include="content\icons\question.png" />
+    <Content Include="content\img\test.png" />
+    <Content Include="content\img\test2.png" />
+    <Content Include="content\img\zoomIn.png" />
+    <Content Include="content\img\zoomOut.png" />
+    <Content Include="content\icons\close.png" />
+    <Content Include="content\icons\home-w.png" />
+    <Content Include="content\icons\info2-w.png" />
+    <Content Include="content\icons\info2.png" />
+    <Content Include="content\icons\legend-w.png" />
+    <Content Include="content\icons\legend.png" />
+    <Content Include="content\icons\share-w.png" />
+    <Content Include="content\icons\share.png" />
+    <Content Include="content\icons\slicer.png" />
+    <Content Include="content\icons\slicer-w.png" />
+    <Content Include="content\mobile_dialog.css" />
+    <Content Include="content\mobile_icons\basemap-w.png" />
+    <Content Include="content\mobile_icons\basemap.png" />
+    <Content Include="content\mobile_icons\close.png" />
+    <Content Include="content\mobile_icons\home-w.png" />
+    <Content Include="content\mobile_icons\home.png" />
+    <Content Include="content\mobile_icons\info2-w.png" />
+    <Content Include="content\mobile_icons\info2.png" />
+    <Content Include="content\mobile_icons\legend-w.png" />
+    <Content Include="content\mobile_icons\legend.png" />
+    <Content Include="content\mobile_icons\question-w.png" />
+    <Content Include="content\mobile_icons\question.png" />
+    <Content Include="content\mobile_icons\share-w.png" />
+    <Content Include="content\mobile_icons\share.png" />
+    <Content Include="content\mobile_icons\slicer-w.png" />
+    <Content Include="content\mobile_icons\slicer.png" />
+    <Content Include="content\page.css" />
+    <Content Include="content\rangeslider.css" />
+    <Content Include="content\img\rightMouse.png" />
+    <Content Include="content\img\zscale.png" />
+    <Content Include="content\legend.css" />
+    <Content Include="content\popup.css" />
+    <Content Include="content\popup2.css" />
+    <Content Include="content\page-layout.css" />
+    <Content Include="content\slicer.css" />
+    <Content Include="data\dem.json" />
+    <Content Include="dist\app\three.js" />
+    <Content Include="dist\build.txt" />
+    <Content Include="dist\config.js" />
+    <Content Include="dist\counting.js" />
+    <Content Include="dist\Gba3D.js" />
+    <Content Include="dist\gba\controls\Dialog.js" />
+    <Content Include="dist\gba\features\BgColor.js" />
+    <Content Include="dist\gba\geometry\Vector2.js" />
+    <Content Include="dist\gba\layer\Point.js" />
+    <Content Include="dist\gba\tasks\RaycasterVertices.js" />
+    <Content Include="dist\helper\dom.js" />
+    <Content Include="dist\helper\domEvent.js" />
+    <Content Include="dist\helper\Events.js" />
+    <Content Include="dist\helper\utilities.js" />
+    <Content Include="dist\i18n.js" />
+    <Content Include="dist\lib\jquery\jquery-2.1.4.js" />
+    <Content Include="dist\lib\jrespond\jRespond.js" />
+    <Content Include="dist\lib\leaflet\Class.js" />
+    <Content Include="dist\lib\leaflet\Control.js" />
+    <Content Include="dist\lib\proj4js\proj4js-amd.js" />
+    <Content Include="dist\lib\threejs\LICENSE.txt" />
+    <Content Include="dist\lib\threejs\OrbitControls.js" />
+    <Content Include="dist\lib\threejs\OrbitControlsOld.js" />
+    <Content Include="dist\lib\threejs\three.js" />
+    <Content Include="dist\main.js" />
+    <Content Include="dist\mainr.js" />
+    <Content Include="dist\maiOld.js" />
+    <Content Include="dist\nls\de\template.js" />
+    <Content Include="dist\nls\template.js" />
+    <Content Include="dist\require.js" />
+    <None Include="dist\_references.js" />
+    <Content Include="images\basemap\base_border.jpg" />
+    <Content Include="images\basemap\base_geo.jpg" />
+    <Content Include="images\basemap\base_traffic.jpg" />
+    <Content Include="images\close.png" />
+    <Content Include="images\map\loading.gif" />
+    <Content Include="images\map\start.gif" />
+    <Content Include="images\popup.png" />
+    <Content Include="Bedienung.html" />
+    <Content Include="index.html" />
+    <Content Include="packages.config" />
+    <Content Include="LICENSE.md" />
+    <Content Include="dist\lib\leaflet\LICENSE.md" />
+    <Content Include="dist\lib\proj4js\LICENSE.md" />
+    <Content Include="dist\lib\requirejs\LICENSE.md" />
+    <None Include="Properties\PublishProfiles\3dViewer_ArvArcgis.pubxml" />
+    <Content Include="scripts\counting.js" />
+    <Content Include="scripts\gba\controls\BarChart.js" />
+    <Content Include="scripts\gba\controls\BasemapDialog.js" />
+    <Content Include="scripts\gba\controls\BorderControl.js" />
+    <Content Include="scripts\gba\controls\Fullscreen.js" />
+    <Content Include="scripts\gba\controls\MobileDialog.js" />
+    <Content Include="scripts\gba\controls\NorthArrow.js" />
+    <Content Include="scripts\gba\controls\RangeSlider.js" />
+    <Content Include="scripts\gba\controls\BoreholePopup.js" />
+    <Content Include="scripts\gba\controls\MaptoolControl.js" />
+    <Content Include="scripts\gba\controls\SlicerControl.js" />
+    <Content Include="scripts\gba\features\BgColor.js" />
+    <Content Include="scripts\gba\geometry\Edge.js" />
+    <Content Include="scripts\gba\geometry\Face.js" />
+    <Content Include="scripts\gba\geometry\Graph.js" />
+    <Content Include="scripts\gba\geometry\Vector2.js" />
+    <Content Include="scripts\gba\layer\BaseEditor.js" />
+    <Content Include="scripts\gba\layer\GridLayer.js" />
+    <Content Include="scripts\gba\layer\Layer.js" />
+    <Content Include="scripts\gba\layer\LayerGroup.js" />
+    <Content Include="scripts\gba\layer\Marker.js" />
+    <Content Include="scripts\gba\layer\Point.js" />
+    <Content Include="scripts\gba\maptools\Boretool.js" />
+    <Content Include="scripts\gba\controls\LayerControl.js" />
+    <Content Include="scripts\gba\controls\MoreControls.js" />
+    <Content Include="scripts\gba\controls\Map.js" />
+    <Content Include="scripts\gba\tasks\DxfIdentify.js" />
+    <Content Include="scripts\gba\controls\Coordinates.js" />
+    <Content Include="scripts\gba\controls\Slider.js" />
+    <Content Include="scripts\gba\tasks\BoreHole.js" />
+    <Content Include="scripts\gba\tasks\BoreholeIdentify.js" />
+    <Content Include="scripts\gba\controls\ControlButton.js" />
+    <Content Include="scripts\gba\geometry\Node.js" />
+    <Content Include="scripts\gba\tasks\Raycaster.js" />
+    <Content Include="scripts\gba\tasks\RaycasterVertices.js" />
+    <Content Include="scripts\helper\domEvent.js" />
+    <Content Include="scripts\gba\controls\HomeButton.js" />
+    <Content Include="scripts\gba\controls\MyZoom.js" />
+    <None Include="Properties\PublishProfiles\local 3d viewer.pubxml" />
+    <None Include="scripts\lib\jquery\jquery-2.1.4.intellisense.js" />
+    <Content Include="scripts\gba\layer\DxfLayer.js" />
+    <Content Include="scripts\helper\domUtil.js" />
+    <Content Include="scripts\helper\mixin.js" />
+    <Content Include="scripts\helper\unload.js" />
+    <Content Include="scripts\lib\jrespond\jRespond.js" />
+    <Content Include="scripts\lib\threejs\OrbitControls.js" />
+    <Content Include="scripts\lib\threejs\three.js" />
+    <Content Include="scripts\main.js" />
+    <Content Include="scripts\lib\leaflet\Class.js" />
+    <Content Include="scripts\lib\leaflet\Control.js" />
+    <Content Include="scripts\helper\dom.js" />
+    <Content Include="scripts\helper\Events.js" />
+    <Content Include="scripts\gba\controls\Dialog.js" />
+    <Content Include="scripts\gba\controls\Legend.js" />
+    <Content Include="scripts\gba\controls\Popup.js" />
+    <Content Include="scripts\lib\threejs\OrbitControlsOld.js" />
+    <Content Include="scripts\helper\logger.js" />
+    <Content Include="scripts\helper\utilities.js" />
+    <Content Include="scripts\i18n.js" />
+    <Content Include="scripts\lib\jquery\jquery-2.1.4.js" />
+    <Content Include="scripts\lib\threejs\LICENSE.txt" />
+    <Content Include="scripts\lib\requirejs\LICENSE.md" />
+    <Content Include="scripts\lib\proj4js\LICENSE.md" />
+    <None Include="scripts\lib\leaflet\LICENSE.md" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\img\favicon.ico" />
+    <Content Include="gruntfile.js" />
+    <Content Include="scripts\app\appmodule.js" />
+    <Content Include="scripts\app\commonConfig.js" />
+    <Content Include="scripts\gba\layer\DemBlock.js" />
+    <Content Include="scripts\gba\layer\DemLayer.js" />
+    <Content Include="scripts\lib\proj4js\proj4js-amd.js" />
+    <Content Include="scripts\app\Dataservice.js" />
+    <Content Include="scripts\app\three.js" />
+    <Content Include="scripts\config.js" />
+    <Content Include="scripts\Gba3D.js" />
+    <Content Include="scripts\maiOld.js" />
+    <Content Include="package.json" />
+    <None Include="scripts\_references.js" />
+    <Content Include="scripts\mainr.js" />
+    <Content Include="scripts\nls\de\template.js" />
+    <Content Include="scripts\nls\template.js" />
+    <Content Include="scripts\r.js" />
+    <Content Include="scripts\require.js" />
+    <Content Include="index_old.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptModuleKind>amd</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>False</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52782</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52782/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:52782/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

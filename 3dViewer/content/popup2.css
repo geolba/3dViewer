@@ -1,0 +1,109 @@
+﻿/*.esriPopup.modernGrey { 
+    box-shadow: 1px 1px 3px #dbdbdb;   
+    border-radius: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+}*/
+
+    /*.esriPopup.modernGrey .titlePane {
+        line-height: 28px;
+        background: #f4f4f4;
+        background: -moz-linear-gradient(top, #f4f4f4 0, #e9e9e9 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f4f4f4), color-stop(100%,#e9e9e9));
+        background: -webkit-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
+        background: -o-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
+        background: -ms-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
+        background: linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#e9e9e9',GradientType=0 );
+        color: #333;
+        border: 0;
+        border-bottom: 1px solid #dbdbdb;       
+        border-radius: 2px 2px 0 0;
+    }*/
+
+
+/*.esriPopup.modernGrey .titleButton {
+    top: 6px;
+    background: url(../images/popup.png) no-repeat;
+}*/
+
+/*.esriPopup.modernGrey .pointer, .esriPopup.modernGrey .outerPointer {
+    background-image: url(../images/popup.png);
+}*/
+
+.esriPopup.modernGrey .titleButton, .esriPopup.modernGrey .pointer, 
+.esriPopup.modernGrey .esriViewPopup .gallery .mediaHandle, 
+.esriPopup.modernGrey .esriViewPopup .gallery .mediaIcon {
+    background-image: url(../images/popup.png);
+}
+
+/*.esriPopup.modernGrey .titlePane .spinner {
+    margin-top: 6px;
+    background: url('data:image/gif;base64,R0lGODlhEAAQAPMJABaFx/j6/DiXz4S+4QZ9wyaNytbp9KjR6Wav2uTw95jI5cbg8Eif03a33Vam1v///yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCgAJACwAAAAAEAAQAAAETDDJSau9NQjCiWxDYGmdBBCFkRVlcrCFOA3oNgXsQG2HRh0EAYWDIU6MGWSCR0G4ghRa7IjIUXCog6QzpRhYgC1HILsOGuJxGcNuTyIAIfkECQoADAAsAgAAAAwAEAAABFWQSQOUvJgVIlZmwQAQpIEZG0kgYAJuhUIASSAUIYEzwvASAwHhICEWOaQPSEUIKElCY8B44Ax0zuBvECiwEiMFzOliIJgF08WgAnA/C2FBeVEA1IwIACH5BAkKAA0ALAIAAAAMABAAAARTsMnZEqO4KXJoGAJBAGMgGYWoikMTpEW3iEA3EIXZ3IgedpKBwXW4ETKSFTLAOpgMLcmBIJAEEIToK9s4kAiLwAFmMq5wQxfpKxjopAQFcsJIICMAIfkECQoACQAsAgABAA0ADQAABEYwyUlTCDIMQYgYl7AkRtGdRMEtgVkc0mF2y5BiGUc3ADzptIpQsigWcRUUgnIANBKn5aRFGEA7r4vsBnXMUAWDZKnRfZARACH5BAkKAAwALAAAAgAQAAwAAARUkEkWhiBEjDB7KlhIFEY3IcXBHWDBTSXVBeDAlAuBJCajEIACgHEBbiSHIkbxCwkOkwEAI2AEp4peAkFY3BiD0UsS4MTILVWAJRjDQKIRr1cpatwRACH5BAUKAA0ALAAAAgAQAAwAAARTsMk5CBEjzBmGaodlFcZ2AAQQaGBBFCwjEsgWuIOUKKhVTiHBxrIY5IYEJEtiXFg2AsJhYxABFAnma9lAzBiS2+ugWaEA04nBJZoeMpvwIEo4biIAOw==')  no-repeat;
+}*/
+
+/*.esriPopup.modernGrey .titleButton.maximize {
+    right: 22px;
+    background-position: 0 -251px;
+    width: 11px;
+    height: 11px;
+    top: 8px;
+}*/
+
+/*.esriPopup.modernGrey .titleButton.next {
+    right: 46px;
+    background-position: 0 -443px;
+    width: 9px;
+    height: 17px;
+}*/
+
+/*.esriPopup.modernGrey .titleButton.prev {
+    right: 64px;
+    background-position: 0 -224px;
+    width: 9px;
+    height: 17px;
+}*/
+
+
+/*.esriPopup.modernGrey .titleButton.restore {
+    right: 22px;
+    background-position: 0 -787px;
+    width: 11px;
+    height: 11px;   
+    top: 8px;
+}*/
+
+/*.esriPopup.modernGrey .titleButton.close {
+    right: 3px;
+    background-position: 0 -171px;
+    width: 12px;
+    height: 17px;
+    top: 5px;
+}*/
+
+/*.esriPopup.modernGrey .contentPane {
+    background: #fff;
+    padding: 10px;
+    color: #333;
+    font-size: 12px;
+    line-height: 16px;
+    border-radius: 0 0 2px 2px;
+}*/
+
+.esriPopup.modernGrey .titlePane .iconImg {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.esriPopup.modernGrey .titlePane .pageInfo {
+    display: inline-block;
+}
+
+.esriPopup.modernGrey .titlePane .titleInfo {
+    display: inline-block;
+    margin-right: 5px;
+}
