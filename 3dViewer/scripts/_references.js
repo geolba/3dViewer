@@ -102,3 +102,4 @@
 /// <reference path="../dist/Gba3D.js" />
 /// <reference path="../dist/counting.js" />
 /// <reference path="../dist/config.js" />
+/// <reference path="gba/controls/mobilepopup.js" />
