@@ -112,6 +112,7 @@
     <Content Include="content\mobile_icons\share.png" />
     <Content Include="content\mobile_icons\slicer-w.png" />
     <Content Include="content\mobile_icons\slicer.png" />
+    <Content Include="content\mobile_popup.css" />
     <Content Include="content\page.css" />
     <Content Include="content\rangeslider.css" />
     <Content Include="content\img\rightMouse.png" />
@@ -159,8 +160,13 @@
     <Content Include="images\close.png" />
     <Content Include="images\map\loading.gif" />
     <Content Include="images\map\start.gif" />
+    <Content Include="images\pointerbottom.png" />
+    <Content Include="images\pointertop.png" />
     <Content Include="images\popup.png" />
     <Content Include="Bedienung.html" />
+    <Content Include="images\whitedown.png" />
+    <Content Include="images\whiter.png" />
+    <Content Include="images\whitex.png" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
     <Content Include="LICENSE.md" />

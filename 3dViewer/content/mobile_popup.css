@@ -1,0 +1,195 @@
+﻿.gba-popup-mobile {
+    position: absolute;
+    z-index: 40;
+    -moz-box-shadow: 0 0 0.75em #111;
+    -webkit-box-shadow: 0 0 0.75em #111;
+    box-shadow: 0 0 0.75em #111;
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.mobilePopupInfoView {
+    display: none;
+    position: absolute;
+    top: 42px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 42;
+    padding-bottom: 30px;
+    padding-left: 2px;
+}
+
+.gba-popup-mobile .hidden {
+    display: none;
+}
+
+.gba-popup-mobile .sizer {
+    width: 260px;
+}
+
+.gba-popup-mobile .titlePane {
+    background: none repeat scroll 0 0 rgb(0, 255, 255);
+    color: #FFFFFF;
+    height: 40px;
+    padding-left: 35px;
+    padding-right: 35px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    cursor: default;
+    border: 2px solid #fff;
+}
+
+.gba-popup-mobile .titlePane .title {
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 10pt;
+    font-weight: bold;
+    width: 174px;
+    line-height: 18px;
+    margin-top: 3px;
+}
+
+.gba-popup-mobile .titlePane .footer {
+    font-size: 9pt;
+    font-style: italic;
+    line-height: 10px;
+}
+
+.gba-popup-mobile .titleButton {
+    position: absolute;
+    top: 2px;
+    cursor: pointer;
+}
+
+.gba-popup-mobile .titleButton.close {
+    top: 6px;
+    left: 3px;
+    width: 32px;
+    height: 32px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAmVBMVEUAAAD////////////////////////////////////////////////+/v7////////////+/v7////////+/v7////////////+/v7////+/v7////+/v7////+/v7////////////+/v7+/v7+/v7+/v7+/v7////+/v7+/v7+/v7+/v7+/v7////+/v7+/v7+/v7///////+7MSHaAAAAMnRSTlMABAgQEhgbICImKCowOD5AQUhQV1hgY2RoaHCAh4qPkJWWl5+nr7e9v8fP19/i5+/3+ApDK1YAAAEPSURBVBgZzcENVoJAAEbRTwstwyz6sxnUggxUguHtf3EJHASsBXivLsssyqkU8UL/8GIgS9P0AKS+zvkZxL4qs7DABRryC9KpWl4EgfqmGbH6DG6uni2phtbs1fFxnobGOYFOYtY6Z9jppGAm6QGSkSYlP9eSxo6pWhxUWcG7ErhXZctSLbaqjBL4hDfVLFYtYtUmJbBRY0msFl9qvAJ3alhCtdipdlMCyUi1CKOWc1c6GiWUK1ipljFX6xujow28KIEHHc3JdBKQj6Un+JCuS8pbSTtCdfZYDT3jPHUWEKjPdxj1LcGoExREGjKwf1TDTyHSuSCHbG0fbXgAZ/TX2GQ08rWn//nWpqFd6NL8AthGJSELFBj9AAAAAElFTkSuQmCC') /*../images/whitex.png*/ no-repeat;
+}
+
+.gba-popup-mobile .titleButton.arrow {
+    top: 6px;
+    right: 3px;
+    width: 32px;
+    height: 32px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABCFBMVEUAAAD////////+/v7+/v7////////////////////////+/v7+/v7////////////+/v7+/v7////////////+/v7////+/v7////+/v7////+/v7////////+/v7+/v7////+/v7////////////////////////+/v7+/v7+/v7////////////+/v7////////////+/v7+/v7/////////2N3+/v7////+/v7////////////+/v7////////////////+/v7////////+/v7+/v7////++fn+/v7////+/v7+/v7+/v7+/v7////////+/v7+/v7////+/v7/////////////i1g3AAAAV3RSTlMAART3cBgPFlCAEb+HMAcOn+8DEh7fIpfv10CPDALnxwU4CggVHCALr89oDQkXqwQQHXjiKCY46S6gNSMZxhsTJx/hGt+nwCWCt0FYptNMBl3onopQOIUF6Rt0AAABZklEQVQYGcXB1WITUQBF0X3HJe7uVldcirvb+f8/YUI7SVoKj7AW/1bk81d379zSUrHQ4hruO0lPHsRxU1Kc5aqbJ9L+G/++BaeZouyAy7JFvbhted7T3Rrg1qWATbOqCntn+fwN67DCkiN7yIaFYpi6NcmaH7HU1hZrWdkuWJ1pQ7LmEYlxTwErBbVJzAeWpFy3Q8JRn5WiTll6GPmS/N0ZMLY1I6Um57qTe5IejzCw0DYpLbhQMY+kRo0ShApJqUDKDHypgTH+q2cFUnpOypCXBKa8rwwp9blQnkSSyhioyyFl24f8kos8SS8PSFQ1JPVaDkv5aSSpZgwwVJWVQL0xYJUtSZWS8YC+MqxtKYSDHSQdlUok3sp2WWtJAXmPhiomRyJry2HTtnQ8muzQLXUGQFBUncsc6f0HD/gI2Viqc9Wnz9LJl6/fwkxTsh1+t3dc1ble2+U6udz3H2GcCVv80Yj/4ifiPjti3pEmyAAAAABJRU5ErkJggg==') /*../images/whiter.png*/ no-repeat;
+}
+
+
+
+.gba-popup-mobile .pointer {
+    position: absolute;
+}
+
+.gba-popup-mobile .pointer.top {
+    left: 118px;
+    top: -10px;
+    width: 24px;
+    height: 12px;
+    margin-left: 0;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAMCAMAAABP7o1HAAADAFBMVEUAAAD39/ePj48CAgLk5OQICAgLCwsMDAwJCQn19fX29vYHBweOjo6xsbGRkZF+fn57e3sKCgp4eHiKiopwcHCGhoaMjIxmZmbh4eGBgYGIiIh8fHyFhYWVlZV5eXmYmJj09PR0dHT///8A///w8vNKZHIPMUTx8/RRancIKj4QMUQ6VmZYb3zv8fMQMkVPZ3YHKj5edYJFYG4GKj1UbHlEXm4JKz8RMkVTa3gIKz5IYnHu8PJBXGtCXGsRM0VWbXsJLD9fdoPt8PE7VmYNMEMSM0ZacX7u8fLt7/E4VGQKLEANL0MSNEZgdoMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/yY9cAAABAHRSTlMA//////////////////////////////////////////////////////////////////////////////////////////////////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASURNuQAAAEVJREFUGJVtybsNgEAQxcCtxUYiogKyS6D/ivgKAfcceqqe2KsQZIFRg5w/yP07gUGDvP5HYNIgsGgQmDUItP+/hLX/h2yicxi14B0czwAAAABJRU5ErkJggg==') /*../images/pointertop.png*/ no-repeat;
+}
+
+.gba-popup-mobile .pointer.bottom {
+    left: 50%;
+    bottom: -10px;
+    width: 24px;
+    height: 12px;
+    margin-left: 0;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAMCAMAAABP7o1HAAADAFBMVEUAAAABAQEGBgYICAgKCgoODg5YWFhgYGBkZGRnZ2dubm51dXV4eHh/f3+CgoKLi4uQkJCTk5OYmJidnZ2fn5+hoaGlpaXh4eH///8A///5+vsqSFkyT183U2M7V2Y+WWlDXWxJYnFLZXNOZ3VVbXpYb31edYJle4dofYlsgIxzh5IuTFwwTV4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaeJ9YAAABAHRSTlMA//////////////////////////////////////////////////////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4uNxgQAAADxJREFUGJVtzcENACAIBEHKOO2/UJUQArL8bueBSQtOMpHcaCTeQaIPyf5J6U1af7Kxp4weAt3/YHcp6wCp6xENBplMkgAAAABJRU5ErkJggg==') /*../images/pointerbottom.png*/ no-repeat;
+}
+
+.mobileNavigationBar {
+    overflow: hidden;
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    background-color: #639BBC;
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.25, rgb(10, 77, 106)), color-stop(0.82, rgb(99, 155, 188)));
+    background-image: -moz-linear-gradient( center bottom, rgb(10, 77, 106) 25%, rgb(99, 155, 188) 82%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#639BBC', endColorstr='#0A4D6A');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#639BBC', endColorstr='#0A4D6A')";
+    width: 100%;
+    height: 42px;
+    margin: 0 auto;
+    clear: both;
+    font-family: Helvetica, Arial, sans-serif;
+    display: block;
+}
+
+.mobileNavigationBar .mobileNavigationItem {
+    display: block;
+    margin-top: 5px;
+}
+
+.mobileNavigationBar .mobileNavigationItem.left {
+    width: 32px;
+    height: 32px;
+    float: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.mobileNavigationBar .mobileNavigationItem.right {
+    width: 32px;
+    height: 32px;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+}   
+
+.mobileNavigationBar .mobileNavigationItem.center {
+    display: block;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0.6em 32px 0.8em 32px;
+    outline: 0 none !important;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.mobileInfoView {
+    position: absolute;
+    top: 42px;
+    width: 100%;
+    background: #fff;
+    display: none;
+    z-index: 9999;
+    opacity: 1.0;
+    overflow: hidden;
+}
+
+.mobileInfoView .mobileInfoViewItem {
+    margin: 0;
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+
+
+
