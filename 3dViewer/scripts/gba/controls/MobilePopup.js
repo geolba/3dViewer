@@ -65,10 +65,15 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
 
             this._eventConnections = [
                 domEvent.on(this._closeButton, 'click', this.hide, this),
-                domEvent.on(this._arrowButton, "click", this._toggleView, this)
+                domEvent.on(this._arrowButton, "click", this._toggleView, this)              
             ];
+            map.on("mouse-pan", this.hide, this);
 
             this._initPopupInfoView();
+            this._initPopupNavigationBar();
+
+            this._toggleVisibility(false);
+            return container;
 
         },
 
@@ -121,12 +126,28 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
         },
 
         hide: function () {
-            if (this.isShowing) {
+            if (this.isShowing === true) {
                 (this._toggleVisibility(false));
                 this.isShowing = false;
                 //this.onHide();   
                 //this._clearContent();
             }         
+        },
+
+        destroy: function () {
+            //this.map && this.unsetMap();          
+            this.isShowing && this.hide();
+           
+            //q.forEach(this._eventConnections, b.disconnect);
+            domEvent.off(this._closeButton, 'click', this.hide, this);
+            domEvent.off(this._arrowButton, "click", this._toggleView, this);
+            //handle navigation bar:
+            domEvent.off(this._closeNavButton, 'click', this._closePopupNavigation, this);
+            domEvent.off(this._toggleNavButton, 'click', this._togglePopupNavigation, this);
+            this.map.off('mouse-pan', this.hide, this);
+          
+            this.domNode.parentNode.removeChild(this.domNode);
+            this._title = this._pointerTop = this._pointerBottom = this._arrowButton = this._closeButton = this._eventConnections = null;
         },
 
 
@@ -136,10 +157,10 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
         },
 
         _setVisibility: function (addOrRemove) {
-            //n.set(this.domNode, "visibility", addOrRemove ? "visible" : "hidden");          
+                   
             $(this.domNode).css("visibility", addOrRemove ? "visible" : "hidden");
-            //e.toggle(this.domNode, "esriPopupVisible", addOrRemove)
-            $(this.domNode).toggleClass("gbaPopupVisible", addOrRemove);
+            ////e.toggle(this.domNode, "esriPopupVisible", addOrRemove)
+            //$(this.domNode).toggleClass("gbaPopupVisible", addOrRemove);
         },
 
         _toggleView: function () {
@@ -175,21 +196,24 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
             this._toggleNavButton = this.popupNavigationBar.getElementsByClassName("mobileNavigationItem")[1];
 
             //handle navigation bar:
-            domEvent.on(this._closeNavButton, 'click', function () {
-                $(this.popupInfoView).css("display", "none");
-                $(this.popupNavigationBar).css("display", "none");
-                this.hide();
-            }, this);
-
-            domEvent.on(this._toggleNavButton, 'click', function () {
-                $(this.popupInfoView).css("display", "none");
-                $(this.popupNavigationBar).css("display", "none");
-                this.show(this.location);
-            }, this);
+            domEvent.on(this._closeNavButton, 'click', this._closePopupNavigation, this);
+            domEvent.on(this._toggleNavButton, 'click', this._togglePopupNavigation, this);
 
 
             //$(this.popupNavigationBar).css("visibility", "hidden");
             $(this.popupNavigationBar).css("display", "none");
+        },
+
+        _closePopupNavigation: function(){
+            $(this.popupInfoView).css("display", "none");
+            $(this.popupNavigationBar).css("display", "none");
+            this.hide();
+        },
+
+        _togglePopupNavigation: function(){
+            $(this.popupInfoView).css("display", "none");
+            $(this.popupNavigationBar).css("display", "none");
+            this.show(this.location);
         },
 
 
@@ -240,21 +264,10 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
          
         },
 
-        getContentBox: function (node) {
-            // summary:
-            //		Returns an object that encodes the width, height, left and top
-            //		positions of the node's content box, irrespective of the
-            //		current box model.
-            // node: DOMNode
-
-            // clientWidth/Height are important since the automatically account for scrollbars
-            // fallback to offsetWidth/Height for special cases (see #3378)
-            node = node;
-            //var s = computedStyle || style.getComputedStyle(node);
-            var w = node.clientWidth, h;
-            //var pe = geom.getPadExtents(node, s);
-            var pe = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };
-            //var be = geom.getBorderExtents(node, s);
+        getContentBox: function (node) {         
+            node = node;         
+            var w = node.clientWidth, h;         
+            var pe = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };           
             var be = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };
             if (!w) {
                 w = node.offsetWidth;
@@ -267,17 +280,11 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
         },
 
         _updateUI: function () {
-            var a = "\x26nbsp;",
-                c = "\x26nbsp;",
-                //b = this.selectedIndex,
-                d = this.features;
-                //g = this.deferreds,
-                //h = this._prevFeatureButton.parentNode,
-                //k = this._nextFeatureButton.parentNode,
-                //l = this._spinner,
-                //m = this._nls;
+            var a = "\x26nbsp;";
+            var c = "\x26nbsp;";
+            var d = this.features;  
             d && 1 <= d.length ? ($(this._arrowButton).removeClass("hidden")) : ($(this._arrowButton).addClass("hidden"));
-            //this.setTitle(a, c);
+            this.setTitle(a, c);
         }
 
     });
