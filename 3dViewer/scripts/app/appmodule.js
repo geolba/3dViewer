@@ -1,13 +1,11 @@
 ﻿define('app/appmodule', ['three',
     "app/commonConfig",
-    "lib/proj4js/proj4js-amd",
-    //"lib/threejs/OrbitControls",
+    "lib/proj4js/proj4js-amd",  
     "gba/controls/Map",
     "helper/utilities",
     "i18n!nls/template",
     "jquery",
-    "gba/tasks/DxfIdentify",
-    //"gba/tasks/BoreholeIdentify",
+    "gba/tasks/DxfIdentify", 
     "gba/controls/MobileDialog",
     "gba/controls/BasemapDialog",
     "gba/controls/Legend",
@@ -17,11 +15,10 @@
     "helper/domUtil",
     "helper/domEvent", "gba/controls/Fullscreen",'gba/layer/GridLayer','gba/controls/NorthArrow',
     "gba/controls/ControlButton",
-    "gba/tasks/BoreHole",
-    //"gba/controls/Coordinates",
+    "gba/tasks/BoreHole",  
     "gba/controls/Slider", "gba/controls/LayerControl", "gba/controls/BorderControl", "gba/controls/MoreControls", "lib/jrespond/jRespond"],
     function (THREE, appSettings, Proj4js,
-        map,//controls,
+        map,
         util, i18n, $,
         DxfIdentify, Dialog,BasemapDialog, Legend, Popup, BoreholePopup, dom, domUtil,domEvent, Fullscreen, GridLayer, NorthArrow, 
         ControlButton, BoreHole, Slider, LayerControl, BorderControl, MoreControls, jRespond) {
@@ -1133,7 +1130,8 @@
             if (features.length > 0) {
                 app.popup.show({
                     x: xClickedOnCanvas,
-                    y: yClickedonCanvas
+                    y: yClickedonCanvas,
+                    features: features
                 });
 
                 features.forEach(function (feature, j) {
