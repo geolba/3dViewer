@@ -704,15 +704,15 @@
             slider.addTo(app.controls);   
            
           
-            var map = app.controls;
-            app.dataservice.layers.forEach(function (layer) {
-                //layer.initMaterials();
-                //layer.build(app.dataservice.layers, app.scene);                
+            var map = app.controls;          
+            var index;          
+            for (index = 0; index < app.dataservice.layers.length; ++index) {
+                var layer = app.dataservice.layers[index];
                 map.addLayer(layer);
-                if (layer.name == "2014-07-22_Gelaendemodell_Hoehe_Adria") {
+                if (index === 0) {
                     map.currentBasemap = layer;
                 }
-            });
+            }
             
 
 
