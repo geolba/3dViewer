@@ -1468,7 +1468,7 @@
                 //    self.worker.terminate();
                 //}
 
-                this.work({ file: 'dist/counting.js', args: { borderEdges: borderEdges, vertices: vertices, index: index, check: check } }).then(function (data) {
+                this.work({ file: 'scripts/counting.js', args: { borderEdges: borderEdges, vertices: vertices, index: index, check: check } }).then(function (data) {
                     //Worker completed successfully
                     //console.log(data);
                     //document.getElementById("footerText").innerHTML = data.length;
