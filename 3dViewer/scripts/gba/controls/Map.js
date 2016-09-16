@@ -1,8 +1,8 @@
 ﻿// Filename: Map.js 
 define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/controls/MyZoom", "gba/controls/HomeButton",
     "gba/controls/Coordinates", "gba/controls/SlicerControl", "gba/controls/MaptoolControl", "helper/utilities", "helper/unload",
-"gba/controls/BoreholePopup", "gba/layer/GridLayer"],
-    function (OrbitControls, dom, MyZoom, HomeButton, Coordinates, SlicerControl, MaptoolControl, util, unload, BoreholePopup, GridLayer) {
+"gba/controls/BoreholePopup", "gba/layer/GridLayer", "lib/proj4js/proj4js-amd"],
+    function (OrbitControls, dom, MyZoom, HomeButton, Coordinates, SlicerControl, MaptoolControl, util, unload, BoreholePopup, GridLayer, Proj4js) {
         "use strict";
 
         //var test = Dataservice;
@@ -17,7 +17,32 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                 trackResize: true                
             },
 
-            datalayers: [],           
+            datalayers: [],
+
+            getMapX:function(x){
+                x = x / this.scale + this.origin.x;
+                var dest = new Proj4js.Proj("EPSG:4326");
+                var source = new Proj4js.Proj(this.crs);
+                var minPoint = { x: x, spatialReference: { wkid: 31256 } };
+                var point84 = Proj4js.transform(source, dest, minPoint);
+                x=  point84.x;
+                return (Math.round(x * 100) / 100);
+            },
+
+            getMapY:function(y){
+                y = y / this.scale + this.origin.y;
+                var dest = new Proj4js.Proj("EPSG:4326");
+                var source = new Proj4js.Proj(this.crs);
+                var minPoint = { y: y, spatialReference: { wkid: 31256 } };
+                var point84 = Proj4js.transform(source, dest, minPoint);
+                y=  point84.y;
+                return (Math.round(y * 100) / 100);
+            },
+
+            getMapZ:function(z){
+                z = z / this.zScale + this.origin.z;              
+                return parseInt(z, 10);
+            },
 
             init: function (camera, scene, domElement,container, dataservice) {
               //call parent constructor
@@ -27,6 +52,9 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                 this.dataservice = dataservice;
                 //Map.LAYERS = dataservice.LAYERS;
                 this.origin = dataservice.origin;
+                this.scale = dataservice.scale;
+                this.zScale = dataservice.zScale;
+                this.crs = dataservice.crs;
                 this.container = container;
 
                 this.length = dataservice.width;

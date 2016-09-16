@@ -141,38 +141,36 @@
                 this.parentElement = parentElement;
                 var width = 80;
                 //label
-                this.f = [
-                     { a: ["-10"], cl:"red-label", h: 0.0, centroid: [[-10, width/2, this.height]] },
-                    { a: ["-20"], cl: "red-label", h: 0.6, centroid: [[-20, width / 2, this.height]] },
-                    { a: ["-30"], cl: "red-label", h: 0.6, centroid: [[-30, width / 2, this.height]] },
-                    { a: ["-40"], cl: "red-label", h: 0.6, centroid: [[-40, width / 2, this.height]] },
-                    { a: ["-50"], cl: "red-label", h: 0.6, hs: 2, centroid: [[-50, width / 2, this.height]] },
-                    { a: ["0"], cl: "red-label", h: 0.6, centroid: [[0, width / 2, this.height]] },
-                    { a: ["10"], cl: "red-label", h: 0.6, centroid: [[10, width / 2, this.height]] },
-                    { a: ["20"], cl: "red-label", h: 0.6, centroid: [[20, width / 2, this.height]] },
-                    { a: ["30"], cl: "red-label", h: 0.6, centroid: [[30, width / 2, this.height]] },
-                    { a: ["40"], cl: "red-label", h: 0.6, centroid: [[40, width / 2, this.height]] },
-                    { a: ["50"], cl: "red-label", h: 0.6, centroid: [[50, width / 2, this.height]] },
+                this.f = [                    
+                    { a: [this._map.getMapX(-10)], cl: "red-label", h: 0.0, centroid: [[-10, width / 2, this.height]] },
+                    { a: [this._map.getMapX(-20)], cl: "red-label", h: 0.6, centroid: [[-20, width / 2, this.height]] },
+                    { a: [this._map.getMapX(-30)], cl: "red-label", h: 0.6, centroid: [[-30, width / 2, this.height]] },
+                    { a: [this._map.getMapX(-40)], cl: "red-label", h: 0.6, centroid: [[-40, width / 2, this.height]] },
+                    { a: [this._map.getMapX(-50)], cl: "red-label", h: 0.6, hs: 4, centroid: [[-50, width / 2, this.height]] },
+                    { a: [this._map.getMapX(0)], cl: "red-label", h: 0.6, centroid: [[0, width / 2, this.height]] },
+                    { a: [this._map.getMapX(10)], cl: "red-label", h: 0.6, centroid: [[10, width / 2, this.height]] },
+                    { a: [this._map.getMapX(20)], cl: "red-label", h: 0.6, centroid: [[20, width / 2, this.height]] },
+                    { a: [this._map.getMapX(30)], cl: "red-label", h: 0.6, centroid: [[30, width / 2, this.height]] },
+                    { a: [this._map.getMapX(40)], cl: "red-label", h: 0.6, centroid: [[40, width / 2, this.height]] },
+                    { a: [this._map.getMapX(50)], cl: "red-label", h: 0.6, centroid: [[50, width / 2, this.height]] },
 
-                    { a: ["-10"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -10, this.height]] },
-                    { a: ["-20"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -20, this.height]] },
-                    { a: ["-30"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -30, this.height]] },
-                     { a: ["-40"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -40, this.height]] },
-                    { a: ["0"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 0, this.height]] },
-                    { a: ["10"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 10, this.height]] },
-                    { a: ["20"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 20, this.height]] },
-                    { a: ["30"], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 30, this.height]] },
-                    { a: ["40"], cl: "green-label", h: 0.6, hs: -2, centroid: [[-(this._map.length / 2), 40, this.height]] },
+                    { a: [this._map.getMapY(-10)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -10, this.height]] },
+                    { a: [this._map.getMapY(-20)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -20, this.height]] },
+                    { a: [this._map.getMapY(-30)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -30, this.height]] },
+                     { a: [this._map.getMapY(-40)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -40, this.height]] },
+                    { a: [this._map.getMapY(0)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 0, this.height]] },
+                    { a: [this._map.getMapY(10)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 10, this.height]] },
+                    { a: [this._map.getMapY(20)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 20, this.height]] },
+                    { a: [this._map.getMapY(30)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 30, this.height]] },
+                    { a: [this._map.getMapY(40)], cl: "green-label", h: 0.6, hs: -4, centroid: [[-(this._map.length / 2), 40, this.height]] },
 
-                    { a: ["-10"], cl: "blue-label", ht:1, hs:-2, centroid: [[-(this._map.length / 2) - 1, -width/2, -10]] },
-                    { a: ["-20"], cl: "blue-label",ht:1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -20]] },
-                    { a: ["-30"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },
-                    //{ a: ["-40"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -40]] },
-                    { a: ["0"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 0]] },
-                    { a: ["10"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 10]] },
-                    { a: ["20"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 20]] },
-                    { a: ["30"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 30]] }
-                    //{ a: ["40"], cl: "blue-label", h: 0.600000000001, centroid: [[-(this._map.length / 2) - 1, -width / 2, 40]] }
+                    { a: [this._map.getMapZ(-10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2) - 1, -width / 2, -10]] },
+                    { a: [this._map.getMapZ(-20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -20]] },
+                    { a: [this._map.getMapZ(-30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },                  
+                    { a: [this._map.getMapZ(0)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 0]] },
+                    { a: [this._map.getMapZ(10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 10]] },
+                    { a: [this._map.getMapZ(20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 20]] },
+                    { a: [this._map.getMapZ(30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 30]] }                   
                 ];
 
                 var zFunc, getPointsFunc = function (f) { return f.centroid; };
