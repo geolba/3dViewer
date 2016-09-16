@@ -39,6 +39,11 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                 return (Math.round(y * 100) / 100);
             },
 
+            getMapZ:function(z){
+                z = z / this.zScale + this.origin.z;              
+                return parseInt(z, 10);
+            },
+
             init: function (camera, scene, domElement,container, dataservice) {
               //call parent constructor
                 OrbitControls.prototype.init.call(this, camera, scene, domElement);
@@ -48,6 +53,7 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                 //Map.LAYERS = dataservice.LAYERS;
                 this.origin = dataservice.origin;
                 this.scale = dataservice.scale;
+                this.zScale = dataservice.zScale;
                 this.crs = dataservice.crs;
                 this.container = container;
 

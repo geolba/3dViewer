@@ -164,15 +164,13 @@
                     { a: [this._map.getMapY(30)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 30, this.height]] },
                     { a: [this._map.getMapY(40)], cl: "green-label", h: 0.6, hs: -4, centroid: [[-(this._map.length / 2), 40, this.height]] },
 
-                    { a: ["-10"], cl: "blue-label", ht:1, hs:-2, centroid: [[-(this._map.length / 2) - 1, -width/2, -10]] },
-                    { a: ["-20"], cl: "blue-label",ht:1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -20]] },
-                    { a: ["-30"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },
-                    //{ a: ["-40"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -40]] },
-                    { a: ["0"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 0]] },
-                    { a: ["10"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 10]] },
-                    { a: ["20"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 20]] },
-                    { a: ["30"], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 30]] }
-                    //{ a: ["40"], cl: "blue-label", h: 0.600000000001, centroid: [[-(this._map.length / 2) - 1, -width / 2, 40]] }
+                    { a: [this._map.getMapZ(-10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2) - 1, -width / 2, -10]] },
+                    { a: [this._map.getMapZ(-20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -20]] },
+                    { a: [this._map.getMapZ(-30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },                  
+                    { a: [this._map.getMapZ(0)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 0]] },
+                    { a: [this._map.getMapZ(10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 10]] },
+                    { a: [this._map.getMapZ(20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 20]] },
+                    { a: [this._map.getMapZ(30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 30]] }                   
                 ];
 
                 var zFunc, getPointsFunc = function (f) { return f.centroid; };
