@@ -1463,12 +1463,12 @@
                 var index = b.geometry.index.array;
                 var vertices = b.geometry.attributes.position.array;
 
-                ////var self = this;     
-                //if (self.worker) {
-                //    self.worker.terminate();
-                //}
-
-                this.work({ file: 'scripts/counting.js', args: { borderEdges: borderEdges, vertices: vertices, index: index, check: check } }).then(function (data) {
+                var scriptEls = document.getElementsByTagName('script');
+                var thisScriptEl = scriptEls[scriptEls.length -1];
+                var scriptPath = thisScriptEl.src;
+                var scriptFolder = scriptPath.substr(0, scriptPath.lastIndexOf('/') +1);
+              
+                this.work({ file: scriptFolder +'counting.js', args: { borderEdges: borderEdges, vertices: vertices, index: index, check: check } }).then(function (data) {
                     //Worker completed successfully
                     //console.log(data);
                     //document.getElementById("footerText").innerHTML = data.length;
