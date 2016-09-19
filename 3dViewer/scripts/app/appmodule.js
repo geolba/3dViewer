@@ -9,6 +9,7 @@
     "gba/controls/MobileDialog",
     "gba/controls/BasemapDialog",
     "gba/controls/Legend",
+    "gba/controls/MobilePopup",
     "gba/controls/Popup",
     "gba/controls/BoreholePopup",   
     "helper/dom",
@@ -20,7 +21,7 @@
     function (THREE, appSettings, Proj4js,
         map,
         util, i18n, $,
-        DxfIdentify, Dialog,BasemapDialog, Legend, Popup, BoreholePopup, dom, domUtil,domEvent, Fullscreen, GridLayer, NorthArrow, 
+        DxfIdentify, Dialog, BasemapDialog, Legend, MobilePopup, Popup, BoreholePopup, dom, domUtil, domEvent, Fullscreen, GridLayer, NorthArrow,
         ControlButton, BoreHole, Slider, LayerControl, BorderControl, MoreControls, jRespond) {
         "use strict";
 
@@ -94,7 +95,8 @@
           
             //creating the popup for identify
             dom.createDom("div", { id: "identifyDiv" }, container, 'first');// document.getElementsByTagName("body")[0]);
-            app.popup = new Popup({ domElement: app.renderer.domElement }, "identifyDiv");
+            var popupClass = util.hasTouch() ? MobilePopup : Popup;
+            app.popup = new popupClass({ domElement: app.renderer.domElement }, "identifyDiv");
             app.popup.addTo(app.controls);
                      
             app._queryableObjects = [];
