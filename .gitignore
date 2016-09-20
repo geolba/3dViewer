@@ -188,3 +188,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 /3dViewer/dist/
+/.vs/config/applicationhost.config
+/.vs/Image Optimizer/cache-lossless.txt
+/3dViewer/content/concat.min.css
