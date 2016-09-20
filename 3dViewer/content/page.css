@@ -1,6 +1,4 @@
-﻿@charset "UTF-8";
-
-/* Start Reset CSS */
+﻿/* Start Reset CSS */
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strong, sub, sup, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
@@ -100,22 +98,8 @@ h1 {
     pointer-events: none;
 }
 
-.red-label {
-    /*color: red;*/
+.red-label {  
     color: #f00;
-    padding: 2px;
-    text-shadow: -1px -1px #FFF, 0 -1px #FFF, 1px -1px #FFF, -1px 0 #FFF, 1px 0 #FFF, -1px 1px #FFF, 0 1px #FFF, 1px 1px #FFF;
-    position: absolute;
-    pointer-events: none;
-      -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.green-label {
-    /*color: lawngreen;*/
-     color: #7cfc00;
     padding: 2px;
     text-shadow: -1px -1px #FFF, 0 -1px #FFF, 1px -1px #FFF, -1px 0 #FFF, 1px 0 #FFF, -1px 1px #FFF, 0 1px #FFF, 1px 1px #FFF;
     position: absolute;
@@ -126,14 +110,25 @@ h1 {
     user-select: none;
 }
 
-.blue-label {
-     /*color: deepskyblue;*/
-    color: #00bfff;    
+.green-label {   
+    color: #7cfc00;
     padding: 2px;
     text-shadow: -1px -1px #FFF, 0 -1px #FFF, 1px -1px #FFF, -1px 0 #FFF, 1px 0 #FFF, -1px 1px #FFF, 0 1px #FFF, 1px 1px #FFF;
     position: absolute;
     pointer-events: none;
-      -moz-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.blue-label {  
+    color: #00bfff;
+    padding: 2px;
+    text-shadow: -1px -1px #FFF, 0 -1px #FFF, 1px -1px #FFF, -1px 0 #FFF, 1px 0 #FFF, -1px 1px #FFF, 0 1px #FFF, 1px 1px #FFF;
+    position: absolute;
+    pointer-events: none;
+    -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -147,14 +142,14 @@ header, footer, nav {
     z-index: 150;
 }
 
-    footer, header .fm_title_bar {
-        text-align: center;
-        margin: 0 auto;
-    }
+footer, header .fm_title_bar {
+    text-align: center;
+    margin: 0 auto;
+}
 
-    nav .div_nav {
-        height: 100%;
-    }
+nav .div_nav {
+    height: 100%;
+}
 
 .fm_container {
     margin: 10px;
@@ -267,13 +262,12 @@ nav {
 	box-shadow: 0 0 0 10px rgba(34,34,34,.6);	
 }*/
 
-
-
 .gba_panel {
     display: none;
 }
 
 .panel-section {
+    border-bottom: 2px solid rgb(0,0,0);
     border-bottom: 2px solid rgba(0,0,0,0.5);
     margin-bottom: 15px;
     /*padding-bottom: 10px;*/
@@ -281,14 +275,11 @@ nav {
 
 .feature-wrapper.inline-block {
     position: relative;
-    display: inline-block;
-    /*vertical-align: bottom;*/
+    display: inline-block;  
 }
 
 .button {
-    border: 0 solid;
-    /*border-style: solid;
-    border-width: 0;*/
+    border: 0 solid;  
     cursor: pointer;
     font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
     font-weight: normal;
@@ -298,12 +289,10 @@ nav {
     text-decoration: none;
     text-align: center;
     -webkit-appearance: none;
+    -moz-appearance: none;
     border-radius: 0;
-    display: inline-block;
-    padding-top: 0.5625rem;
-    padding-right: 1.125rem;
-    padding-bottom: 0.625rem;
-    padding-left: 1.125rem;
+    display: inline-block;    
+    padding: 0.5625rem 1.125rem 0.625rem 1.125rem;
     font-size: 1rem;
     background-color: #48D1CC;
     border-color: #007095;
@@ -319,24 +308,19 @@ nav {
     user-select: none; /* Non-prefixed version, currently not supported by any browser */
 }
 
-    button.radius, .button.radius {
-        border-radius: 2px;
-    }
+button.radius, .button.radius {
+    border-radius: 2px;
+}
 
-    button.small, .button.small {
-        padding-top: 0.4375rem;
-        padding-right: 0.875rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0.875rem;
-        font-size: 0.8125rem;
-    }
+button.small, .button.small {      
+    padding: 0.4375rem 0.875rem 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+}
 
-    button:hover, button:focus, .button:hover, .button:focus {
-        color: #fff;
-        background-color: #007095;
-    }
-
-
+button:hover, button:focus, .button:hover, .button:focus {
+    color: #fff;
+    background-color: #007095;
+}
 
 .feature-wrapper input[type="checkbox"]:checked + label {
     box-shadow: inset 0 0 10px #000;
@@ -352,10 +336,7 @@ nav {
 }
 
 input[type="checkbox"] + label, input[type="radio"] + label {
-    display: inline-block;
-    /*margin-left: 0.5rem;
-    margin-right: 1rem;
-    margin-bottom: 0;*/
+    display: inline-block; 
     vertical-align: baseline;
 }
 
@@ -366,8 +347,7 @@ select {
     cursor: pointer;
     font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
     font-weight: normal;
-    line-height: normal;
-    /*margin: 0 0 1.25rem;*/
+    line-height: normal;  
     margin-left: 0;
     margin-bottom: 1.25rem;
     margin-right: 0;
@@ -376,13 +356,9 @@ select {
     text-align: center;
     -webkit-appearance: caret;
     -moz-appearance: none;
-    display: inline-block;
-    padding-top: 0.4375rem;
-    padding-right: 0.875rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.875rem;
+    display: inline-block;    
+    padding: 0.4375rem 0.875rem 0.5rem 0.875rem;
     font-size: 0.8125rem;
-    /*font-size: 1rem;*/
     background-color: #48D1CC;
     border-color: #007095;
     color: #fff;
@@ -395,16 +371,12 @@ select {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
-    overflow: hidden;
-    /*-ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap;*/
+    overflow: hidden;   
 }
 
-    select.radius {
-        border-radius: 2px;
-    }
+select.radius {
+    border-radius: 2px;
+}
 
 .gba_close {
     position: absolute;
@@ -429,21 +401,20 @@ select {
     display: none;
 }
 
-    .fm_icon_text.text_show {
-        display: inline;
-    }
+.fm_icon_text.text_show {
+    display: inline;
+}
 
 #creativeCommons {
     font-size: 0.75em;
     padding-top: .25em;
 }
 
-    #creativeCommons a:link, #creativeCommons a:visited, #creativeCommons a:hover, #creativeCommons a:active {
-        vertical-align: middle;
-        /*color: #ccc;*/
-        color: white;
-        text-decoration: none;
-    }
+#creativeCommons a:link, #creativeCommons a:visited, #creativeCommons a:hover, #creativeCommons a:active {
+    vertical-align: middle;   
+    color: white;
+    text-decoration: none;
+}
 
 .fm_embed_code {
     width: 100%;
@@ -469,13 +440,12 @@ select {
     right: 0;
 }
 
-    #logoPanel > a > img {
-        padding-left: 30px;
-        max-height: 100%;
-        max-width: 90%;
-    }
+#logoPanel > a > img {
+    padding-left: 30px;
+    max-height: 100%;
+    max-width: 90%;
+}
 
-/***************************/
 
 /* everything but min. phone */
 @media all and (min-width: 768px) {
@@ -578,17 +548,17 @@ select {
         margin: 0 3px;
     }
 
-        .gba_button:hover {
-            color: black;
-            background-color: #fff;
-        }
+    .gba_button:hover {
+        color: black;
+        background-color: #fff;
+    }
 
-            .gba_button .fm_icon, .gba_button:hover .fm_icon {
-                width: 24px;
-                height: 24px;
-                display: inline-block;
-                background-size: 24px 24px;
-            }
+    .gba_button .fm_icon, .gba_button:hover .fm_icon {
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        background-size: 24px 24px;
+    }
 
     .gba_active_button {
         background-color: white;
@@ -604,8 +574,7 @@ select {
 
     header {
         top: 0;
-        height: 2.5em;
-        /*height:60px;*/
+        height: 2.5em;        
     }
 
     footer {
@@ -614,8 +583,7 @@ select {
     }
 
     nav {
-        top: 2.5em;
-        /*top:60px;*/
+        top: 2.5em;     
         margin: 0;
         padding: 0;
         height: 2.2em;
@@ -623,8 +591,7 @@ select {
 
     header .fm_title_bar {
         font-size: 1.5em;
-        margin-top: .2em;
-        /*margin-top: 1.2em;*/
+        margin-top: .2em;      
     }
 
     .main {
@@ -639,9 +606,7 @@ select {
 
     .fm_center_content {
         left: 0;
-        right: 300px;
-        /*left: 300px;
-        right: 0;*/
+        right: 300px;       
     }
 
     nav .div_nav {
@@ -670,16 +635,13 @@ select {
     overflow: auto;
 
 		
-	}
-    #basemapList { width: 100%; }*/
-
-
+	}*/
+   
 }
-
 
 /* tab */
 /*@media all and (max-width: 1024px){*/
-@media all and (max-width: 1279px) {
+@media all and (max-width: 1279px){
     .sidebar_right {
         display: none;
     }
@@ -702,13 +664,7 @@ select {
 
 /* phone */
 @media all and (max-width: 767px) {
-
-    /* image overrides */
-
-    /*white butons*/
-    /*.fm_basemap_icon{ background: url(mobile_icons/map2-w.png) no-repeat; }
-	.fm_measure_icon{ background: url(mobile_icons/ruler3-w.png) no-repeat; }*/
-
+       
     /*normal rechts */
     .fm_details_icon {
         background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3AcYFR8Pya2nAAAAA35JREFUaN7tmV2IVVUUx39bZ6bIMouKhLQaw0gI/OzBSpMRfKrAl6KwJ9/yoei18AsjIsGHPggSBbGXMDIKMSuK8sEokookIYes7BO/JiFnxn49eIJht8+559x758wdvH+4cPc667/2+e9z97lrrQ1ddNHFJYHQrkBqAJYAq4C7gH5gZuT2C/A98BmwH/g8hGBHrIR6g7pRHbQ6jqkb1OsmUsA09Vn1L1vHkLpZvaJuESvVH2w/BtUV475Hsn2wHngGmFLgOgx8BwwC5zPb5cAtwO1AXwH3ArAB2DIu+0ftUXcWrOaI+pa6Rp1REGeG+pi6N+PkYbs6td0igro7Z8JR9VV1VoK3Sn1JfVG9L3F9dsa9kCem3UKeyJnoN3V5wn+Kuivh/3JO/AH1j5w5Hm+XiCXq+cQEh9WbczjrCn4ya3I4t6pfJ/z/Vhe2KqI3J/g36vQC3qECIe8V8K5Wj+QsWk8rQp5MBP1TndOAd6RAyKEG3LnqyQRvXbMi+tSfEgHvL8HdUSBkWwn+6gTvuNrbjJBHE8E+Ksm9ST2T4P9eNh1RDyb4Dzcj5MMoyD/q4gr8O9QD2et5RH1H7a/Av7vK/ir60xqNghxs8id6mdrXJPer6B6G1atSvnlvgnuB+F/19RITrwUeyrn239dXQghvltSyF7hzzLgXuAfYV1bIooTtgxIT3wasbODzboWH8jbwdOLe/ickL/GbG43PZUlgIzwPzAF2timp+DJLQIvurVDIjdF4sEwmGkI4GUI4llWBrZevIYwCxyPzzCpCrozGZyawCD0djadXERKYZMgTMlRmFWpCXNucrSLk12jcn1WHdZfUPcDsRCemtJCj0XhaVqLWjQWJsvhoFSFfJGwDEyDkgZL3livkk6wJMBaPTICQB6PxCPBpaSEhhNPA+5F5abOtmib3x0CUngDsDyEMVXkiALsStvU1Po1NCdvuqq9fgDeAnyPb8jKFVRuexmpgaWT+EdhTWUgIYRjYmri0o1Gp2wBTG5W6wGupPC6EMFJL80FdmxVTJwpK3ROZz1O1NR+qtoPU5yr0ebfX1g6q2qBTr1X7S36ur7VBN2aybQWre0Cd30TMBRk3Dy+MS97TyU3sS+9YIRLUcQc9rYiZ/EdvkaCOOAxt9/H0QmAZF4+n5wGzgGsyl1NZI+FbLh5Pfwwc7pjj6S666GJy4F8SuWHm3BERRgAAAABJRU5ErkJggg==') /*mobile_icons/info2-w.png*/ no-repeat;
@@ -848,12 +804,11 @@ select {
         background-color: #222;
     }
 
-        nav .div_nav {
-            display: block;
-            /*min-width: 380px;*/
-            text-align: center;
-        }
-
+    nav .div_nav {
+        display: block;
+        /*min-width: 380px;*/
+        text-align: center;
+    }
 
     .gba_button {
         width: 32px;
@@ -862,24 +817,23 @@ select {
         padding: 5px 5px;
     }
 
-        .gba_button .fm_icon, .gba_button:hover .fm_icon {
-            display: inline-block;
-            width: 32px;
-            height: 32px;
-            background-size: 32px 32px;
-            padding: 5px;
-        }
+    .gba_button .fm_icon, .gba_button:hover .fm_icon {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background-size: 32px 32px;
+        padding: 5px;
+    }
 
-        .gba_button:hover, .gba_active_button {
-            background-color: white;
-        }
+    .gba_button:hover, .gba_active_button {
+        background-color: white;
+    }
 
     .fm_icon_text, .fm_icon_text.text_show {
         display: none;
         margin: 0;
         padding: 0;
     }
-
 
     .gba_panel {
         padding-top: 30px;
@@ -888,21 +842,9 @@ select {
     .float_right {
         float: none;
     }
-
-    /*.fm_overlay{
-	bottom: 4em;
-	left: 20px;
-	right: 20px;
-    }
-   
-    .fm_basemap_list{ max-height: 80%; overflow-y: auto;}*/
-
 }
 /* end phone */
 
-
-/* override elements */
-/*.fm_no_margin { margin: 0; }*/
 
 /* webkit scrollbar */
 ::-webkit-scrollbar {
@@ -916,13 +858,15 @@ select {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 3px;
+    background: rgb(34,34,34);
     background: rgba(34,34,34,.7);
     box-shadow: 0 0 6px rgba(0,0,0,.6) inset;
 }
 
-    ::-webkit-scrollbar-thumb:window-inactive {
-        background: rgba(34,34,34,.1);
-    }
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgb(34,34,34);
+    background: rgba(34,34,34,.1);
+}
 
 
 /*Popup!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
@@ -996,21 +940,18 @@ select {
 
 /*asychrones laden anzeigen*/
 #progressArea {
-    position: absolute;
-    /*bottom: 20px;
-    right: 0;*/
+    position: absolute;   
     top: 50%;
     right: 50%;
     z-index: 30;
 }
 
-
 /* attributes table */
-table.layer tr {
+.layer tr {
     background-color: #eeeeee;
 }
 
-table.coords tr {
+.coords tr {
     background-color: #eeeeee;
 }
 
@@ -1018,15 +959,12 @@ table.attrs tr:nth-child(odd) {
     background-color: #eeeeee;
 }
 
-
 table.attrs tr td:first-child {
     width: 40%;
 }
 
-
 .loading {
-    position: absolute;
-    /*z-index: 65536;*/
+    position: absolute;   
     z-index: 999999;
 }
 
@@ -1034,6 +972,7 @@ table.attrs tr td:first-child {
     width: 100%;
     min-height: 75px;
     height: 100%;
+    background: rgb(160, 160, 160);
     background: rgba(160, 160, 160, 0.5);
     text-align: center;
     color: rgb(240, 240, 240);
@@ -1050,19 +989,16 @@ table.attrs tr td:first-child {
     font-weight: 500;
 }
 
-    #socialButtons a, #socialButtons div {
-        vertical-align: middle;
-        line-height: 15px;
-    }
+#socialButtons a, #socialButtons div {
+    vertical-align: middle;
+    line-height: 15px;
+}
 
 .share-twitter {
     border: 1px solid #00CDCD;
     padding: 2px 10px;
     background-color: #48D1CC;
-    color: #ffffff;
-    /*-moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;*/
+    color: #ffffff;  
     border-radius: 4px;
     text-decoration: none;
 }
@@ -1071,10 +1007,7 @@ table.attrs tr td:first-child {
     border: 1px solid #D8472A;
     padding: 2px 10px;
     background-color: #D8472A;
-    color: #ffffff;
-    /*-moz-border-radius: 4px;
-    -webkit-border-radius:4px;
-    -khtml-border-radius:4px;*/
+    color: #ffffff;  
     border-radius: 4px;
     text-decoration: none;
     margin-left: 10px;
@@ -1085,18 +1018,16 @@ table.attrs tr td:first-child {
     padding: 2px 10px;
     margin-right: 10px;
     background-color: #3B5898;
-    color: #FFFFFF;
-    /*-moz-border-radius: 4px;
-    -webkit-border-radius:4px;
-    -khtml-border-radius:4px;*/
+    color: #FFFFFF;   
     border-radius: 4px;
     text-decoration: none;
 }
 
-@import url("mobile_dialog.css");
+/*@import url("mobile_dialog.css");
 @import url("legend.css");
 @import url("popup.css");
 @import url("borehole.css");
 @import url("controls.css");
 @import url("rangeslider.css");
 @import url("slicer.css");
+@import url("mobile_popup.css");*/

@@ -66,8 +66,7 @@
     color: #464646;
     line-height: 46px;
     cursor: pointer;
-    float: right;
-    display: inline;
+    float: right;   
     padding: 0 5px;
 }
 .gba-menu .body {
