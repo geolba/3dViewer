@@ -1,9 +1,11 @@
-﻿
+﻿ .popup_close {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3AgBFSI5w7714wAAAYlJREFUSMfd1c9KFWEYBvCfJz15NI8RoRnpLohuILyMll1CG0taibhqERkJQWFBixbZpkSwlRs3kdfhBYgaBHU4h8bNGwzTfDNzIgh8YWBmeL7n/TPP8w7/MUb+BbaVeD+NO+g0IG9hEVeaVtPFGjK8wIUa/KPAvsVsHfk0VuNAhh420E7gl/Eth39TlWQsV02GX7kkzzBeGMtDnOawv/GbqdF28A79kkM/8CSSjGAJxyW4DPsxidJoR5uDksM/8TgqP0qQf8bluu/QwetEJ4PcfZF8B1ebKmkSLxNJyp4/YWZYo3VDpt9zRMWrjw+Y+1s3X8dBRYJD3K5zYSpGcRfzNV3ew8SwlbfwoEKKRXU9LfikNpZwkiAvS9LDenRdG8sV5Fsh4V6ik+dVY29jJbdbiuQfcQ1TIeFBopNXIfM/4mLIsox8uyDFbhCV+WQPl1JdLOB9YdY7CRNNxmLr57BfQraVP6sbMesMuzX2H4/dleErbjVV0QLuN3ToREj65rBeGB0CO+bcxhlxQrBXIUNRlQAAAABJRU5ErkJggg==') /*icons/close.png*/ no-repeat;
+    }
 
 /* anything but phone */
 @media all and (min-width: 768px) {
-    .touch .popup_close {
-        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3AgBFSI5w7714wAAAYlJREFUSMfd1c9KFWEYBvCfJz15NI8RoRnpLohuILyMll1CG0taibhqERkJQWFBixbZpkSwlRs3kdfhBYgaBHU4h8bNGwzTfDNzIgh8YWBmeL7n/TPP8w7/MUb+BbaVeD+NO+g0IG9hEVeaVtPFGjK8wIUa/KPAvsVsHfk0VuNAhh420E7gl/Eth39TlWQsV02GX7kkzzBeGMtDnOawv/GbqdF28A79kkM/8CSSjGAJxyW4DPsxidJoR5uDksM/8TgqP0qQf8bluu/QwetEJ4PcfZF8B1ebKmkSLxNJyp4/YWZYo3VDpt9zRMWrjw+Y+1s3X8dBRYJD3K5zYSpGcRfzNV3ew8SwlbfwoEKKRXU9LfikNpZwkiAvS9LDenRdG8sV5Fsh4V6ik+dVY29jJbdbiuQfcQ1TIeFBopNXIfM/4mLIsox8uyDFbhCV+WQPl1JdLOB9YdY7CRNNxmLr57BfQraVP6sbMesMuzX2H4/dleErbjVV0QLuN3ToREj65rBeGB0CO+bcxhlxQrBXIUNRlQAAAABJRU5ErkJggg==') /*icons/close.png*/ no-repeat;
+   
+    .touch .popup_close {      
         width: 20px;
         height: 20px;      
         /*margin: 5px;*/
@@ -33,8 +35,7 @@
      .touch .popup_close {
         background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3AcXFyot5RvgagAAAbdJREFUaN7t2DFOAkEUxvE/6AFMUBMoIDExHsMDqJVgZ+KJKIyFBSjGxCN4DbUSC6XRys5GZDXYMAkh7rLz5s0smPmSLXnDj2Hhm4WYmJiYlFSAG2DTw+wS0AZ2fSOqQB8YA09ATXF2GbiczB4CeyEQY2VMGbiYmT0E9kMgtDB/IbxgahkIV0wWQhWTByHF5EGY68sFY4OwxdggpjEHEsit5ULmegDW5/zEnglnfwAbtpA68CxcsJ+yM2WgK5w5Ag6lXy9NjCui6XrD14EXB0x1ERAm28Cr8I3cA+fC134Dx9p/ii47I7kSzZ0oCuMVEQoTBGHS8IQJivCFKQShjUmAVtEnxgYwWHaE6U7XDpCBpD9pR9JibbpZMERX8WYvBKONKATjCzFbNJcaEQQTCuEVUwJOHar4u8MRoLIIO2Fqh8bhzBnRUepOhWE0ERqYRymmLVzwBzjJmLsDvAln3wFrtpDW5JP1UQClrfkKWJHsig3GtsXaYnpShEkzB0ZaxfMeAXqTe9Y5WZgEOPJ4nlFDZGFcEfMw6ohpzEgZkYbxhpjGfCojZjHeESZbnp8BrBITExPzr/MLneElMzKD908AAAAASUVORK5CYII=') /*mobile_icons/close.png*/ no-repeat;
         width: 25px;
-        height: 25px;     
-        /*margin: 10px;*/
+        height: 25px;            
         background-size: 25px 25px;
 
            float: right;
@@ -55,10 +56,7 @@
 
 
 .notouch .popup .fm_overlay {
-    position: fixed;  
-    /*max-width: 480px;*/
-     /*max-width: 360px;
-    min-width: 300px;*/
+    position: fixed;    
      width:300px;
 
       left: 50%;
@@ -117,8 +115,7 @@
     height: 16px;
     text-align: center;
     float: right;
-    cursor: pointer;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH3AgBFSI5w7714wAAAYlJREFUSMfd1c9KFWEYBvCfJz15NI8RoRnpLohuILyMll1CG0taibhqERkJQWFBixbZpkSwlRs3kdfhBYgaBHU4h8bNGwzTfDNzIgh8YWBmeL7n/TPP8w7/MUb+BbaVeD+NO+g0IG9hEVeaVtPFGjK8wIUa/KPAvsVsHfk0VuNAhh420E7gl/Eth39TlWQsV02GX7kkzzBeGMtDnOawv/GbqdF28A79kkM/8CSSjGAJxyW4DPsxidJoR5uDksM/8TgqP0qQf8bluu/QwetEJ4PcfZF8B1ebKmkSLxNJyp4/YWZYo3VDpt9zRMWrjw+Y+1s3X8dBRYJD3K5zYSpGcRfzNV3ew8SwlbfwoEKKRXU9LfikNpZwkiAvS9LDenRdG8sV5Fsh4V6ik+dVY29jJbdbiuQfcQ1TIeFBopNXIfM/4mLIsox8uyDFbhCV+WQPl1JdLOB9YdY7CRNNxmLr57BfQraVP6sbMesMuzX2H4/dleErbjVV0QLuN3ToREj65rBeGB0CO+bcxhlxQrBXIUNRlQAAAABJRU5ErkJggg==') /*icons/close.png*/ no-repeat;
+    cursor: pointer;    
     background-size: 16px 16px;
 }
 
@@ -174,7 +171,7 @@
 	font-size: .8em;
 	text-align: center;
 	display: inline-block;
-	float: left;
+	/*float: left;*/
 	margin: 10px 15px 10px 15px;
 }
 .gba_basemap_option label { display: block; margin-top: 5px;}

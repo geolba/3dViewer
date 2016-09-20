@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+﻿/*@charset "UTF-8";*/
 
 /* control positioning */
 .gba-control {
@@ -124,11 +124,10 @@
     display: block;   
     
     background-image: url('img/242.png');
-        background-position:-84px -45px;
-     background-repeat: no-repeat;
-     /*background-position: 50% 50%;*/ 
-        background-color: rgba(128,128,128, 0.8);
-        filter: alpha(opacity=80);    
+    background-position:-84px -45px;
+    background-repeat: no-repeat;   
+    background-color: rgb(128,128,128);
+    background-color: rgba(128,128,128, 0.8);          
 }
 .gba-control-hideborder {
    width: 30px;
@@ -140,7 +139,7 @@
     cursor: pointer;
     border-radius: 5px;   
     display: block;  
-      /*background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAACFlBMVEUAAAAAAAAAAAAAAAAGBgYAAAAAAAAICAgAAAAAAAAHBwcAAAAAAAAAAAABAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEAAAAAAAAcHBwAAAAAAAAJCQlkZGQGBgZFRUUNDQ0FBQUAAAAAAABra2sAAAAAAAAAAAADAwMKCgoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEAAAAyMjIQEBAAAAAAAAAAAAAlJSUAAAAAAAAAAAAICAgAAAAAAAAAAAAAAAAAAAAAAAADAwMAAAAAAAAAAAAAAABiYmJMTEwAAAAAAAAAAAAKCgoAAAAAAAAAAAAAAAAJCQkAAAAAAAAAAAAJCQkAAACAgIAAAAAAAAAAAAAAAAAAAAD////Z2dkEBAQLCwu/v7+tra0BAQH7+/vFxcUkJCQ6Ojq7u7vW1tYNDQ00NDQPDw+Xl5ejo6Pr6+vX19epqann5+dYWFgoKCiRkZG0tLTPz88QEBAZGRl2dnZmZmZdXV1AQEBBQUEODg4rKysbGxsFBQVSUlLHx8dgYGAnJydoaGiEhISYmJiSkpIWFhbk5OS+vr41NTXMzMw+Pj4MDAyamppcXFyVlZWLi4vS0tIYGBjz8/MHBwd8fHwzMzMGBgaHh4e3t7ewsLDIyMhISEgDAwNQUFD39/d3d3c5OTmPj48RERFvb287OzsKCgox6chrAAAAYnRSTlMAgsPz7AjekLj5xhDm7OZsGFnbIOOPfP7r+oQw85845vv29cP+lED9r1tI+8i3UNK/WATHDI71e/P2/WgU8tfEcPgcXYt4JJP6gCzvm/r3NGKj4uQ8vqvs2USFnvT94ftMOTQvtbIAAAGISURBVCjPY2AgBLh5vWUNscpoCEW5ursxibmhS0jbSbkwMJjoBRrb+OiZIEnIaTmxhEcngIRsxIyFTKy5oRI2IgE6vuXqttrK/CDTWBNjTGGW+LBb5KekpGQvVnKUZ480MYgwgEi4eQlaZqdAQH6JgoyHWRIb2K4QiUTFjBQE6F+fmsTpDLbEMCgWSWJyUV1SUpI5UIbfnssPSSJl4USgRJIoA4NwMJ/KhuxZc2ASGbkgiaQwBgYj8aRFaxp7Ns6sXQaSmF0AEi9MMgZaEwNWk9O5en7uhJSaNBBnWkVSMFCPVRIUrJvS1NeWCmRUzVuSlAR0QVwSAnSsABLtFWVpSYxAGd2k6oaqVIRsQVlpTpIGyKPuSWuTk7PyKuszwRKpXVnNSfrgIHBIWl6bDAKrZrS0JmUuTe5N8hYAh5oeUOHc7pJSsOykqcnFSZL+kPBkTXC3A/thQXoWUC4vNUkTKeaErUOZgZLTVxanFyV5osU3q5oqD9gJHNiSiRO/cXycCY7UZQSXAAD3PpOFkeOtRwAAAABJRU5ErkJggg==')*/ /*img/border.png*/;   
+      /*background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAACFlBMVEUAAAAAAAAAAAAAAAAGBgYAAAAAAAAICAgAAAAAAAAHBwcAAAAAAAAAAAABAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEAAAAAAAAcHBwAAAAAAAAJCQlkZGQGBgZFRUUNDQ0FBQUAAAAAAABra2sAAAAAAAAAAAADAwMKCgoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEAAAAyMjIQEBAAAAAAAAAAAAAlJSUAAAAAAAAAAAAICAgAAAAAAAAAAAAAAAAAAAAAAAADAwMAAAAAAAAAAAAAAABiYmJMTEwAAAAAAAAAAAAKCgoAAAAAAAAAAAAAAAAJCQkAAAAAAAAAAAAJCQkAAACAgIAAAAAAAAAAAAAAAAAAAAD////Z2dkEBAQLCwu/v7+tra0BAQH7+/vFxcUkJCQ6Ojq7u7vW1tYNDQ00NDQPDw+Xl5ejo6Pr6+vX19epqann5+dYWFgoKCiRkZG0tLTPz88QEBAZGRl2dnZmZmZdXV1AQEBBQUEODg4rKysbGxsFBQVSUlLHx8dgYGAnJydoaGiEhISYmJiSkpIWFhbk5OS+vr41NTXMzMw+Pj4MDAyamppcXFyVlZWLi4vS0tIYGBjz8/MHBwd8fHwzMzMGBgaHh4e3t7ewsLDIyMhISEgDAwNQUFD39/d3d3c5OTmPj48RERFvb287OzsKCgox6chrAAAAYnRSTlMAgsPz7AjekLj5xhDm7OZsGFnbIOOPfP7r+oQw85845vv29cP+lED9r1tI+8i3UNK/WATHDI71e/P2/WgU8tfEcPgcXYt4JJP6gCzvm/r3NGKj4uQ8vqvs2USFnvT94ftMOTQvtbIAAAGISURBVCjPY2AgBLh5vWUNscpoCEW5ursxibmhS0jbSbkwMJjoBRrb+OiZIEnIaTmxhEcngIRsxIyFTKy5oRI2IgE6vuXqttrK/CDTWBNjTGGW+LBb5KekpGQvVnKUZ480MYgwgEi4eQlaZqdAQH6JgoyHWRIb2K4QiUTFjBQE6F+fmsTpDLbEMCgWSWJyUV1SUpI5UIbfnssPSSJl4USgRJIoA4NwMJ/KhuxZc2ASGbkgiaQwBgYj8aRFaxp7Ns6sXQaSmF0AEi9MMgZaEwNWk9O5en7uhJSaNBBnWkVSMFCPVRIUrJvS1NeWCmRUzVuSlAR0QVwSAnSsABLtFWVpSYxAGd2k6oaqVIRsQVlpTpIGyKPuSWuTk7PyKuszwRKpXVnNSfrgIHBIWl6bDAKrZrS0JmUuTe5N8hYAh5oeUOHc7pJSsOykqcnFSZL+kPBkTXC3A/thQXoWUC4vNUkTKeaErUOZgZLTVxanFyV5osU3q5oqD9gJHNiSiRO/cXycCY7UZQSXAAD3PpOFkeOtRwAAAABJRU5ErkJggg==')*/ /*img/border.png*/
     background-image: url('img/242.png');
         background-position:-84px -45px;
       background-repeat: no-repeat;
@@ -181,10 +180,9 @@ span.gba-control-hideborder {
         font-weight: bold;
         text-decoration: none;
         text-align: center;
-        background-color: rgba(128,128,128, 0.8);
-        filter: alpha(opacity=80);
-        border-radius: 4px;
-        vertical-align: middle;
+        background-color: rgb(128,128,128);
+        background-color: rgba(128,128,128, 0.8);  
+        border-radius: 4px;       
         line-height: 30px;
         background-position: 50% 50%;
         background-repeat: no-repeat;
@@ -210,6 +208,7 @@ span.gba-control-hideborder {
 
 /*Koordinatenanzeige*/
 .gba-control-coordinates {
+    background-color: rgb(250,250,250);
     background-color: rgba(250,250,250,0.8);
     text-align: center;
     box-shadow: 0 0 5px #bbb;
@@ -298,7 +297,7 @@ gba-control-slider.gba-control-slider-horizontal .gba-slider-container {
     display: block;
 }
 
-.gba-control-slider.gba-control-slider-expanded span.gba-control-slider-toggle {
+.gba-control-slider.gba-control-slider-expanded .gba-control-slider-toggle {
     display: none;
 }
 
@@ -315,6 +314,7 @@ gba-control-slider.gba-control-slider-horizontal .gba-slider-container {
 
 .gba-control-slider input[type=range] {
   -webkit-appearance: none;
+  -moz-appearance:none;
   /*width: 100%;*/
 }
 .gba-control-slider input[type=range]:focus {
@@ -327,6 +327,7 @@ gba-control-slider.gba-control-slider-horizontal .gba-slider-container {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
   background: #dddddd;
   border-radius: 25px;
+   border: 0 solid rgb(0, 0, 0);
   border: 0 solid rgba(0, 0, 0, 0);
 }
 .gba-control-slider.gba-control-slider-vertical input[type=range]::-webkit-slider-runnable-track {
@@ -334,8 +335,8 @@ gba-control-slider.gba-control-slider-horizontal .gba-slider-container {
     width: 5px;    
 }
 .gba-control-slider input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
- 
+    -webkit-appearance: none;
+    -moz-appearance:none;
     border: none;
     height: 16px;
     width: 16px;
@@ -355,6 +356,7 @@ gba-control-slider.gba-control-slider-horizontal .gba-slider-container {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
   background: #dddddd;
   border-radius: 25px;
+  border: 0 solid rgb(0, 0, 0);
   border: 0 solid rgba(0, 0, 0, 0);
 }
 .gba-control-slider.gba-control-slider-vertical input[type=range]::-moz-range-track {
@@ -493,7 +495,7 @@ a.gba-control-less {
     display: none;
 }
 
-a.gba-control-text {
+.gba-control-text {
     float: right;
     margin: 0;
     width: 30px;

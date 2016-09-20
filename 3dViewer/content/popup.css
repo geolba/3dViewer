@@ -1,6 +1,4 @@
-﻿@charset "UTF-8";
-
-.gba-popup.modernGrey {
+﻿.gba-popup.modernGrey {
     position: absolute;
     z-index: 40;
     box-shadow: 1px 1px 3px #dbdbdb;
@@ -37,8 +35,7 @@
     background: -moz-linear-gradient(top, #f4f4f4 0, #e9e9e9 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0,#f4f4f4), color-stop(100%,#e9e9e9));
     background: -webkit-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
-    background: -o-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
-    background: -ms-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
+    background: -o-linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);    
     background: linear-gradient(top, #f4f4f4 0,#e9e9e9 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#e9e9e9',GradientType=0 );
     color: #333;

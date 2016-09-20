@@ -119,7 +119,6 @@
     <Content Include="content\img\zscale.png" />
     <Content Include="content\legend.css" />
     <Content Include="content\popup.css" />
-    <Content Include="content\popup2.css" />
     <Content Include="content\page-layout.css" />
     <Content Include="content\slicer.css" />
     <Content Include="data\dem.json" />
