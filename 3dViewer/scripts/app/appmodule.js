@@ -719,14 +719,32 @@
 
 
             util.showLoading();
-            var work1 = map.dataservice.layers[1].asyncBuildBorder(true);
-            var work2 = map.dataservice.layers[2].asyncBuildBorder(true);
-            var work3 = map.dataservice.layers[3].asyncBuildBorder(true);
-            var work4 = map.dataservice.layers[4].asyncBuildBorder(true);
-            var work5 = map.dataservice.layers[5].asyncBuildBorder(true);
-            var work6 = map.dataservice.layers[6].asyncBuildBorder(false);
 
-            $.when(work1, work2, work3, work4, work5, work6).then(function () {              
+            //var work1 = map.dataservice.layers[1].asyncBuildBorder(true);
+            //var work2 = map.dataservice.layers[2].asyncBuildBorder(true);
+            //var work3 = map.dataservice.layers[3].asyncBuildBorder(true);
+            //var work4 = map.dataservice.layers[4].asyncBuildBorder(true);
+            //var work5 = map.dataservice.layers[5].asyncBuildBorder(true);
+            //var work6 = map.dataservice.layers[6].asyncBuildBorder(false);
+
+            var workArray = [];
+            for (var j = 1; j < map.dataservice.layers.length-1; j++) {
+                var layer = map.dataservice.layers[j];
+                var work;
+                if (j !== map.dataservice.layers.length-2){
+                    work = layer.asyncBuildBorder(true);
+                }
+                else {
+                    //BasementLayer
+                    work = layer.asyncBuildBorder(false);
+                }
+                workArray.push(work);
+            }
+
+
+
+            //$.when(work1, work2, work3, work4, work5, work6).then(function () {
+            $.when.apply($, workArray).then(function () {
                 util.hideLoading();
                 var borderControl = new BorderControl(app.dataservice.layers, {});
                 borderControl.addTo(app.controls);

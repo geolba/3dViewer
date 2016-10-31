@@ -164,13 +164,27 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
 
             util.showLoading();
             var self = this;
-            var work1 = this._map.dataservice.layers[1].asyncBuildBorder(true);
-            var work2 = this._map.dataservice.layers[2].asyncBuildBorder(true);
-            var work3 = this._map.dataservice.layers[3].asyncBuildBorder(true);
-            var work4 = this._map.dataservice.layers[4].asyncBuildBorder(true);
-            var work5 = this._map.dataservice.layers[5].asyncBuildBorder(true);
-            var work6 = this._map.dataservice.layers[6].asyncBuildBorder(false);
-            $.when(work1, work2, work3, work4, work5, work6).then(function (result1, result2, result3, result4, result5, result6) {
+            //var work1 = this._map.dataservice.layers[1].asyncBuildBorder(true);
+            //var work2 = this._map.dataservice.layers[2].asyncBuildBorder(true);
+            //var work3 = this._map.dataservice.layers[3].asyncBuildBorder(true);
+            //var work4 = this._map.dataservice.layers[4].asyncBuildBorder(true);
+            //var work5 = this._map.dataservice.layers[5].asyncBuildBorder(true);
+            //var work6 = this._map.dataservice.layers[6].asyncBuildBorder(false);
+            var workArray = [];
+            for (var j = 1; j < this._map.dataservice.layers.length - 1; j++) {
+                var layer = this._map.dataservice.layers[j];
+                var work;
+                if (j !== this._map.dataservice.layers.length - 2) {
+                    work = layer.asyncBuildBorder(true);
+                }
+                else {
+                    //BasementLayer
+                    work = layer.asyncBuildBorder(false);
+                }
+                workArray.push(work);
+            }
+            //$.when(work1, work2, work3, work4, work5, work6).then(function (result1, result2, result3, result4, result5, result6) {
+            $.when.apply($, workArray).then(function () {
                 util.hideLoading();
                 //var borderControl = new BorderControl(app.dataservice.layers, {}).addTo(app.controls);
                 self._map.update();

@@ -40,20 +40,23 @@ function (Control, N, util, dom, domEvent, domUtil) {
 
             this._hideBorderButton = this._createButton("", b.hideBorder, 'gba-control-hideborder', container, this._hideBorder, this);
          
-            this.map.dataservice.layers[6].on('border-change', this.toggle, this);
+            var lastDxfLayerIndex = this.map.dataservice.layers.length - 2;//BasementLayer
+            this.map.dataservice.layers[lastDxfLayerIndex].on('border-change', this.toggle, this);
             return container;
         },
 
         _showBorder: function () {
                      
-            this.map.dataservice.layers[1].toggleBorderVisible(true);
-            this.map.dataservice.layers[2].toggleBorderVisible(true);
-            this.map.dataservice.layers[3].toggleBorderVisible(true);
-            this.map.dataservice.layers[4].toggleBorderVisible(true);
-            this.map.dataservice.layers[5].toggleBorderVisible(true);
-            this.map.dataservice.layers[6].toggleBorderVisible(true);
-
-            //this.toggle();
+            //this.map.dataservice.layers[1].toggleBorderVisible(true);
+            //this.map.dataservice.layers[2].toggleBorderVisible(true);
+            //this.map.dataservice.layers[3].toggleBorderVisible(true);
+            //this.map.dataservice.layers[4].toggleBorderVisible(true);
+            //this.map.dataservice.layers[5].toggleBorderVisible(true);
+            //this.map.dataservice.layers[6].toggleBorderVisible(true);
+            for (var j = 1; j < this.map.dataservice.layers.length - 1; j++) {
+                var layer = this.map.dataservice.layers[j];
+                layer.toggleBorderVisible(true);
+            }           
             this.map.update();
            
 
@@ -112,14 +115,17 @@ function (Control, N, util, dom, domEvent, domUtil) {
 
         _hideBorder: function () {
 
-            this.map.dataservice.layers[1].toggleBorderVisible(false);
-            this.map.dataservice.layers[2].toggleBorderVisible(false);
-            this.map.dataservice.layers[3].toggleBorderVisible(false);
-            this.map.dataservice.layers[4].toggleBorderVisible(false);
-            this.map.dataservice.layers[5].toggleBorderVisible(false);
-            this.map.dataservice.layers[6].toggleBorderVisible(false);
+            //this.map.dataservice.layers[1].toggleBorderVisible(false);
+            //this.map.dataservice.layers[2].toggleBorderVisible(false);
+            //this.map.dataservice.layers[3].toggleBorderVisible(false);
+            //this.map.dataservice.layers[4].toggleBorderVisible(false);
+            //this.map.dataservice.layers[5].toggleBorderVisible(false);
+            //this.map.dataservice.layers[6].toggleBorderVisible(false);
 
-            //this.toggle();
+            for (var j = 1; j < this.map.dataservice.layers.length - 1; j++) {
+                var layer = this.map.dataservice.layers[j];
+                layer.toggleBorderVisible(false);
+            }
             this.map.update();
         },
 
