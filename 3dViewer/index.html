@@ -20,9 +20,9 @@
     <link rel="stylesheet" type="text/css" href="content/controls.css" />
     <link rel="stylesheet" type="text/css" href="content/rangeslider.css" />
     <link rel="stylesheet" type="text/css" href="content/slicer.css" />
-    <link rel="stylesheet" type="text/css" href="content/mobile_popup.css" />
+    <link rel="stylesheet" type="text/css" href="content/mobile_popup.css" /> 
+    <link rel='stylesheet' type='text/css' href='scripts/lib/bower/font-awesome/css/font-awesome.css' />
 
-   
 </head>
 <body>
 
@@ -39,42 +39,66 @@
             </div>
         </header>
 
-        <nav>
+        <nav itemprop="hasPart" itemscope itemtype="http://schema.org/SiteNavigationElement">
             <div class='div_nav'>
-                <!-- float left elements ohne gba_trigger und braucht auch kein data-panel  -->
-                <a href="http://www.geologie.ac.at/forschung-entwicklung/geologische-3d-modellierung/" target="_blank" class='home_button gba_button'>
-                    <span class='fm_icon fm_home_icon'></span>
-                    <span class='fm_icon_text text_show'>GBA</span>
-                </a>
-                <a href='#' class='basemap_button gba_button'>
-                    <span class='fm_icon fm_basemap_icon'></span>
-                    <span class='fm_icon_text text_show'>Basemap</span>
-                </a>
-                <a href='#' class='about_button gba_button'>
-                    <span class='fm_icon fm_about_icon'></span>
-                    <span class='fm_icon_text text_show'>About</span>
-                </a>
+            
+                <ul>
+
+                    <!-- float left elements ohne gba_trigger und braucht auch kein data-panel  -->
+                    <li class="float_left">
+                        <a href="http://www.geologie.ac.at/forschung-entwicklung/geologische-3d-modellierung/" target="_blank" class='home_button gba_button'>
+                            <!--<span class='fm_icon fm_home_icon'></span>-->
+                            <span class='fm_icon fa fa-home'></span>
+                            <span class='fm_icon_text text_show'>GBA</span>
+                        </a>
+                    </li>
+       
+                    <li class="float_left">
+                        <a href='#' class='basemap_button gba_button'>
+                            <!--<span class='fm_icon fm_basemap_icon'></span>-->
+                            <i class="fm_icon fa fa-map"></i>
+                            <span class='fm_icon_text text_show'>Basemap</span>
+                        </a>
+                    </li>
+                    <li class="float_left">
+                        <a href='#' class='gba_button about_button'>
+                            <!--<span class='fm_icon fm_about_icon'></span>-->
+                            <i class="fm_icon fa fa-question"></i>
+                            <span class='fm_icon_text text_show'>About</span>
+                        </a>
+                    <li />
 
 
-
-                <!-- float right elements are displayed in reverse order -->
-                <a href='#' class='description_button gba_trigger gba_button float_right' data-panel='description_panel'>
-                    <span class='fm_icon fm_details_icon'></span>
-                    <span class='fm_icon_text'>Details</span>
-                </a>
-
-                <a href='#' class='legend_button gba_trigger gba_button float_right' data-panel='legend_panel'>
-                    <span class='fm_icon fm_legend_icon'></span>
-                    <span class='fm_icon_text'>Legend</span>
-                </a>
-                <a href='#' class='slicer_button gba_trigger gba_button float_right' data-panel='slicer_panel'>
-                    <span class='fm_icon fm_slicer_icon'></span>
-                    <span class='fm_icon_text'>Slicer</span>
-                </a>
-                <a href='#' class='share_button gba_trigger gba_button float_right' data-panel='share_panel'>
-                    <span class='fm_icon fm_share_icon'></span>
-                    <span class='fm_icon_text'>Share</span>
-                </a>
+                    <!-- float right elements are displayed in reverse order -->
+                    <li class="float_right">
+                        <a href='#' class='description_button gba_trigger gba_button' data-panel='description_panel'>
+                            <!--<span class='fm_icon fm_details_icon'></span>-->
+                            <span class='fm_icon fa fa-info'></span>
+                            <span class='fm_icon_text'>Details</span>
+                        </a>
+                    <li />
+                    <li class="float_right">
+                        <a href='#' class='legend_button gba_trigger gba_button' data-panel='legend_panel'>
+                            <!--<span class='fm_icon fm_legend_icon'></span>-->
+                            <span class='fm_icon fa fa-list-ul'></span>
+                            <span class='fm_icon_text'>Legend</span>
+                        </a>
+                    </li>
+                    <li class="float_right">
+                        <a href='#' class='slicer_button gba_trigger gba_button' data-panel='slicer_panel'>
+                            <!--<span class='fm_icon fm_slicer_icon'></span>-->
+                            <span class='fm_icon fa fa-gears'></span>
+                            <span class='fm_icon_text'>Slicer</span>
+                        </a>
+                    </li>
+                    <li class="float_right">
+                        <a href='#' class='share_button gba_trigger gba_button' data-panel='share_panel'>
+                            <!--<span class='fm_icon fm_share_icon'></span>-->
+                            <span class='fm_icon fa fa-share-square-o'></span>
+                            <span class='fm_icon_text'>Share</span>
+                        </a>
+                    </li>
+                </ul>
 
             </div>
         </nav>
