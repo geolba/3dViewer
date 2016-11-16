@@ -63,12 +63,31 @@ module.exports = function (grunt) {
 
                 }
             }
+        },
+        
+        bower: {
+            install: {
+                options: {
+                    //Whether you want to run bower install task itself 
+                    install: true,
+                    targetDir: 'scripts/lib/bower',
+                    //Will clean target dir before running install.
+                    cleanTargetDir: true,
+                    layout: 'byComponent'
+                    //layout: function (type, component, source) {
+                    //    return type;
+                    //}
+                }
+            }
         }
 
        
 
 
     });
+
+    // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-bower-task');
  
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-requirejs');

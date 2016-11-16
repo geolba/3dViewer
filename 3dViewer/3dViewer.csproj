@@ -152,6 +152,8 @@
     <Content Include="dist\nls\de\template.js" />
     <Content Include="dist\nls\template.js" />
     <Content Include="dist\require.js" />
+    <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
     <None Include="dist\_references.js" />
     <Content Include="images\basemap\base_border.jpg" />
     <Content Include="images\basemap\base_geo.jpg" />
