@@ -1,19 +1,22 @@
 {
-    "name": "3dviewer",
-    "private": true,
-    "dependencies": {
-        "font-awesome": "4.7.0",
-        "pure": "0.6.0"      
+  "name": "3dviewer",
+  "private": true,
+  "dependencies": {
+    "font-awesome": "4.6.1",
+    "pure": "0.6.0"
+  },
+  "exportsOverride": {
+    "font-awesome": {
+      "fonts": "fonts/*",
+      "css": "css/font-awesome.css"
     },
-    "exportsOverride": {
-        "font-awesome": {
-            "fonts": "fonts/*",
-            "css": "css/font-awesome.css"
-        },
-        "pure": {
-            "css": [ "pure.css", "grids-responsive.css" ]
-        }
-    },
+    "pure": {
+      "css": [
+        "pure.css",
+        "grids-responsive.css"
+      ]
+    }
+  },
     "ignore": [
         "**/.*",
         "node_modules",
@@ -21,6 +24,6 @@
         "test",
         "package.json",
         "src"
-    ]
+    ]  
 
 }
