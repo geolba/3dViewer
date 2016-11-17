@@ -142,8 +142,14 @@ header, footer, nav {
     z-index: 150;
 }
 
-footer, header .fm_title_bar {
-    text-align: center;
+footer{
+    text-align:center;
+}
+
+header .fm_title_bar {
+   display: block;
+    text-decoration: none;
+    white-space: nowrap;
     margin: 0 auto;
 }
 
@@ -164,7 +170,7 @@ header, footer {
     color: white;
 }
 
-#headerArea {
+/*#headerArea {
     position: absolute;
     height: auto;
     width: auto;
@@ -174,7 +180,7 @@ header, footer {
     right: 0;
     margin: 0 30px 0 30px;
     overflow: visible;
-}
+}*/
 
 footer {
     box-shadow: 0 0 15px -2px black;
@@ -611,8 +617,9 @@ select.radius {
     }
 
     header .fm_title_bar {
-        font-size: 1.5em;
-        margin-top: .2em;      
+        text-align:center;
+        font-size: 1.2em;
+        margin-top: .4em;      
     }
 
     .main {
@@ -794,7 +801,7 @@ select.radius {
         box-shadow: 0 0 15px -2px black;
     }
 
-    footer {
+    #mainWindow footer {
         display: none;
     }
     /*nav{ bottom: 0; height: 2.6em; }*/
@@ -804,8 +811,9 @@ select.radius {
     }
 
     header .fm_title_bar {
-        font-size: 1.2em;
-        margin: .1em;
+        text-align:center;
+        font-size: 1.1em;
+        margin: .2em;
     }
 
     .mapDesktop {
@@ -1071,4 +1079,7 @@ table.attrs tr td:first-child {
 @import url("controls.css");
 @import url("rangeslider.css");
 @import url("slicer.css");
-@import url("mobile_popup.css");*/
+@import url("mobile_popup.css");
+@import url("components/font-awesome/css/font-awesome.css");
+@import url("components/pure/css/pure.css");
+@import url("components/pure/css/grids-responsive.css");*/

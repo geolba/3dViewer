@@ -62,6 +62,10 @@
   <ItemGroup>
     <Content Include="3dviewer_disclaimer.html" />
     <Content Include="content\borehole.css" />
+    <Content Include="content\components\font-awesome\css\font-awesome.css" />
+    <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\components\pure\css\grids-responsive.css" />
+    <Content Include="content\components\pure\css\pure.css" />
     <Content Include="content\concat.min.css" />
     <Content Include="content\controls.css" />
     <Content Include="content\icons\basemap-w.png" />
@@ -154,6 +158,11 @@
     <Content Include="dist\require.js" />
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
+    <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="content\components\font-awesome\fonts\FontAwesome.otf" />
     <None Include="dist\_references.js" />
     <Content Include="images\basemap\base_border.jpg" />
     <Content Include="images\basemap\base_geo.jpg" />
@@ -220,13 +229,6 @@
     <Content Include="scripts\helper\domUtil.js" />
     <Content Include="scripts\helper\mixin.js" />
     <Content Include="scripts\helper\unload.js" />
-    <Content Include="scripts\lib\bower\font-awesome\css\font-awesome.css" />
-    <Content Include="scripts\lib\bower\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="scripts\lib\bower\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="scripts\lib\bower\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="scripts\lib\bower\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="scripts\lib\bower\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="scripts\lib\bower\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="scripts\lib\jrespond\jRespond.js" />
     <Content Include="scripts\lib\threejs\OrbitControls.js" />
     <Content Include="scripts\lib\threejs\three.js" />

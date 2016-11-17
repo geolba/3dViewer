@@ -2,12 +2,16 @@
     "name": "3dviewer",
     "private": true,
     "dependencies": {
-        "font-awesome": "4.7.0"      
+        "font-awesome": "4.7.0",
+        "pure": "0.6.0"      
     },
     "exportsOverride": {
         "font-awesome": {
             "fonts": "fonts/*",
             "css": "css/font-awesome.css"
+        },
+        "pure": {
+            "css": [ "pure.css", "grids-responsive.css" ]
         }
     },
     "ignore": [

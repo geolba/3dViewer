@@ -70,7 +70,7 @@ module.exports = function (grunt) {
                 options: {
                     //Whether you want to run bower install task itself 
                     install: true,
-                    targetDir: 'scripts/lib/bower',
+                    targetDir: 'content/components',
                     //Will clean target dir before running install.
                     cleanTargetDir: true,
                     layout: 'byComponent'
