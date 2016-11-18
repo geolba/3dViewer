@@ -63,12 +63,70 @@ module.exports = function (grunt) {
 
                 }
             }
+        },
+        
+        bower: {
+            install: {
+                options: {
+                    //Whether you want to run bower install task itself 
+                    install: true,
+                    targetDir: 'content/components',
+                    //Will clean target dir before running install.
+                    cleanTargetDir: true,
+                    layout: 'byComponent'
+                    //layout: function (type, component, source) {
+                    //    return type;
+                    //}
+                }
+            }
+        },
+        
+        bowercopy: {
+            options: {
+                // Bower components folder will be removed afterwards
+                clean: false
+            },
+            //js: {
+            //    options: {
+            //        destPrefix: '../../Themes/Theme/assets/'
+            //    },
+            //    //The key is the destination file.  The value is the file from the bower_components folder
+            //    //The files will be added to a scripts folder at the location: ../../themes/3MTheme/assets/scripts
+            //    //The key is the name of the folder that is copied into the /assets folder.
+            //    src: 'scripts'
+
+            //},
+            css: {
+                options: {
+                    destPrefix: 'content/components'
+                },
+                files: {
+                   
+                    'font-awesome/css/font-awesome.css': 'font-awesome/css/font-awesome.css',
+                    'font-awesome/fonts/fontawesome-webfont.eot': 'font-awesome/fonts/fontawesome-webfont.eot',
+                    'font-awesome/fonts/fontawesome-webfont.svg': 'font-awesome/fonts/fontawesome-webfont.svg',
+                    'font-awesome/fonts/fontawesome-webfont.ttf': 'font-awesome/fonts/fontawesome-webfont.ttf',
+                    'font-awesome/fonts/fontawesome-webfont.woff': 'font-awesome/fonts/fontawesome-webfont.woff',
+                    'font-awesome/fonts/fontawesome-webfont.woff2': 'font-awesome/fonts/fontawesome-webfont.woff2',
+                    'font-awesome/fonts/FontAwesome.otf': 'font-awesome/fonts/FontAwesome.otf',
+
+                    'pure/css/grids-responsive.css': 'pure/grids-responsive.css',
+                    'pure/css/pure.css': 'pure/pure.css',
+                    'pure/css/LICENSE.md': 'pure/LICENSE.md'
+                }
+
+            }
         }
 
        
 
 
     });
+
+    grunt.loadNpmTasks('grunt-bowercopy');
+
+    // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-bower-task');
  
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
