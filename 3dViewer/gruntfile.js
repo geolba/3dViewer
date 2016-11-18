@@ -111,7 +111,8 @@ module.exports = function (grunt) {
                     'font-awesome/fonts/FontAwesome.otf': 'font-awesome/fonts/FontAwesome.otf',
 
                     'pure/css/grids-responsive.css': 'pure/grids-responsive.css',
-                    'pure/css/pure.css': 'pure/pure.css'
+                    'pure/css/pure.css': 'pure/pure.css',
+                    'pure/css/LICENSE.md': 'pure/LICENSE.md'
                 }
 
             }

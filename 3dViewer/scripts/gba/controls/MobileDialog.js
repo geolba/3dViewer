@@ -106,8 +106,14 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
                                             '<li id="lib_proj4js">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a>' +
                                             ' <a href="./dist/lib/proj4js/LICENSE.md" target="_blank" class="license">LGPL LICENSE</a></li>' +
 
-                                             '<li id="lib_leaflet">leaflet - class.js and control.js <a href="http://leafletjs.com/" target="_blank">http://leafletjs.com/</a>' +
+                                             '<li id="lib_leaflet">leaflet - class.js <a href="http://leafletjs.com/" target="_blank">http://leafletjs.com/</a>' +
                                             ' <a href="./dist/lib/leaflet/LICENSE.md" target="_blank" class="license">LICENSE</a></li>' +
+
+                                             '<li id="lib_pure">pure.css <a href="http://purecss.io/" target="_blank">http://purecss.io/</a>' +
+                                            ' <a href="./content/components/pure/css/LICENSE.md" target="_blank" class="license">BSD LICENSE</a></li>' +
+
+                                               '<li id="lib_fontawesome">fontawesome <a href="http://fontawesome.io/" target="_blank">http://fontawesome.io/</a>' +
+                                            ' <a href="http://fontawesome.io/license" target="_blank" class="license">Font: SIL OFL 1.1, CSS: MIT License</a></li>' +
 
                                             '</ul>' +
                                         '</div>' 

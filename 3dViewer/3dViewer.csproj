@@ -163,6 +163,7 @@
     <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="content\components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="content\components\pure\css\LICENSE.md" />
     <None Include="dist\_references.js" />
     <Content Include="images\basemap\base_border.jpg" />
     <Content Include="images\basemap\base_geo.jpg" />
