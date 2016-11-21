@@ -82,20 +82,20 @@ module.exports = function (grunt) {
         },
         
         bowercopy: {
+
             options: {
                 // Bower components folder will be removed afterwards
                 clean: false
             },
-            //js: {
-            //    options: {
-            //        destPrefix: '../../Themes/Theme/assets/'
-            //    },
-            //    //The key is the destination file.  The value is the file from the bower_components folder
-            //    //The files will be added to a scripts folder at the location: ../../themes/3MTheme/assets/scripts
-            //    //The key is the name of the folder that is copied into the /assets folder.
-            //    src: 'scripts'
+            js: {
+                options: {
+                    destPrefix: 'scripts/lib/bower'
+                },
+                files: {
+                    'threejs/three.js': 'three.js/build/three.js'
+                }
 
-            //},
+            },
             css: {
                 options: {
                     destPrefix: 'content/components'

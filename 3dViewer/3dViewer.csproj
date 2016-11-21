@@ -230,6 +230,7 @@
     <Content Include="scripts\helper\domUtil.js" />
     <Content Include="scripts\helper\mixin.js" />
     <Content Include="scripts\helper\unload.js" />
+    <Content Include="scripts\lib\bower\threejs\three.js" />
     <Content Include="scripts\lib\jrespond\jRespond.js" />
     <Content Include="scripts\lib\threejs\OrbitControls.js" />
     <Content Include="scripts\lib\threejs\three.js" />

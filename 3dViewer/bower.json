@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "font-awesome": "4.6.1",
-    "pure": "0.6.0"
+    "pure": "0.6.0",
+    "three.js": "threejs#*"
   },
   "exportsOverride": {
     "font-awesome": {
@@ -17,13 +18,12 @@
       ]
     }
   },
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "package.json",
-        "src"
-    ]  
-
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "package.json",
+    "src"
+  ]
 }
