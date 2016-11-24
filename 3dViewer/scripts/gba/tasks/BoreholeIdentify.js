@@ -1,6 +1,6 @@
 ﻿// Filename: BoreholeIdentify.js -> class
-define('gba/tasks/BoreholeIdentify', ["jquery"
-], function ($) {
+define('gba/tasks/BoreholeIdentify', ["jquery", "three"
+], function ($, THREE) {
     "use strict";
 
     function BoreholeIdentify(defaults) {

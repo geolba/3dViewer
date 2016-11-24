@@ -153,7 +153,7 @@
          
         // update label position
         _updateLabelPosition : function () {
-            if (!app.labelVisibility || app.labels.length == 0|| app.controls.gridlayer.objectGroup.visible === false) return;
+            if (!app.labelVisibility || app.labels.length === 0|| app.controls.gridlayer.objectGroup.visible === false) return;
 
             var widthHalf = app.width / 2,
                 heightHalf = app.height / 2,
