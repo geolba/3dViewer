@@ -37,7 +37,7 @@
             this.origin = origin;
             this.direction = direction;
             //this.faces = faces;
-            this.check = check != undefined ? check : true;
+            this.check = check != undefined ? check : true;           
 
             var intersects = [];
 
@@ -67,15 +67,15 @@
             //var material = object.material;
             //var matrixWorld = object.matrixWorld;
 
-
-
+           
+                        
             var intersectionPoint = new THREE.Vector3(this.origin.x, this.origin.y, 0);
+           
+            this.vA.fromArray(this.vertices, a * 3);//.multiplyScalar(this.tolerance);
+            this.vB.fromArray(this.vertices, b * 3);//.multiplyScalar(this.tolerance);
+            this.vC.fromArray(this.vertices, c * 3);//.multiplyScalar(this.tolerance);
 
-            this.vA.fromArray(this.vertices, a * 3);
-            this.vB.fromArray(this.vertices, b * 3);
-            this.vC.fromArray(this.vertices, c * 3);
-
-
+          
 
 
 
@@ -105,12 +105,13 @@
             //} else {
             var intersect = null;
 
-            if (this.check === false) {
-                intersect = this.intersectTriangle(pA, pB, pC, false, point);
+            if (this.check === false) {             
+                    intersect = this.intersectTriangle(pA, pB, pC, false, point, false);
             }
-            else {
-                if (this.pointInTriangleBoundingBox(pA.x, pA.y, pB.x, pB.y, pC.x, pC.y)) {
-                    intersect = this.intersectTriangle(pA, pB, pC, false, point);
+            else if (this.check === true) {
+                if (this.pointInBoundingBox(point, pA.x, pA.y, pB.x, pB.y, pC.x, pC.y)) {   
+                //if (this.pointInTriangle(point, pA, pB, pC)) {
+                    intersect = this.intersectTriangle(pA, pB, pC, false, point, true);
                 }
 
             }
@@ -133,15 +134,16 @@
 
         },
 
+       
         //pre-check
-        pointInTriangleBoundingBox: function (x1, y1, x2, y2, x3, y3) {
+        pointInBoundingBox: function (point, x1, y1, x2, y2, x3, y3) {
             var xMin = Math.min(x1, Math.min(x2, x3)) - EPSILON;
             var yMin = Math.min(y1, Math.min(y2, y3)) - EPSILON;
 
             var xMax = Math.max(x1, Math.max(x2, x3)) + EPSILON;
             var yMax = Math.max(y1, Math.max(y2, y3)) + EPSILON;
 
-            return !(this.origin.x < xMin || this.origin.x > xMax || this.origin.y < yMin || this.origin.y > yMax);
+            return !(point.x < xMin || point.x > xMax || point.y < yMin || point.y > yMax);
             //var xIntersects = (this.origin.x < xMax) && (this.origin.x > xMin);
             //if (xIntersects === true) {
             //    var yIntersects = (this.origin.y < yMax) && (this.origin.y > yMin);
@@ -153,6 +155,7 @@
 
         },
 
+
         intersectTriangle: function () {
 
             // Compute the offset origin, edges, and normal.
@@ -163,7 +166,7 @@
 
             //var nullVector = new THREE.Vector3(0, 0, 0);
 
-            return function (a, b, c, backfaceCulling, optionalTarget) {
+            return function (a, b, c, backfaceCulling, optionalTarget, check) {
 
                 // from http://www.geometrictools.com/LibMathematics/Intersection/Wm5IntrRay3Triangle3.cpp
 
@@ -178,7 +181,7 @@
                 //   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
                 var DdN = this.direction.dot(normal);
                 var sign;
-
+                
 
                 if (DdN > 0) {
 
@@ -190,60 +193,84 @@
                     DdN = -DdN;
                 }
                 //else {
-
                 //    return null;
-
                 //}
 
                 diff.subVectors(this.origin, a);
+               
+                if (check) {
+                    //////wieder auskommentieren
+                    var b1 = sign * this.direction.dot(edge2.crossVectors(diff, edge2));
+                    //// b1 < 0, no intersection
+                    if (b1 < 0) {
+                        return null;
+                    }
 
-                //////wieder auskommentieren
-                //var DdQxE2 = sign * this.direction.dot(edge2.crossVectors(diff, edge2));
-                ////// b1 < 0, no intersection
-                //if (DdQxE2 < 0) {
-                //    return null;
-                //}
+                    ////wieder auskommentieren
+                    var b2 = sign * this.direction.dot(edge1.cross(diff));
+                    // b2 < 0, no intersection
+                    if (b2 < 0) {
+                        //var QdN = -sign * diff.dot(normal);
+                        //var result = this.at(QdN / DdN, optionalTarget);
+                        return null;
+                    }
 
-                ////wieder auskommentieren
-                //var DdE1xQ = sign * this.direction.dot(edge1.cross(diff));
-                //// b2 < 0, no intersection
-                //if (DdE1xQ < 0) {
-                //    //var QdN = -sign * diff.dot(normal);
-                //    //var result = this.at(QdN / DdN, optionalTarget);
-                //    return null;
-                //}
-                //// b1+b2 > 1, no intersection
-                //if (DdQxE2 + DdE1xQ > DdN) {
-                //    return null;
-                //}
+                    //damit nicht runter sticht
+                    // b1+b2 > 1, no intersection
+                    if (b1 + b2 > DdN) {
+                        return null;
+                    }
+                }
+               
 
                 // Line intersects triangle, check if ray does.
-                var QdN = -sign * diff.dot(normal);
-
-                ////wieder auskommentieren
-                //// t < 0, no intersection
-                //if (QdN < 0) {
-                //    return null;
-                //}
-
-                // Ray intersects triangle.
-                var result = this.at(QdN / DdN, optionalTarget);
-                if (result.z > this.origin.z) {
+                var t = - sign * diff.dot(normal);                               
+                //wieder auskommentieren
+                // t < 0, no intersection
+                if (t < 0) {
                     return null;
                 }
-                //if (this.pointInTriangleBoundingBox(a.x, a.y, b.x, b.y, c.x, c.y) == false) {
-                //    return null;
+              
+           
+
+                // Ray intersects triangle.
+                var result = this.at(t / DdN, optionalTarget);
+                //if (check) {
+                //    if (result.z > this.origin.z) {
+                //        return null;
+                //    }
+                //    //if (this.pointInTriangleBoundingBox(a.x, a.y, b.x, b.y, c.x, c.y) == false) {
+                //    //    return null;
+                //    //}
                 //}
                 return result;
 
             };
 
         }(),
-
+     
         at: function (t, optionalTarget) {
             var result = optionalTarget || new THREE.Vector3();
             return result.copy(this.direction).multiplyScalar(t).add(this.origin);
-        }
+        },
+
+        pointInTriangle: function(p, p0, p1, p2)
+            {
+                var s = p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * p.x + (p0.x - p2.x) * p.y;
+                var t = p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * p.x + (p1.x - p0.x) * p.y;
+
+                if ((s < 0) != (t < 0))
+                    return false;
+
+                var A = -p1.y * p2.x + p0.y * (p2.x - p1.x) + p0.x * (p1.y - p2.y) + p1.x * p2.y;
+                if (A < 0.0)
+                {
+                    s = -s;
+                    t = -t;
+                    A = -A;
+                }
+                return s > 0 && t > 0 && (s + t) <= A;
+            }
 
 
        

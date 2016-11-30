@@ -164,45 +164,7 @@
             this.opacity = sum_opacity / this.materialsArray.length;
         },
 
-        checkLineIntersection: function(line1StartX, line1StartY, line1EndX, line1EndY, line2StartX, line2StartY, line2EndX, line2EndY) {
-            // if the lines intersect, the result contains the x and y of the intersection (treating the lines as infinite) and booleans for whether line segment 1 or line segment 2 contain the point
-                var denominator, a, b, numerator1, numerator2, result = {
-                    x: null,
-                    y: null,
-                    onLine1: false,
-                    onLine2: false
-                };
-                denominator = ((line2EndY - line2StartY) * (line1EndX - line1StartX)) - ((line2EndX - line2StartX) * (line1EndY - line1StartY));
-                if (denominator === 0) {
-                    return result;
-                }
-                a = line1StartY - line2StartY;
-                b = line1StartX - line2StartX;
-                numerator1 = ((line2EndX - line2StartX) * a) - ((line2EndY - line2StartY) * b);
-                numerator2 = ((line1EndX - line1StartX) * a) - ((line1EndY - line1StartY) * b);
-                a = numerator1 / denominator;
-                b = numerator2 / denominator;
-
-                // if we cast these lines infinitely in both directions, they intersect here:
-                result.x = line1StartX + (a * (line1EndX - line1StartX));
-                result.y = line1StartY + (a * (line1EndY - line1StartY));
-                /*
-                        // it is worth noting that this should be the same as:
-                        x = line2StartX + (b * (line2EndX - line2StartX));
-                        y = line2StartX + (b * (line2EndY - line2StartY));
-                        */
-                // if line1 is a segment and line2 is infinite, they intersect if:
-                if (a > 0 && a < 1) {
-                    result.onLine1 = true;
-                }
-                // if line2 is a segment and line1 is infinite, they intersect if:
-                if (b > 0 && b < 1) {
-                    result.onLine2 = true;
-                }
-                // if line1 and line2 are segments, they intersect if both of the above are true
-                return result;
-        },
-
+       
         extractFormFromTypedArray: function( startIndex, endIndex, itemSize, typedArray ) {
             // The startIndex and endIndex are the range of points to remove in order to delete the form the viewer has selected
             // startIndex is inclusive, end index in non-inclusive
@@ -1128,35 +1090,133 @@
                             pointOut2 = secondPoint = coordinatesOut['p2'];
                         }
 
-                     
+                        var addClippedTriangleToIndices = function (clippedPolygon, newInnerPointIndex, definedPoint) {
+                            //two outer points
+                            for (var sub in clippedPolygon) {
+                                var point = clippedPolygon[sub];
+                                var isInnerPoint = point.index === definedPoint.index;
+
+                                var newPointIndex = -1;
+
+                                if (OldIndices.hasOwnProperty(point.index)) {
+                                    if (isInnerPoint) {
+                                        newPointIndex = OldIndices[definedPoint.index];
+                                    }
+                                    else {
+                                        //ein äßerer Punkt
+                                        var indexArray = OldIndices[point.index];
+                                        for (var index in indexArray) {
+                                            var item = indexArray[index];
+                                            if (item.oppI == newInnerPointIndex) newPointIndex = item.i;
+                                            if (newPointIndex !== -1) break;
+                                        }
+                                        if (newPointIndex === -1) {
+                                            newPointIndex = filteredArray.length / 3
+                                            //newPointIndex = { i: filteredArray.length / 3, oppI: newInnerPointIndex };
+                                            OldIndices[point.index].push({ i: newPointIndex, oppI: newInnerPointIndex });
+                                            filteredArray.push(point.x);
+                                            filteredArray.push(point.y);
+                                            filteredArray.push(point.z);
+
+                                        }
+                                        //var indexArray = OldIndices[point.index];
+                                        //var item = indexArray[0]
+                                        //newPointIndex = item.i;
+                                    }
+
+                                }
+                                else {
+
+                                    //define the array
+                                    if (isInnerPoint) {
+                                        newPointIndex = newInnerPointIndex;
+                                        OldIndices[point.index] = newInnerPointIndex;
+                                    }
+                                    else {
+                                        newPointIndex = filteredArray.length / 3;
+                                        OldIndices[point.index] = [{ i: newPointIndex, oppI: newInnerPointIndex }];
+                                        filteredArray.push(point.x);
+                                        filteredArray.push(point.y);
+                                        filteredArray.push(point.z);
+                                    }
+
+
+                                }
+                                filteredIndicesArray.push(newPointIndex);
+
+                            }
+                        };
 
                         //var subjectPolygon = [[pointIn.x, pointIn.y], [pointOut1.x, pointOut1.y], [pointOut2.x, pointOut2.y]];
-                        var subjectPolygon = [pointIn, pointOut1, pointOut2];                                         
-                        //var clipPolygon = [
-                        //    new THREE.Vector2(xmin, ymin),
-                        //    new THREE.Vector2(filterX, ymin),
-                        //    new THREE.Vector2(filterX, ymax),
-                        //    new THREE.Vector2(xmin, ymax)
-                        //];
-                        var clipPolygon = []; var clippedPolygon;
-                        //
-                        if (pointOut1.x > filterX && pointOut1.y > filterY && pointOut2.x > filterX && pointOut2.y > filterY)  {
-                            //clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
-                            clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
-                            var clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
-                        }
-                        else if (pointOut1.x < filterX && pointOut1.y < filterY && pointOut2.x < filterX && pointOut2.y < filterY) {
-                            //clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
-                            clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                        var subjectPolygon = [pointIn, pointOut1, pointOut2];  
+                        var clipPolygon = []; var clippedPolygon = []; var clippedPolygon2 = [];
+                        clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+
+                        var point1IsOutsideOf_x = pointOut1.x > filterX;
+                        var point2IsOutsideOf_x = pointOut2.x > filterX;
+                        var bothPointsOutsideOf_x = (point1IsOutsideOf_x && point2IsOutsideOf_x);
+                        var bothPointsInsideOf_x = (pointOut1.x < filterX) && (pointOut2.x < filterX);
+
+                        var point1IsOutsideOf_y = pointOut1.y < filterY;
+                        var point2IsOutsideOf_y = pointOut2.y < filterY;
+                        var bothPointsOutsideOf_y = (point1IsOutsideOf_y && point2IsOutsideOf_y);
+                        var bothPointsInsideOf_y = (pointOut1.y > filterY) && (pointOut2.y > filterY);
+
+                        //var onlyOnepointIsOutsideOf_X = (point1IsOutsideOf_x && !point2IsOutsideOf_x) || (!point1IsOutsideOf_x && point2IsOutsideOf_x);
+                        //var onlyOnepointIsOutsideOf_Y = (point1IsOutsideOf_y && !point2IsOutsideOf_y) || (!point1IsOutsideOf_y && point2IsOutsideOf_y);
+                        ////var point1IsOutside = point1IsOutsideOf_x || point1IsOutsideOf_y;
+                        ////var point2IsOutside = point2IsOutsideOf_x || point2IsOutsideOf_y;
+                        ////var bothPointsAreOutside = point1IsOutside && point2IsOutside;
+
+                        //two point are outside of x but inside of y
+                        //if (pointOut1.x > filterX && pointOut1.y > filterY && pointOut2.x > filterX && pointOut2.y > filterY) {
+                        if ((bothPointsOutsideOf_x && bothPointsInsideOf_y) || (bothPointsInsideOf_x && bothPointsOutsideOf_y)) {
+                            ////clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                            //clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
                             clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
                         }
-                       
-                        else {
-                            clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
-                            clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon).slice(0, 3);
-                        }
+                        ////two ponts are outside of y but inside of x
+                        //else if (bothPointsInsideOf_x && bothPointsOutsideOf_y) {
+                        ////else if (pointOut1.x < filterX && pointOut1.y < filterY && pointOut2.x < filterX && pointOut2.y < filterY) {
+                        //    ////clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                        //    //clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                        //    clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
+                        //}                     
+                        else  {
+                        //else  {
+                            
+                            var clippedPolygonTemp = geo_util.clip(subjectPolygon, clipPolygon);
+                            if (clippedPolygonTemp.length > 3) {
+                                //clippedPolygon = clippedPolygonTemp.slice(0, 3);
+                                for (var idx in clippedPolygonTemp) {
+                                    var point = clippedPolygonTemp[idx];
+                                    if (point.index === pointIn.index) {
+                                        clippedPolygon.push(point);
+                                    }
+                                    else if (point.oppositePointIndex === pointIn.index) {
+                                        clippedPolygon.push(point);
+                                    }
+                                }
+                                for (var idx in clippedPolygonTemp) {
+                                    var point = clippedPolygonTemp[idx];
+                                    if (point.oppositePointIndex === pointIn.index) {
+                                        clippedPolygon2.push(point);
+                                    }
+                                }
+                                var zeroPoint = new Vector3(filterX, filterY, pointIn.z, -1);
+                                clippedPolygon2.push(zeroPoint);
+                                var zeroPointIndex = filteredArray.length / 3;
+                                OldIndices[zeroPoint.index] = zeroPointIndex;
+                                filteredArray.push(zeroPoint.x);
+                                filteredArray.push(zeroPoint.y);
+                                filteredArray.push(zeroPoint.z);
+                                addClippedTriangleToIndices(clippedPolygon2, zeroPointIndex, zeroPoint);
+                            }
 
-                        //var clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
+                            else {
+                                clippedPolygon = clippedPolygonTemp;
+                            }
+                        }
                       
                         //one innerPoint  
                         var newInnerPointIndex;                          
@@ -1171,63 +1231,7 @@
                             filteredArray.push(pointIn.y);
                             filteredArray.push(pointIn.z);
                         }
-                        //filteredIndicesArray.push(newInnerPointIndex);//wird durch dir for-Schleife erledigt
-                                            
-
-                        //two outer points
-                        for (var sub in clippedPolygon) {
-                            var point = clippedPolygon[sub];
-                            var isInnerPoint = point.index === pointIn.index;
-                           
-                            var newPointIndex = -1;
-
-                            if (OldIndices.hasOwnProperty(point.index)) {
-                                if (isInnerPoint) {
-                                    newPointIndex = OldIndices[pointIn.index];
-                                }
-                                else {
-                                    //ein äßerer Punkt
-                                    var indexArray = OldIndices[point.index];
-                                    for (var index in indexArray) {
-                                        var item = indexArray[index];
-                                        if (item.oppI == newInnerPointIndex) newPointIndex = item.i;
-                                        if (newPointIndex !== -1) break;
-                                    }
-                                    if (newPointIndex === -1) {
-                                        newPointIndex = filteredArray.length / 3
-                                        //newPointIndex = { i: filteredArray.length / 3, oppI: newInnerPointIndex };
-                                        OldIndices[point.index].push({ i: newPointIndex, oppI: newInnerPointIndex });                                       
-                                        filteredArray.push(point.x);
-                                        filteredArray.push(point.y);
-                                        filteredArray.push(point.z);
-
-                                    }
-                                    //var indexArray = OldIndices[point.index];
-                                    //var item = indexArray[0]
-                                    //newPointIndex = item.i;
-                                }
-                               
-                            }
-                            else {                                
-                                                           
-                                //define the array
-                                if (isInnerPoint) {
-                                    newPointIndex = newInnerPointIndex;
-                                    OldIndices[point.index] = newInnerPointIndex;
-                                }
-                                else {
-                                    newPointIndex = filteredArray.length / 3;
-                                    OldIndices[point.index] = [{ i: newPointIndex, oppI: newInnerPointIndex }];
-                                    filteredArray.push(point.x);
-                                    filteredArray.push(point.y);
-                                    filteredArray.push(point.z);
-                                }
-                               
-                               
-                            }
-                            filteredIndicesArray.push(newPointIndex);
-                            
-                        }                
+                        addClippedTriangleToIndices(clippedPolygon, newInnerPointIndex, pointIn);
                     }//erster Fall Ende
 
 
@@ -1350,16 +1354,12 @@
                                     }
                                     if (newPoint1Index === -1) {
                                         i1new = true;
-
                                         newPoint1Index = filteredArray.length / 3;                                      
                                         //OldIndices[point1.index].push({ i: newPoint1Index, oppI: newPoint0Index });
-
-
                                         //newPoint1Index = { i: filteredArray.length / 3, oppI: newPoint0Index };
                                         filteredArray.push(point1.x);
                                         filteredArray.push(point1.y);
                                         filteredArray.push(point1.z);
-                                        //OldIndices[point1.index].push(newPoint1Index);
                                     }
 
                                     for (var index in indexArray) {
@@ -1369,24 +1369,15 @@
                                     }
                                     if (newPoint2Index === -1) {
                                         i2new = true;
-
                                         newPoint2Index = filteredArray.length / 3;                                    
                                         //OldIndices[point2.index].push({ i: newPoint2Index, oppI: newPoint3Index });
-
-
                                         //newPoint2Index = { i: filteredArray.length / 3, oppI: newPoint3Index };
                                         filteredArray.push(point2.x);
                                         filteredArray.push(point2.y);
-                                        filteredArray.push(point2.z);
-                                        //OldIndices[point2.index].push(newPoint2Index);
+                                        filteredArray.push(point2.z);                                       
                                     }
                                     if (i1new == true) indexArray.push({ i: newPoint1Index, oppI: newPoint0Index });
-                                    if (i2new == true) indexArray.push({ i: newPoint2Index, oppI: newPoint3Index });
-
-                                    
-                               
-                            
-                                
+                                    if (i2new == true) indexArray.push({ i: newPoint2Index, oppI: newPoint3Index });                                
                                 
                             }
                             else {                                
@@ -1419,11 +1410,6 @@
                 }//else       
 
             }//for loop
-
-
-            //var max_of_array = Math.max.apply(Math, filteredArray);
-            //var min_of_array = Math.min.apply(Math, filteredArray);          
-            //this.mainGeometry.setIndex(new THREE.BufferAttribute(indices2, 1).setDynamic(true));
 
             var indices2 = new Uint32Array(filteredIndicesArray);
             //this.mainGeometry.index.array = indices2;
@@ -2049,8 +2035,7 @@
         stopWorker: function(){
             if (this.worker) {
                 this.worker.terminate();
-                this.worker = null;
-                //this.setStatus("Stopped");
+                this.worker = null;             
             }
         },
 
