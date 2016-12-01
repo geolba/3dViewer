@@ -1,5 +1,6 @@
-﻿define('gba/layer/DxfLayer', ['three', 'gba/layer/Layer', "jquery", 'gba/geometry/Graph', 'gba/tasks/Raycaster', 'helper/utilities', 'app/commonConfig'],
-    function (THREE, Layer, $, Graph, Raycaster, util, Gba3D) {
+﻿define('gba/layer/DxfLayer',
+    ['three', 'gba/layer/Layer', "jquery", 'gba/geometry/Graph', 'gba/tasks/Raycaster', 'helper/utilities', 'helper/geo_utilities', 'gba/geometry/Vector3', 'app/commonConfig'],
+    function (THREE, Layer, $, Graph, Raycaster, util, geo_util, Vector3, Gba3D) {
     "use strict";
 
     /**
@@ -163,45 +164,7 @@
             this.opacity = sum_opacity / this.materialsArray.length;
         },
 
-        checkLineIntersection: function(line1StartX, line1StartY, line1EndX, line1EndY, line2StartX, line2StartY, line2EndX, line2EndY) {
-            // if the lines intersect, the result contains the x and y of the intersection (treating the lines as infinite) and booleans for whether line segment 1 or line segment 2 contain the point
-                var denominator, a, b, numerator1, numerator2, result = {
-                    x: null,
-                    y: null,
-                    onLine1: false,
-                    onLine2: false
-                };
-                denominator = ((line2EndY - line2StartY) * (line1EndX - line1StartX)) - ((line2EndX - line2StartX) * (line1EndY - line1StartY));
-                if (denominator == 0) {
-                    return result;
-                }
-                a = line1StartY - line2StartY;
-                b = line1StartX - line2StartX;
-                numerator1 = ((line2EndX - line2StartX) * a) - ((line2EndY - line2StartY) * b);
-                numerator2 = ((line1EndX - line1StartX) * a) - ((line1EndY - line1StartY) * b);
-                a = numerator1 / denominator;
-                b = numerator2 / denominator;
-
-                // if we cast these lines infinitely in both directions, they intersect here:
-                result.x = line1StartX + (a * (line1EndX - line1StartX));
-                result.y = line1StartY + (a * (line1EndY - line1StartY));
-                /*
-                        // it is worth noting that this should be the same as:
-                        x = line2StartX + (b * (line2EndX - line2StartX));
-                        y = line2StartX + (b * (line2EndY - line2StartY));
-                        */
-                // if line1 is a segment and line2 is infinite, they intersect if:
-                if (a > 0 && a < 1) {
-                    result.onLine1 = true;
-                }
-                // if line2 is a segment and line1 is infinite, they intersect if:
-                if (b > 0 && b < 1) {
-                    result.onLine2 = true;
-                }
-                // if line1 and line2 are segments, they intersect if both of the above are true
-                return result;
-        },
-
+       
         extractFormFromTypedArray: function( startIndex, endIndex, itemSize, typedArray ) {
             // The startIndex and endIndex are the range of points to remove in order to delete the form the viewer has selected
             // startIndex is inclusive, end index in non-inclusive
@@ -584,6 +547,7 @@
 
                 }//else
 
+
                 //else {
                 //    filteredIndicesArray[i] = undefined;
                 //    filteredIndicesArray[i + 1] = undefined;
@@ -610,8 +574,8 @@
             //var filteredArray = new Float32Array(this.positions.length);
             var filteredIndicesArray = [];// new Uint16Array(this.indices.length);
           
-            var typedArray = this.positions;//oder auch this.features
-            var indices = this.indices;
+            var typedArray = this.features;
+            var indices = this.idx;
 
             var x1, y1, z1;
             var x2, y2, z2;
@@ -625,17 +589,23 @@
                 x1 = typedArray[v1index];
                 y1 = typedArray[v1index + 1];
                 z1 = typedArray[v1index + 2];
-
+                var vector1NotNull = x1 && y1 & z1 != 0;
 
                 var v2index = indices[i + 1] * 3;
                 x2 = typedArray[v2index];
                 y2 = typedArray[v2index + 1];
                 z2 = typedArray[v2index + 2];
+                var vector2NotNull = x2 && y2 & z2 != 0;
 
                 var v3index = indices[i + 2] * 3;
                 x3 = typedArray[v3index];
                 y3 = typedArray[v3index + 1];
                 z3 = typedArray[v3index + 2];
+                var vector3NotNull = x3 && y3 & z3 != 0;
+
+                if (vector1NotNull === false || vector2NotNull === false || vector3NotNull === false) {
+                    continue;
+                }
 
                 if ((x1 <= filterX && x2 <= filterX && x3 <= filterX) && (y1 >= filterY && y2 >= filterY && y3 >= filterY)) {
                  
@@ -657,281 +627,291 @@
                     filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
                     filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
                     filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                    //filteredIndicesArray.push(filteredIndicesArray.length);
+                    //filteredIndicesArray.push(filteredIndicesArray.length);
+                    //filteredIndicesArray.push(filteredIndicesArray.length);
                 }
-                else {
+                //else {
 
-                    var coordinatesIn = {};// [];
-                    var coordinatesOut = {};//[];
-                    if (x1 < filterX && y1 > filterY) {
-                        //coordinatesIn.push(new THREE.Vector3(x1, y1, z1));
-                        coordinatesIn["p1"] = new THREE.Vector3(x1, y1, z1);
-                    }
-                    else {
-                        //coordinatesOut.push(new THREE.Vector3(x1, y1, z1));
-                        coordinatesOut["p1"] = new THREE.Vector3(x1, y1, z1);
-                    }
-                    if (x2 < filterX && y2 > filterY) {
-                        //coordinatesIn.push(new THREE.Vector3(x2, y2, z2));
-                        coordinatesIn["p2"] = new THREE.Vector3(x2, y2, z2);
-                    }
-                    else {
-                        //coordinatesOut.push(new THREE.Vector3(x2, y2, z2));
-                        coordinatesOut["p2"] = new THREE.Vector3(x2, y2, z2);
-                    }
-                    if (x3 < filterX && y3 > filterY) {
-                        //coordinatesIn.push(new THREE.Vector3(x3, y3, z3));
-                        coordinatesIn["p3"] = new THREE.Vector3(x3, y3, z3);
-                    }
-                    else {
-                        //coordinatesOut.push(new THREE.Vector3(x3, y3, z3));
-                        coordinatesOut["p3"] = new THREE.Vector3(x3, y3, z3);
-                    }
-                    //erster Fall!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    //if (coordinatesIn.length === 1) {
-                    if (Object.keys(coordinatesIn).length === 1) {
+                //    var coordinatesIn = {};// [];
+                //    var coordinatesOut = {};//[];
+                //    if (x1 < filterX && y1 > filterY) {
+                //        //coordinatesIn.push(new THREE.Vector3(x1, y1, z1));
+                //        coordinatesIn["p1"] = new THREE.Vector3(x1, y1, z1);
+                //    }
+                //    else {
+                //        //coordinatesOut.push(new THREE.Vector3(x1, y1, z1));
+                //        coordinatesOut["p1"] = new THREE.Vector3(x1, y1, z1);
+                //    }
+                //    if (x2 < filterX && y2 > filterY) {
+                //        //coordinatesIn.push(new THREE.Vector3(x2, y2, z2));
+                //        coordinatesIn["p2"] = new THREE.Vector3(x2, y2, z2);
+                //    }
+                //    else {
+                //        //coordinatesOut.push(new THREE.Vector3(x2, y2, z2));
+                //        coordinatesOut["p2"] = new THREE.Vector3(x2, y2, z2);
+                //    }
+                //    if (x3 < filterX && y3 > filterY) {
+                //        //coordinatesIn.push(new THREE.Vector3(x3, y3, z3));
+                //        coordinatesIn["p3"] = new THREE.Vector3(x3, y3, z3);
+                //    }
+                //    else {
+                //        //coordinatesOut.push(new THREE.Vector3(x3, y3, z3));
+                //        coordinatesOut["p3"] = new THREE.Vector3(x3, y3, z3);
+                //    }
+
+                //    //erster Fall!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //    //if (coordinatesIn.length === 1) {
+                //    if (Object.keys(coordinatesIn).length === 1) {
                       
-                        var pointIn, pointOut1, pointOut2, firstPoint, secondPoint, thirdPoint;
-                        if (coordinatesIn.hasOwnProperty('p1')) {
-                            pointIn = firstPoint = coordinatesIn['p1'];
-                            pointOut1 = secondPoint = coordinatesOut['p2'];
-                            pointOut2 = thirdPoint= coordinatesOut['p3'];
-                        }
-                        else if (coordinatesIn.hasOwnProperty('p2')) {
-                            pointIn = secondPoint = coordinatesIn['p2'];
-                            pointOut1 = thirdPoint = coordinatesOut['p3'];
-                            pointOut2 = firstPoint = coordinatesOut['p1'];
-                        }
-                        else if (coordinatesIn.hasOwnProperty('p3')) {
-                            pointIn = thirdPoint = coordinatesIn['p3'];
-                            pointOut1 = firstPoint = coordinatesOut['p1'];
-                            pointOut2 = secondPoint = coordinatesOut['p2'];
-                        }
+                //        var pointIn, pointOut1, pointOut2, firstPoint, secondPoint, thirdPoint;
+                //        if (coordinatesIn.hasOwnProperty('p1')) {
+                //            pointIn = firstPoint = coordinatesIn['p1'];
+                //            pointOut1 = secondPoint = coordinatesOut['p2'];
+                //            pointOut2 = thirdPoint = coordinatesOut['p3'];
+                //        }
+                //        else if (coordinatesIn.hasOwnProperty('p2')) {
+                //            pointIn = secondPoint = coordinatesIn['p2'];
+                //            pointOut1 = thirdPoint = coordinatesOut['p3'];
+                //            pointOut2 = firstPoint = coordinatesOut['p1'];
+                //        }
+                //        else if (coordinatesIn.hasOwnProperty('p3')) {
+                //            pointIn = thirdPoint = coordinatesIn['p3'];
+                //            pointOut1 = firstPoint = coordinatesOut['p1'];
+                //            pointOut2 = secondPoint = coordinatesOut['p2'];
+                //        }
 
-                        //var pointIn = coordinatesIn[0];
-                        //var pointOut1 = coordinatesOut[0];
-                        //var pointOut2 = coordinatesOut[1];  
+                //        //var pointIn = coordinatesIn[0];
+                //        //var pointOut1 = coordinatesOut[0];
+                //        //var pointOut2 = coordinatesOut[1];  
                    
-                        //x ist definiert: oder beide
-                        if (pointOut1.x < filterX && pointOut1.y < filterY) {
-                            var line1 = {
-                                startX: pointIn.x,
-                                startY: pointIn.y,
-                                endX: pointOut1.x,
-                                endY: pointOut1.y
-                            };
+                //        //x ist definiert: oder beide
+                //        if (pointOut1.x < filterX && pointOut1.y < filterY) {
+                //            var line1 = {
+                //                startX: pointIn.x,
+                //                startY: pointIn.y,
+                //                endX: pointOut1.x,
+                //                endY: pointOut1.y
+                //            };
 
-                            var filterLine = {
-                                startX: -40,
-                                startY: filterY,
-                                endX: +40,
-                                endY: filterY
-                            };
-                            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            pointOut1.x = results.x;
-                            pointOut1.y = results.y;
-                        }
+                //            var filterLine = {
+                //                startX: -40,
+                //                startY: filterY,
+                //                endX: +40,
+                //                endY: filterY
+                //            };
+                //            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            pointOut1.x = results.x;
+                //            pointOut1.y = results.y;
+                //        }
 
-                            //y ist definiert:
-                        else if (pointOut1.x > filterX && pointOut1.y > filterY) {
-                            var line1 = {
-                                startX: pointIn.x,
-                                startY: pointIn.y,
-                                endX: pointOut1.x,
-                                endY: pointOut1.y
-                            };
+                //            //y ist definiert:
+                //        else if (pointOut1.x > filterX && pointOut1.y > filterY) {
+                //            var line1 = {
+                //                startX: pointIn.x,
+                //                startY: pointIn.y,
+                //                endX: pointOut1.x,
+                //                endY: pointOut1.y
+                //            };
 
-                            var filterLine = {
-                                startX: filterX,
-                                startY: 30,
-                                endX: filterX,
-                                endY: -30
-                            };
-                            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            pointOut1.x = results.x;
-                            pointOut1.y = results.y;
-                        }
-                        else {
-                            //alert("erster Fall");
-                            continue;
-                        }
-
-
-                        //x ist definiert: oder beide
-                        if (pointOut2.x < filterX && pointOut2.y < filterY) {
-                            var line1 = {
-                                startX: pointIn.x,
-                                startY: pointIn.y,
-                                endX: pointOut2.x,
-                                endY: pointOut2.y
-                            };
-
-                            var filterLine = {
-                                startX: -40,
-                                startY: filterY,
-                                endX: +40,
-                                endY: filterY
-                            };
-                            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            pointOut2.x = results.x;
-                            pointOut2.y = results.y;
-                        }
-
-                            //y ist definiert:
-                        else if (pointOut2.x > filterX && pointOut2.y > filterY) {
-                            var line1 = {
-                                startX: pointIn.x,
-                                startY: pointIn.y,
-                                endX: pointOut2.x,
-                                endY: pointOut2.y
-                            };
-
-                            var filterLine = {
-                                startX: filterX,
-                                startY: 30,
-                                endX: filterX,
-                                endY: -30
-                            };
-                            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            pointOut2.x = results.x;
-                            pointOut2.y = results.y;
-                        }
-                        else {
-                            //alert("erster Fall");
-                            continue;
-                        }
+                //            var filterLine = {
+                //                startX: filterX,
+                //                startY: 30,
+                //                endX: filterX,
+                //                endY: -30
+                //            };
+                //            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            pointOut1.x = results.x;
+                //            pointOut1.y = results.y;
+                //        }
+                //        else {
+                //            //alert("erster Fall");
+                //            continue;
+                //        }
 
 
+                //        //Punkt2 x ist definiert: oder beide
+                //        if (pointOut2.x < filterX && pointOut2.y < filterY) {
+                //            var line1 = {
+                //                startX: pointIn.x,
+                //                startY: pointIn.y,
+                //                endX: pointOut2.x,
+                //                endY: pointOut2.y
+                //            };
 
-                        //filteredArray[v1index] = firstPoint.x;
-                        //filteredArray[v1index + 1] = firstPoint.y;
-                        //filteredArray[v1index + 2] = firstPoint.y;
-                        filteredArray.push(firstPoint.x);
-                        filteredArray.push(firstPoint.y);
-                        filteredArray.push(firstPoint.y);
+                //            var filterLine = {
+                //                startX: -40,
+                //                startY: filterY,
+                //                endX: +40,
+                //                endY: filterY
+                //            };
+                //            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            pointOut2.x = results.x;
+                //            pointOut2.y = results.y;
+                //        }
 
-                        //filteredArray[v2index] = secondPoint.x;
-                        //filteredArray[v2index + 1] = secondPoint.y;
-                        //filteredArray[v2index + 2] = secondPoint.z;
-                        filteredArray.push(secondPoint.x);
-                        filteredArray.push(secondPoint.y);
-                        filteredArray.push(secondPoint.y);
+                //            //Punkt2y ist definiert:
+                //        else if (pointOut2.x > filterX && pointOut2.y > filterY) {
+                //            var line1 = {
+                //                startX: pointIn.x,
+                //                startY: pointIn.y,
+                //                endX: pointOut2.x,
+                //                endY: pointOut2.y
+                //            };
 
-                        //filteredArray[v3index] = thirdPoint.x;
-                        //filteredArray[v3index + 1] = thirdPoint.y;
-                        //filteredArray[v3index + 2] = thirdPoint.z;
-                        filteredArray.push(thirdPoint.x);
-                        filteredArray.push(thirdPoint.y);
-                        filteredArray.push(thirdPoint.y);
+                //            var filterLine = {
+                //                startX: filterX,
+                //                startY: 30,
+                //                endX: filterX,
+                //                endY: -30
+                //            };
+                //            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            pointOut2.x = results.x;
+                //            pointOut2.y = results.y;
+                //        }
+                //        else {
+                //            //alert("erster Fall");
+                //            continue;
+                //        }
 
-                        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
-                        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
-                        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
-                    }
 
-                    //zweiter Fall!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    //if (coordinatesIn.length === 2) {
-                    if (Object.keys(coordinatesIn).length === 2 && Object.keys(coordinatesOut).length === 1) {
-                        //    var pointIn1 = coordinatesIn[0];
-                        //    var pointIn2 = coordinatesIn[1];
-                        //    var pointOut = coordinatesOut[0];
-                        var pointIn1, pointIn2, pointOut, firstPoint, secondPoint, thirdPoint;
-                        if (coordinatesOut.hasOwnProperty('p1')) {
-                            pointOut = firstPoint = coordinatesOut['p1'];
-                            pointIn1 = secondPoint = coordinatesIn['p2'];
-                            pointIn2 = thirdPoint = coordinatesIn['p3'];
-                       
-                        }
-                        else if (coordinatesOut.hasOwnProperty('p2')) {
-                            pointOut = secondPoint = coordinatesOut['p2'];
-                            pointIn1 = thirdPoint = coordinatesIn['p3'];
-                            pointIn2 = firstPoint = coordinatesIn['p1'];
-                        }
-                        else if (coordinatesOut.hasOwnProperty('p3')) {
-                            pointOut = thirdPoint = coordinatesOut['p3'];
-                            pointIn1 = firstPoint = coordinatesIn['p1'];
-                            pointIn2 = secondPoint = coordinatesIn['p2'];
-                        }
-                        //if (pointOut == undefined) {
-                        //    var test = "test";
-                        //}
+
+                //        //filteredArray[v1index] = firstPoint.x;
+                //        //filteredArray[v1index + 1] = firstPoint.y;
+                //        //filteredArray[v1index + 2] = firstPoint.z;
+                //        filteredArray.push(firstPoint.x);
+                //        filteredArray.push(firstPoint.y);
+                //        filteredArray.push(firstPoint.z);
+
+                //        //filteredArray[v2index] = secondPoint.x;
+                //        //filteredArray[v2index + 1] = secondPoint.y;
+                //        //filteredArray[v2index + 2] = secondPoint.z;
+                //        filteredArray.push(secondPoint.x);
+                //        filteredArray.push(secondPoint.y);
+                //        filteredArray.push(secondPoint.z);
+
+                //        //filteredArray[v3index] = thirdPoint.x;
+                //        //filteredArray[v3index + 1] = thirdPoint.y;
+                //        //filteredArray[v3index + 2] = thirdPoint.z;
+                //        filteredArray.push(thirdPoint.x);
+                //        filteredArray.push(thirdPoint.y);
+                //        filteredArray.push(thirdPoint.z);
+
+                //        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        //filteredIndicesArray.push(filteredIndicesArray.length);
+                //        //filteredIndicesArray.push(filteredIndicesArray.length);
+                //        //filteredIndicesArray.push(filteredIndicesArray.length);
+                //    }
+
+                //    //zweiter Fall!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //    //if (coordinatesIn.length === 2) {
+                //    if (Object.keys(coordinatesIn).length === 2 && Object.keys(coordinatesOut).length === 1) {
+                //        //    var pointIn1 = coordinatesIn[0];
+                //        //    var pointIn2 = coordinatesIn[1];
+                //        //    var pointOut = coordinatesOut[0];
+                //        var pointIn1, pointIn2, pointOut, firstPoint, secondPoint, thirdPoint;
+                //        if (coordinatesOut.hasOwnProperty('p1')) {
+                //            pointOut = firstPoint = coordinatesOut['p1'];
+                //            pointIn1 = secondPoint = coordinatesIn['p2'];
+                //            pointIn2 = thirdPoint = coordinatesIn['p3'];
+
+                //        }
+                //        else if (coordinatesOut.hasOwnProperty('p2')) {
+                //            pointOut = secondPoint = coordinatesOut['p2'];
+                //            pointIn1 = thirdPoint = coordinatesIn['p3'];
+                //            pointIn2 = firstPoint = coordinatesIn['p1'];
+                //        }
+                //        else if (coordinatesOut.hasOwnProperty('p3')) {
+                //            pointOut = thirdPoint = coordinatesOut['p3'];
+                //            pointIn1 = firstPoint = coordinatesIn['p1'];
+                //            pointIn2 = secondPoint = coordinatesIn['p2'];
+                //        }
+                //        //if (pointOut == undefined) {
+                //        //    var test = "test";
+                //        //}
                                           
-                        //x ist definiert:                            
-                        if (pointOut.x < filterX && pointOut.y < filterY) {
-                            var line1 = {
-                                startX: pointIn1.x,
-                                startY: pointIn1.y,
-                                endX: pointOut.x,
-                                endY: pointOut.y
-                            };
+                //        //Punkt1 x ist definiert:                            
+                //        if (pointOut.x < filterX && pointOut.y < filterY) {
+                //            var line1 = {
+                //                startX: pointIn1.x,
+                //                startY: pointIn1.y,
+                //                endX: pointOut.x,
+                //                endY: pointOut.y
+                //            };
 
-                            var filterLine = {
-                                startX: -40,
-                                startY: filterY,
-                                endX: +40,
-                                endY: filterY
-                            };
-                            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            pointOut.x = results.x;
-                            pointOut.y = results.y;
-                        }
-                            //y ist definiert:                      
-                        else if (pointOut.x > filterX && pointOut.y > filterY) {
-                            var line1 = {
-                                startX: pointIn1.x,
-                                startY: pointIn1.y,
-                                endX: pointOut.x,
-                                endY: pointOut.y
-                            };
+                //            var filterLine = {
+                //                startX: -40,
+                //                startY: filterY,
+                //                endX: +40,
+                //                endY: filterY
+                //            };
+                //            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            pointOut.x = results.x;
+                //            pointOut.y = results.y;
+                //        }
+                //            //Punkt1 y ist definiert:                      
+                //        else if (pointOut.x > filterX && pointOut.y > filterY) {
+                //            var line1 = {
+                //                startX: pointIn1.x,
+                //                startY: pointIn1.y,
+                //                endX: pointOut.x,
+                //                endY: pointOut.y
+                //            };
 
-                            var filterLine = {
-                                startX: filterX,
-                                startY: 30,
-                                endX: filterX,
-                                endY: -30
-                            };
-                            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            //var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
-                            pointOut.x = results.x;
-                            pointOut.y = results.y;
+                //            var filterLine = {
+                //                startX: filterX,
+                //                startY: 30,
+                //                endX: filterX,
+                //                endY: -30
+                //            };
+                //            var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            //var results = this.checkLineIntersection(line1.startX, line1.startY, line1.endX, line1.endY, filterLine.startX, filterLine.startY, filterLine.endX, filterLine.endY);
+                //            pointOut.x = results.x;
+                //            pointOut.y = results.y;
 
-                        }
-                        else {
-                            //alert("zweiter Fall");
-                            continue;
-                        }
+                //        }
+                //        else {
+                //            //alert("zweiter Fall");
+                //            continue;
+                //        }
                         
 
                     
-                        //filteredArray[v1index] = firstPoint.x;
-                        //filteredArray[v1index + 1] = firstPoint.y;
-                        //filteredArray[v1index + 2] = firstPoint.z;
-                        filteredArray.push(firstPoint.x);
-                        filteredArray.push(firstPoint.y);
-                        filteredArray.push(firstPoint.y);
+                //        //filteredArray[v1index] = firstPoint.x;
+                //        //filteredArray[v1index + 1] = firstPoint.y;
+                //        //filteredArray[v1index + 2] = firstPoint.z;
+                //        filteredArray.push(firstPoint.x);
+                //        filteredArray.push(firstPoint.y);
+                //        filteredArray.push(firstPoint.z);
 
-                        //filteredArray[v2index] = secondPoint.x;
-                        //filteredArray[v2index + 1] = secondPoint.y;
-                        //filteredArray[v2index + 2] = secondPoint.z;
-                        filteredArray.push(secondPoint.x);
-                        filteredArray.push(secondPoint.y);
-                        filteredArray.push(secondPoint.y);
+                //        //filteredArray[v2index] = secondPoint.x;
+                //        //filteredArray[v2index + 1] = secondPoint.y;
+                //        //filteredArray[v2index + 2] = secondPoint.z;
+                //        filteredArray.push(secondPoint.x);
+                //        filteredArray.push(secondPoint.y);
+                //        filteredArray.push(secondPoint.z);
 
-                        //filteredArray[v3index] = thirdPoint.x;
-                        //filteredArray[v3index + 1] = thirdPoint.y;
-                        //filteredArray[v3index + 2] = thirdPoint.z;
-                        filteredArray.push(thirdPoint.x);
-                        filteredArray.push(thirdPoint.y);
-                        filteredArray.push(thirdPoint.y);
+                //        //filteredArray[v3index] = thirdPoint.x;
+                //        //filteredArray[v3index + 1] = thirdPoint.y;
+                //        //filteredArray[v3index + 2] = thirdPoint.z;
+                //        filteredArray.push(thirdPoint.x);
+                //        filteredArray.push(thirdPoint.y);
+                //        filteredArray.push(thirdPoint.z);
 
                        
-                        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
-                        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
-                        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        filteredIndicesArray[filteredIndicesArray.length] = filteredIndicesArray.length;
+                //        //filteredIndicesArray.push(filteredIndicesArray.length);
+                //        //filteredIndicesArray.push(filteredIndicesArray.length);
+                //        //filteredIndicesArray.push(filteredIndicesArray.length);
                    
                        
-                    } //if (coordinatesIn.length === 2) {
+                //    } //if (coordinatesIn.length === 2) {
 
-                }//else
+                //}//else
 
                 //else {
                 //    filteredIndicesArray[i] = undefined;
@@ -945,36 +925,536 @@
             //var min_of_array = Math.min.apply(Math, filteredArray);          
             //this.mainGeometry.setIndex(new THREE.BufferAttribute(indices2, 1).setDynamic(true));
 
-            var indices2 = new Uint16Array(filteredIndicesArray);
+            var indices2 = new Uint32Array(filteredIndicesArray);
             //this.mainGeometry.index.array = indices2;
            
             //return filteredArray;
             var newEditedTypedArray = new Float32Array(filteredArray);
             return { typedarray: newEditedTypedArray, indicesArray : indices2 };
         },
-        filterTest: function (filterX, filterY) {
-            this.objectGroup.remove(this.mainMesh);
+
+        getFilteredNewIndexedArray: function (filterX, filterY) {//typedArray) {
+
+            var filteredArray = [];
+            //var filteredArray = new Float32Array(this.positions.length);
+            var filteredIndicesArray = [];// new Uint16Array(this.indices.length);
+
+            //var typedArray = this.positions;//oder auch this.features
+            //var indices = this.indices;
+            var typedArray = this.features;
+            var indices = this.idx;
+
+            var x1, y1, z1;
+            var x2, y2, z2;
+            var x3, y3, z3;
+
+            var OldIndices = {};
+            //OldIndices["p1"] = new THREE.Vector3(x1, y1, z1);
+
+            //iterate throug triabgles:
+            for (var i = 0; i < indices.length; i += 3) {
+                var v1index = indices[i] * 3;
+                x1 = typedArray[v1index];
+                y1 = typedArray[v1index + 1];
+                z1 = typedArray[v1index + 2];
+                var vector1NotNull = x1 && y1 & z1 != 0;
+
+                var v2index = indices[i + 1] * 3;
+                x2 = typedArray[v2index];
+                y2 = typedArray[v2index + 1];
+                z2 = typedArray[v2index + 2];
+                var vector2NotNull = x2 && y2 & z2 != 0;
+
+                var v3index = indices[i + 2] * 3;
+                x3 = typedArray[v3index];
+                y3 = typedArray[v3index + 1];
+                z3 = typedArray[v3index + 2];
+                var vector3NotNull = x3 && y3 & z3 != 0;
+
+                if (vector1NotNull === false || vector2NotNull === false || vector3NotNull === false) {
+                    continue;
+                }
+
+                if ((x1 < filterX && x2 < filterX && x3 < filterX) && (y1 > filterY && y2 > filterY && y3 > filterY)) {
+
+                    //filteredArray.push(x1);
+                    //filteredArray.push(y1);
+                    //filteredArray.push(z1);
+                    var newv1Index;// = filteredIndicesArray.length;
+                    if (OldIndices.hasOwnProperty(v1index)) {
+                        newv1Index = OldIndices[v1index];
+                    }
+                    else {
+                        newv1Index = filteredArray.length / 3;
+                        OldIndices[v1index] = filteredArray.length/3;                      
+                        filteredArray.push(x1);
+                        filteredArray.push(y1);
+                        filteredArray.push(z1);
+                      
+                    }
+                    filteredIndicesArray.push(newv1Index);
+
+
+                    //filteredArray.push(x2);
+                    //filteredArray.push(y2);
+                    //filteredArray.push(z2);
+                    var newv2Index;// = filteredIndicesArray.length;
+                    if (OldIndices.hasOwnProperty(v2index)) {
+                        newv2Index = OldIndices[v2index];
+                    }
+                    else {
+                        OldIndices[v2index] = filteredArray.length/3;
+                        newv2Index = filteredArray.length/3;
+                        filteredArray.push(x2);
+                        filteredArray.push(y2);
+                        filteredArray.push(z2);
+                     
+                    }
+                    filteredIndicesArray.push(newv2Index);
+
+
+                    //filteredArray.push(x3);
+                    //filteredArray.push(y3);
+                    //filteredArray.push(z3);
+                    var newv3Index;// = filteredIndicesArray.length;
+                    if (OldIndices.hasOwnProperty(v3index)) {
+                        newv3Index = OldIndices[v3index];
+                    }
+                    else {
+                        OldIndices[v3index] = filteredArray.length/3;
+                        newv3Index = filteredArray.length/3;
+                        filteredArray.push(x3);
+                        filteredArray.push(y3);
+                        filteredArray.push(z3);
+                       
+                    }
+                    filteredIndicesArray.push(newv3Index);
+
+                    //filteredIndicesArray.push(newv1Index);
+                    //filteredIndicesArray.push(newv2Index);
+                    //filteredIndicesArray.push(newv3Index);
+                }
+
+                //cutting triangle:
+                else {
+
+                    var coordinatesIn = {};// [];
+                    var coordinatesOut = {};//[];
+                    if (x1 < filterX && y1 > filterY) {                       
+                        coordinatesIn["p1"] = new Vector3(x1, y1, z1);
+                        coordinatesIn["p1"].setIndex(v1index);
+                    }
+                    else {                       
+                        coordinatesOut["p1"] = new Vector3(x1, y1, z1);
+                        coordinatesOut["p1"].setIndex(v1index);
+                    }
+                    if (x2 < filterX && y2 > filterY) {
+                        coordinatesIn["p2"] = new Vector3(x2, y2, z2);
+                        coordinatesIn["p2"].setIndex(v2index);
+                    }
+                    else {
+                        coordinatesOut["p2"] = new Vector3(x2, y2, z2);
+                        coordinatesOut["p2"].setIndex(v2index);
+                    }
+                    if (x3 < filterX && y3 > filterY) {
+                        coordinatesIn["p3"] = new Vector3(x3, y3, z3);
+                        coordinatesIn["p3"].setIndex(v3index);
+                    }
+                    else {
+                        coordinatesOut["p3"] = new Vector3(x3, y3, z3);
+                        coordinatesOut["p3"].setIndex(v3index);
+                    }
+                    var xmin = -50;
+                    var xmax = 50;
+                    var ymin = -50;
+                    var ymax = 50;
+
+                    //erster Fall!!!!!!!!!!!!!!!!!!!!!!!!!!!! 2 Punkte drausen
+                    //if (coordinatesIn.length === 1) {
+                    if (Object.keys(coordinatesIn).length === 1) {
+                        var pointIn, pointOut1, pointOut2, firstPoint, secondPoint, thirdPoint;
+                     
+                        if (coordinatesIn.hasOwnProperty('p1')) {
+                            pointIn = firstPoint = coordinatesIn['p1'];
+                            pointOut1 = secondPoint = coordinatesOut['p2'];
+                            pointOut2 = thirdPoint = coordinatesOut['p3'];
+                        }
+                        else if (coordinatesIn.hasOwnProperty('p2')) {
+                            pointIn = secondPoint = coordinatesIn['p2'];
+                            pointOut1 = thirdPoint = coordinatesOut['p3'];
+                            pointOut2 = firstPoint = coordinatesOut['p1'];
+                        }
+                        else if (coordinatesIn.hasOwnProperty('p3')) {
+                            pointIn = thirdPoint = coordinatesIn['p3'];
+                            pointOut1 = firstPoint = coordinatesOut['p1'];
+                            pointOut2 = secondPoint = coordinatesOut['p2'];
+                        }
+
+                        var addClippedTriangleToIndices = function (clippedPolygon, newInnerPointIndex, definedPoint) {
+                            //two outer points
+                            for (var sub in clippedPolygon) {
+                                var point = clippedPolygon[sub];
+                                var isInnerPoint = point.index === definedPoint.index;
+
+                                var newPointIndex = -1;
+
+                                if (OldIndices.hasOwnProperty(point.index)) {
+                                    if (isInnerPoint) {
+                                        newPointIndex = OldIndices[definedPoint.index];
+                                    }
+                                    else {
+                                        //ein äßerer Punkt
+                                        var indexArray = OldIndices[point.index];
+                                        for (var index in indexArray) {
+                                            var item = indexArray[index];
+                                            if (item.oppI == newInnerPointIndex) newPointIndex = item.i;
+                                            if (newPointIndex !== -1) break;
+                                        }
+                                        if (newPointIndex === -1) {
+                                            newPointIndex = filteredArray.length / 3
+                                            //newPointIndex = { i: filteredArray.length / 3, oppI: newInnerPointIndex };
+                                            OldIndices[point.index].push({ i: newPointIndex, oppI: newInnerPointIndex });
+                                            filteredArray.push(point.x);
+                                            filteredArray.push(point.y);
+                                            filteredArray.push(point.z);
+
+                                        }
+                                        //var indexArray = OldIndices[point.index];
+                                        //var item = indexArray[0]
+                                        //newPointIndex = item.i;
+                                    }
+
+                                }
+                                else {
+
+                                    //define the array
+                                    if (isInnerPoint) {
+                                        newPointIndex = newInnerPointIndex;
+                                        OldIndices[point.index] = newInnerPointIndex;
+                                    }
+                                    else {
+                                        newPointIndex = filteredArray.length / 3;
+                                        OldIndices[point.index] = [{ i: newPointIndex, oppI: newInnerPointIndex }];
+                                        filteredArray.push(point.x);
+                                        filteredArray.push(point.y);
+                                        filteredArray.push(point.z);
+                                    }
+
+
+                                }
+                                filteredIndicesArray.push(newPointIndex);
+
+                            }
+                        };
+
+                        //var subjectPolygon = [[pointIn.x, pointIn.y], [pointOut1.x, pointOut1.y], [pointOut2.x, pointOut2.y]];
+                        var subjectPolygon = [pointIn, pointOut1, pointOut2];  
+                        var clipPolygon = []; var clippedPolygon = []; var clippedPolygon2 = [];
+                        clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+
+                        var point1IsOutsideOf_x = pointOut1.x > filterX;
+                        var point2IsOutsideOf_x = pointOut2.x > filterX;
+                        var bothPointsOutsideOf_x = (point1IsOutsideOf_x && point2IsOutsideOf_x);
+                        var bothPointsInsideOf_x = (pointOut1.x < filterX) && (pointOut2.x < filterX);
+
+                        var point1IsOutsideOf_y = pointOut1.y < filterY;
+                        var point2IsOutsideOf_y = pointOut2.y < filterY;
+                        var bothPointsOutsideOf_y = (point1IsOutsideOf_y && point2IsOutsideOf_y);
+                        var bothPointsInsideOf_y = (pointOut1.y > filterY) && (pointOut2.y > filterY);
+
+                        //var onlyOnepointIsOutsideOf_X = (point1IsOutsideOf_x && !point2IsOutsideOf_x) || (!point1IsOutsideOf_x && point2IsOutsideOf_x);
+                        //var onlyOnepointIsOutsideOf_Y = (point1IsOutsideOf_y && !point2IsOutsideOf_y) || (!point1IsOutsideOf_y && point2IsOutsideOf_y);
+                        ////var point1IsOutside = point1IsOutsideOf_x || point1IsOutsideOf_y;
+                        ////var point2IsOutside = point2IsOutsideOf_x || point2IsOutsideOf_y;
+                        ////var bothPointsAreOutside = point1IsOutside && point2IsOutside;
+
+                        //two point are outside of x but inside of y
+                        //if (pointOut1.x > filterX && pointOut1.y > filterY && pointOut2.x > filterX && pointOut2.y > filterY) {
+                        if ((bothPointsOutsideOf_x && bothPointsInsideOf_y) || (bothPointsInsideOf_x && bothPointsOutsideOf_y)) {
+                            ////clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                            //clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                            clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
+                        }
+                        ////two ponts are outside of y but inside of x
+                        //else if (bothPointsInsideOf_x && bothPointsOutsideOf_y) {
+                        ////else if (pointOut1.x < filterX && pointOut1.y < filterY && pointOut2.x < filterX && pointOut2.y < filterY) {
+                        //    ////clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                        //    //clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                        //    clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
+                        //}                     
+                        else  {
+                        //else  {
+                            
+                            var clippedPolygonTemp = geo_util.clip(subjectPolygon, clipPolygon);
+                            if (clippedPolygonTemp.length > 3) {
+                                //clippedPolygon = clippedPolygonTemp.slice(0, 3);
+                                for (var idx in clippedPolygonTemp) {
+                                    var point = clippedPolygonTemp[idx];
+                                    if (point.index === pointIn.index) {
+                                        clippedPolygon.push(point);
+                                    }
+                                    else if (point.oppositePointIndex === pointIn.index) {
+                                        clippedPolygon.push(point);
+                                    }
+                                }
+                                for (var idx in clippedPolygonTemp) {
+                                    var point = clippedPolygonTemp[idx];
+                                    if (point.oppositePointIndex === pointIn.index) {
+                                        clippedPolygon2.push(point);
+                                    }
+                                }
+                                var zeroPoint = new Vector3(filterX, filterY, pointIn.z, -1);
+                                clippedPolygon2.push(zeroPoint);
+                                var zeroPointIndex = filteredArray.length / 3;
+                                OldIndices[zeroPoint.index] = zeroPointIndex;
+                                filteredArray.push(zeroPoint.x);
+                                filteredArray.push(zeroPoint.y);
+                                filteredArray.push(zeroPoint.z);
+                                addClippedTriangleToIndices(clippedPolygon2, zeroPointIndex, zeroPoint);
+                            }
+
+                            else {
+                                clippedPolygon = clippedPolygonTemp;
+                            }
+                        }
+                      
+                        //one innerPoint  
+                        var newInnerPointIndex;                          
+                        //isInnerPoint = point.index === pointIn.index;                    
+                        if (OldIndices.hasOwnProperty(pointIn.index)) {
+                            newInnerPointIndex = OldIndices[pointIn.index];
+                        }
+                        else {
+                            newInnerPointIndex = filteredArray.length / 3;
+                            OldIndices[pointIn.index] = newInnerPointIndex;
+                            filteredArray.push(pointIn.x);
+                            filteredArray.push(pointIn.y);
+                            filteredArray.push(pointIn.z);
+                        }
+                        addClippedTriangleToIndices(clippedPolygon, newInnerPointIndex, pointIn);
+                    }//erster Fall Ende
+
+
+                    ///zweiter Fall - zwei Punkte drinnen 1 Punkt drausen - produziert zwei neue Punkte
+                    if (Object.keys(coordinatesIn).length === 2) {
+                       
+                            //    var pointIn1 = coordinatesIn[0];
+                            //    var pointIn2 = coordinatesIn[1];
+                            //    var pointOut = coordinatesOut[0];
+                            var pointIn1, pointIn2, pointOut, firstPoint, secondPoint, thirdPoint;
+                            if (coordinatesOut.hasOwnProperty('p1')) {
+                                pointOut = firstPoint = coordinatesOut['p1'];
+                                pointIn1 = secondPoint = coordinatesIn['p2'];
+                                pointIn2 = thirdPoint = coordinatesIn['p3'];
+
+                            }
+                            else if (coordinatesOut.hasOwnProperty('p2')) {
+                                pointOut = secondPoint = coordinatesOut['p2'];
+                                pointIn1 = thirdPoint = coordinatesIn['p3'];
+                                pointIn2 = firstPoint = coordinatesIn['p1'];
+                            }
+                            else if (coordinatesOut.hasOwnProperty('p3')) {
+                                pointOut = thirdPoint = coordinatesOut['p3'];
+                                pointIn1 = firstPoint = coordinatesIn['p1'];
+                                pointIn2 = secondPoint = coordinatesIn['p2'];
+                            }
+                                                  
+                            var subjectPolygon = [pointIn1, pointIn2, pointOut];
+                            //var clipPolygon = [
+                            //    new THREE.Vector2(xmin, ymin),
+                            //    new THREE.Vector2(filterX, ymin),
+                            //    new THREE.Vector2(filterX, ymax),
+                            //    new THREE.Vector2(xmin, ymax)
+                            //];
+                            var clipPolygon = [];
+                           
+                            if ((pointOut.x > filterX && pointOut.y > filterY) || (pointOut.x < filterX && pointOut.y < filterY)) {
+                                //clipPolygon = [new THREE.Vector2(xmin, ymin), new THREE.Vector2(filterX, ymin), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                                clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                        }
+                           
+                            //else if (pointOut.x < filterX && pointOut.y < filterY) {
+                            //    //clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(xmax, filterY), new THREE.Vector2(xmax, ymax), new THREE.Vector2(xmin, ymax)];
+                            //    clipPolygon = [new THREE.Vector2(xmin, filterY), new THREE.Vector2(filterX, filterY), new THREE.Vector2(filterX, ymax), new THREE.Vector2(xmin, ymax)];
+                            //}
+                            else { continue;}
+
+                            var clippedPolygon = geo_util.clip(subjectPolygon, clipPolygon);
+                            if (clippedPolygon.length < 4) { continue; }
+
+                            //two innerPoints with different indices and two outerPoints with same index
+                            var innerPoints = [];
+                            var outerPoints = [];
+                            for (var sub in clippedPolygon) {
+                                var point = clippedPolygon[sub];
+                                if (point.index == pointIn1.index || point.index === pointIn2.index) {
+                                    innerPoints.push(point);
+                                }
+                                else {
+                                    outerPoints.push(point);
+                                }
+                            }
+
+                            var point1, point2;
+                            if (outerPoints[0].oppositePointIndex == innerPoints[0].index) {
+                                point1 = outerPoints[0];
+                                point2 = outerPoints[1];
+                            }
+                           else if(outerPoints[1].oppositePointIndex == innerPoints[0].index) {
+                                point2 = outerPoints[0];
+                                point1 = outerPoints[1];
+                            }
+
+                            var point0 = innerPoints[0];
+                            var newPoint0Index;
+                            if (OldIndices.hasOwnProperty(point0.index)) {
+                                newPoint0Index = OldIndices[point0.index];
+                            }
+                            else {
+                                newPoint0Index = filteredArray.length / 3;
+                                OldIndices[point0.index] = newPoint0Index;
+                                filteredArray.push(point0.x);
+                                filteredArray.push(point0.y);
+                                filteredArray.push(point0.z);
+
+                            }
+                            //filteredIndicesArray.push(newPoint0Index);
+
+                            var point3 = innerPoints[1];
+                            var newPoint3Index;
+                            if (OldIndices.hasOwnProperty(point3.index)) {
+                                newPoint3Index = OldIndices[point3.index];
+                            }
+                            else {
+                                newPoint3Index = filteredArray.length / 3;
+                                OldIndices[point3.index] = newPoint3Index;
+                                filteredArray.push(point3.x);
+                                filteredArray.push(point3.y);
+                                filteredArray.push(point3.z);
+
+                            }
+                            //filteredIndicesArray.push(newPoint3Index);
+
+                            //die zwei Punkte haben den gleichen Index
+                            //var point2 = outerPoints[1];
+                            var newPoint2Index = -1;
+                            //var point1 = outerPoints[0];
+                            var newPoint1Index = -1;
+                            if (OldIndices.hasOwnProperty(point1.index)) {
+                                var indexArray = OldIndices[point1.index];
+                                
+                                    //newPoint1Index = indexArray[0].i;
+                                    //newPoint2Index = indexArray[1].i;
+                                    
+                                var i1new = false, i2new = false;
+                                    for (var index in indexArray) {
+                                        var item = indexArray[index];
+                                        if (item.oppI == newPoint0Index) newPoint1Index = item.i;
+                                        if (newPoint1Index !== -1) break;
+                                    }
+                                    if (newPoint1Index === -1) {
+                                        i1new = true;
+                                        newPoint1Index = filteredArray.length / 3;                                      
+                                        //OldIndices[point1.index].push({ i: newPoint1Index, oppI: newPoint0Index });
+                                        //newPoint1Index = { i: filteredArray.length / 3, oppI: newPoint0Index };
+                                        filteredArray.push(point1.x);
+                                        filteredArray.push(point1.y);
+                                        filteredArray.push(point1.z);
+                                    }
+
+                                    for (var index in indexArray) {
+                                        var item = indexArray[index];
+                                        if (item.oppI == newPoint3Index) newPoint2Index = item.i;
+                                        if (newPoint2Index !== -1) break;
+                                    }
+                                    if (newPoint2Index === -1) {
+                                        i2new = true;
+                                        newPoint2Index = filteredArray.length / 3;                                    
+                                        //OldIndices[point2.index].push({ i: newPoint2Index, oppI: newPoint3Index });
+                                        //newPoint2Index = { i: filteredArray.length / 3, oppI: newPoint3Index };
+                                        filteredArray.push(point2.x);
+                                        filteredArray.push(point2.y);
+                                        filteredArray.push(point2.z);                                       
+                                    }
+                                    if (i1new == true) indexArray.push({ i: newPoint1Index, oppI: newPoint0Index });
+                                    if (i2new == true) indexArray.push({ i: newPoint2Index, oppI: newPoint3Index });                                
+                                
+                            }
+                            else {                                
+                                newPoint1Index = filteredArray.length / 3;
+                                //OldIndices[point1.index] = filteredArray.length / 3;
+                                filteredArray.push(point1.x);
+                                filteredArray.push(point1.y);
+                                filteredArray.push(point1.z);
+                                newPoint2Index = filteredArray.length / 3;
+                                //newPoint2Index = { i: newPoint2Index, oppI: newPoint3Index };
+                                filteredArray.push(point2.x);
+                                filteredArray.push(point2.y);
+                                filteredArray.push(point2.z);
+                                OldIndices[point1.index] = [{ i: newPoint1Index, oppI: newPoint0Index }, { i: newPoint2Index, oppI: newPoint3Index }];
+                            }
+                           
+                            //first tringle                           
+                            filteredIndicesArray.push(newPoint3Index);
+                            filteredIndicesArray.push(newPoint1Index);
+                            filteredIndicesArray.push(newPoint0Index);
+                           
+                            //second triangle                         
+                            filteredIndicesArray.push(newPoint3Index);
+                            filteredIndicesArray.push(newPoint2Index);
+                            filteredIndicesArray.push(newPoint1Index);    
+
+                    }//zweiter Fall
+
+
+                }//else       
+
+            }//for loop
+
+            var indices2 = new Uint32Array(filteredIndicesArray);
+            //this.mainGeometry.index.array = indices2;
+
+            //return filteredArray;
+            var newEditedTypedArray = new Float32Array(filteredArray);
+            return { typedarray: newEditedTypedArray, indicesArray: indices2 };
+        },
+
+        filterNewGeometry: function (filterX, filterY) {
+            this.stopWorker();
+
+            //this.objectGroup.remove(this.mainMesh);
+            this.removeObject(this.mainMesh, true);
             this.mainMesh.geometry.dispose();
             this.mainMesh.material.dispose();
+            //this.mainMesh.texture.dispose()
 
+            this.mainGeometry !== null && this.mainGeometry.dispose();
             var geometry = this.mainGeometry = new THREE.BufferGeometry();
             geometry.dynamic = true;
 
             //this.mainGeometry.removeAttribute('position');
-            var results = this.getFilteredIndexedArrayTest(filterX, filterY);
-            this.mainGeometry.addAttribute('position', new THREE.BufferAttribute(results.typedarray, 3).setDynamic(true));
+            var results = this.getFilteredNewIndexedArray(filterX, filterY);
+          
+            var positions = this.positions = results.typedarray;
+            var bufferAttribute = new THREE.BufferAttribute(results.typedarray, 3);
+            bufferAttribute.needsUpdate = true;
+            //this.mainGeometry.addAttribute('position', new THREE.BufferAttribute(results.typedarray, 3).setDynamic(true));
+            this.mainGeometry.addAttribute('position', bufferAttribute);
 
-            ////this.mainGeometry.index.array = indices2;
-            //var index = new THREE.BufferAttribute(results.indicesArray, 1).setDynamic(true);
-            //this.mainGeometry.setIndex(index);
+            //this.mainGeometry.index.array = indices2;
+            var indices = this.indices = results.indicesArray;
+            var index = new THREE.BufferAttribute(indices, 1).setDynamic(true);
+            this.mainGeometry.setIndex(index);
 
             this.mainGeometry.computeVertexNormals(); // computed vertex normals are orthogonal to the face f       
             this.mainGeometry.computeBoundingBox();
+          
             var mesh = this.mainMesh = new THREE.Mesh(this.mainGeometry, this.materialsArray[0]);
-            //var mesh = new THREE.Mesh(geometry, material);
+            //var mesh = new THREE.Mesh(geometry, material);  
             mesh.userData.layerId = this.index;
             this.addObject(mesh, true);
 
+            this.buildGraph();
         },
 
         filter: function (filterX, filterY) {
@@ -983,7 +1463,9 @@
             
             //this.mainGeometry.removeAttribute('position');
             //this.mainGeometry.addAttribute('position', new THREE.BufferAttribute(this.getFilteredIndexedArrayTest(filterX, filterY), 3).setDynamic(true));
-                       
+                 
+            //this.mainGeometry.attributes.position.updateRange.offset = 0; // where to start updating
+            //this.mainGeometry.attributes.position.updateRange.count = this.positions.length -1; // how many vertices to update
             //this.mainGeometry.computeVertexNormals();
             this.mainGeometry.attributes.position.needsUpdate = true;
             if (this.mainGeometry.index) {
@@ -1102,7 +1584,7 @@
             geometry.addAttribute('position', position);
 
             //var indices = this.indices;
-            var indices = this.indices = new Uint16Array(this.idx);
+            var indices = this.indices = new Uint32Array(this.idx);
             var index = new THREE.BufferAttribute(indices, 1).setDynamic(true);
             geometry.setIndex(index);
 
@@ -1134,7 +1616,7 @@
             //}
 
             this.buildGraph();
-            //this.setQuadTrees();
+            ////this.setQuadTrees();
         },       
                
         //old build BufferGeometry without Index
@@ -1351,13 +1833,15 @@
            
         },
 
-        buildGraph: function(){
+        buildGraph: function () {
             var graph = this.graph = new Graph();
             //var bottomGraph = new Graph();
 
 
             var typedArray = this.positions;
             var indices = this.indices;
+            //var typedArray = positions;
+            //var indices = indices;
 
             var x1, y1, z1;
             var x2, y2, z2;
@@ -1443,7 +1927,7 @@
             if (this.borderMesh) {
                 this.objectGroup.remove(this.borderMesh);
                 this.borderMesh.geometry.dispose();
-                //this.borderMesh.material.dispose()
+                this.borderMesh.material.dispose()
             }
 
             var borderEdges = this.graph.edges.filter(function (edge) {               
@@ -1551,8 +2035,7 @@
         stopWorker: function(){
             if (this.worker) {
                 this.worker.terminate();
-                this.worker = null;
-                //this.setStatus("Stopped");
+                this.worker = null;             
             }
         },
 
@@ -2144,7 +2627,25 @@
             //for (var i = 0, l = object.children.length; i < l; i++) {
             //    this._addQueryableObject(object.children[i]);
             //}
-        }
+        },
+
+        removeObject: function (object, queryable) {
+            if (queryable === undefined) {
+                queryable = this.q;
+            }
+            this.objectGroup.remove(object);
+            if (queryable) {
+                this._removeQueryableObject(object);
+            }
+        },
+
+        _removeQueryableObject: function (object) {
+            var index = this.queryableObjects.indexOf(object);
+            if (index != -1)
+                this.queryableObjects.splice(index, 1);
+
+            //this.queryableObjects.length = 0;
+        },
 
     });
 

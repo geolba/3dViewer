@@ -202,6 +202,7 @@
     <Content Include="scripts\gba\geometry\Face.js" />
     <Content Include="scripts\gba\geometry\Graph.js" />
     <Content Include="scripts\gba\geometry\Vector2.js" />
+    <Content Include="scripts\gba\geometry\Vector3.js" />
     <Content Include="scripts\gba\layer\BaseEditor.js" />
     <Content Include="scripts\gba\layer\GridLayer.js" />
     <Content Include="scripts\gba\layer\Layer.js" />
@@ -228,8 +229,10 @@
     <None Include="scripts\lib\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="scripts\gba\layer\DxfLayer.js" />
     <Content Include="scripts\helper\domUtil.js" />
+    <Content Include="scripts\helper\geo_utilities.js" />
     <Content Include="scripts\helper\mixin.js" />
     <Content Include="scripts\helper\unload.js" />
+    <Content Include="scripts\lib\bower\threejs\three.js" />
     <Content Include="scripts\lib\jrespond\jRespond.js" />
     <Content Include="scripts\lib\threejs\OrbitControls.js" />
     <Content Include="scripts\lib\threejs\three.js" />

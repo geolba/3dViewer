@@ -1,5 +1,5 @@
 ﻿//note: can also use requireJS in this file - see here for more info: http://requirejs.org/docs/api.html#webworker
-importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
+importScripts('lib/bower/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
 
 //importScripts('require.js');
 //require({
@@ -26,6 +26,8 @@ importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
         indices = event.data.args.index;
         borderEdges = event.data.args.borderEdges;
         //graph = Raycaster.LAYERS[event.data.index + 1].graph;
+        notVisitedEdges = [];
+        vertices = [];
 
         buildTriangleBorder();//and post the message
         //getExtrudedPositions(borderEdges);
@@ -138,10 +140,10 @@ importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
     };
 
     var buildTriangleBorder = function () {
-        var geometry = new THREE.BufferGeometry();
-        var vertices = [];
-        //var idx = [];
-        //var nullVector = new THREE.Vector3(0, 0, 0);
+        //var geometry = new THREE.BufferGeometry();
+        //var vertices = [];
+        ////var idx = [];
+        ////var nullVector = new THREE.Vector3(0, 0, 0);
 
         //var b = this._getQueryableObjects3();//alle faces vom nächsten Layer
         //var b = graph;
@@ -195,7 +197,7 @@ importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
 
                 //var raycaster = new Raycaster(edge.n1.pos, direction);
                 var intersects = raycaster.identifyObjects3(indices, vertizes, edge.n1.pos, direction, check);
-                if (intersects.length > 0) {//&& intersects[0].point.x != 0 && intersects[0].point.y != 0 && intersects[0].point.z != 0) {
+                if (intersects !== null && intersects.length > 0 && intersects[0].point.z <= edge.n1.pos.z) {//&& intersects[0].point.x != 0 && intersects[0].point.y != 0 && intersects[0].point.z != 0) {
                     edge.n1.raycastPos = intersects[0].point;
                     edge.n1.visited = true;
                 }
@@ -220,7 +222,7 @@ importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
 
                 //var raycaster = new Raycaster(edge.n2.pos, direction);
                 var intersects2 = raycaster.identifyObjects3(indices, vertizes, edge.n2.pos, direction, check);
-                if (intersects2.length > 0) {// && intersects2[0].point.x != 0 && intersects2[0].point.y != 0 && intersects2[0].point.z != 0) {
+                if (intersects2 !== null && intersects2.length > 0 && intersects2[0].point.z <= edge.n2.pos.z) {// && intersects2[0].point.x != 0 && intersects2[0].point.y != 0 && intersects2[0].point.z != 0) {
                     edge.n2.raycastPos = intersects2[0].point;
                     edge.n2.visited = true;
                 }
@@ -229,49 +231,195 @@ importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
 
 
             if (edge.n1.visited === true && edge.n2.visited === false) {
-                edge.n2.raycastPos = edge.n1.raycastPos;
-                //edge.n2.raycastPos = new THREE.Vector3(edge.n2.x, edge.n2.y, edge.n1.raycastPos.z);
-                //edge.n2.raycastPos.copy(edge.n1.raycastPos);
-                //edge.n2.raycastPos.set(edge.n2.x, edge.n2.y, edge.n1.raycastPos.z);
+                //edge.n2.raycastPos = edge.n1.raycastPos;
+                //edge.n2.raycastPos = new Vector3(edge.n2.x, edge.n2.y, edge.n1.raycastPos.z);           
+                edge.n2.raycastPos = { x: edge.n2.pos.x, y: edge.n2.pos.y, z: edge.n1.raycastPos.z };
                 edge.n2.visited = true;
             }
             else if (edge.n1.visited === false && edge.n2.visited === true) {
-                edge.n1.raycastPos = edge.n2.raycastPos;
-                //edge.n1.raycastPos = new THREE.Vector3(edge.n1.x, edge.n1.y, edge.n2.raycastPos.z);
-                //edge.n1.raycastPos.copy(edge.n2.raycastPos);
-                //edge.n1.raycastPos.set(edge.n1.x, edge.n1.y, edge.n2.raycastPos.z);
+                //edge.n1.raycastPos = edge.n2.raycastPos;
+                //edge.n1.raycastPos = new Vector3(edge.n1.x, edge.n1.y, edge.n2.raycastPos.z);
+                edge.n1.raycastPos = { x: edge.n1.pos.x, y: edge.n1.pos.y, z: edge.n2.raycastPos.z };
                 edge.n1.visited = true;
             }
 
+            if (edge.n1.visited == false && edge.n2.visited == false) {
+                             
+                //var previousEdge = borderEdges[i - 1];
+                ////edge.n1.raycastPos = previousEdge.n2.visited === true ? previousEdge.n2.raycastPos : previousEdge.n1.raycastPos;
+                ////edge.n1.visited = true;
 
+                //if (previousEdge.n2.visited === true) {
 
-            //if (edge.n1.visited == false && edge.n2.visited == false) {
-            //    //alert("test");                    
-            //    var previousEdge = borderEdges[i - 1];
-            //    //edge.n1.raycastPos = previousEdge.n2.visited === true ? previousEdge.n2.raycastPos : previousEdge.n1.raycastPos;
-            //    //edge.n1.visited = true;
+                //    edge.n1.raycastPos = previousEdge.n2.raycastPos;//new THREE.Vector3(edge.n1.x, edge.n1.y, previousEdge.n2.raycastPos.z); //previousEdge.n2.raycastPos;
+                //    edge.n1.visited = true;
 
-            //    if (previousEdge.n2.visited === true) {
+                //    edge.n2.raycastPos = previousEdge.n2.raycastPos;//new THREE.Vector3(edge.n2.x, edge.n2.y, previousEdge.n2.raycastPos.z); //previousEdge.n2.raycastPos;
+                //    edge.n2.visited = true;
+                //}
+                //else if (previousEdge.n1.visited === true) {
 
-            //        edge.n1.raycastPos = previousEdge.n2.raycastPos;//new THREE.Vector3(edge.n1.x, edge.n1.y, previousEdge.n2.raycastPos.z); //previousEdge.n2.raycastPos;
-            //        edge.n1.visited = true;
+                //    edge.n1.raycastPos = previousEdge.n1.raycastPos; //new THREE.Vector3(edge.n1.x, edge.n1.y, previousEdge.n1.raycastPos.z); //previousEdge.n1.raycastPos;
+                //    edge.n1.visited = true;
 
-            //        edge.n2.raycastPos = previousEdge.n2.raycastPos;//new THREE.Vector3(edge.n2.x, edge.n2.y, previousEdge.n2.raycastPos.z); //previousEdge.n2.raycastPos;
-            //        edge.n2.visited = true;
-            //    }
-            //    else if (previousEdge.n1.visited === true) {
-
-            //        edge.n1.raycastPos = previousEdge.n1.raycastPos; //new THREE.Vector3(edge.n1.x, edge.n1.y, previousEdge.n1.raycastPos.z); //previousEdge.n1.raycastPos;
-            //        edge.n1.visited = true;
-
-            //        edge.n2.raycastPos = previousEdge.n1.raycastPos; //new THREE.Vector3(edge.n2.x, edge.n2.y, previousEdge.n1.raycastPos.z); // previousEdge.n1.raycastPos;
-            //        edge.n2.visited = true;
-            //    }
-            //}
+                //    edge.n2.raycastPos = previousEdge.n1.raycastPos; //new THREE.Vector3(edge.n2.x, edge.n2.y, previousEdge.n1.raycastPos.z); // previousEdge.n1.raycastPos;
+                //    edge.n2.visited = true;
+                //}
+                notVisitedEdges.push(edge);
+            }
 
 
 
             //if (intersects.length > 0 && intersects2.length > 0) {
+            if (edge.n1.raycastPos && edge.n2.raycastPos) {
+                ////vertices.push(edge.n1.pos, intersects[0].point);
+                ////vertices.push(intersects[0].point.x, intersects[0].point.y, intersects[0].point.z);
+
+                               
+                    vertices[vertices.length] = edge.n1.pos.x;
+                    vertices[vertices.length] = edge.n1.pos.y;
+                    vertices[vertices.length] = edge.n1.pos.z;
+                    vertices[vertices.length] = edge.n2.raycastPos.x;
+                    vertices[vertices.length] = edge.n2.raycastPos.y;
+                    vertices[vertices.length] = edge.n2.raycastPos.z;
+                    vertices[vertices.length] = edge.n1.raycastPos.x;
+                    vertices[vertices.length] = edge.n1.raycastPos.y;
+                    vertices[vertices.length] = edge.n1.raycastPos.z;
+
+                    vertices[vertices.length] = edge.n2.pos.x;
+                    vertices[vertices.length] = edge.n2.pos.y;
+                    vertices[vertices.length] = edge.n2.pos.z;
+                    vertices[vertices.length] = edge.n1.pos.x;
+                    vertices[vertices.length] = edge.n1.pos.y;
+                    vertices[vertices.length] = edge.n1.pos.z;
+                    vertices[vertices.length] = edge.n2.raycastPos.x;
+                    vertices[vertices.length] = edge.n2.raycastPos.y;
+                    vertices[vertices.length] = edge.n2.raycastPos.z;
+
+                //var pts = [edge.n1.pos, edge.n2.pos, edge.n1.raycastPos, edge.n2.raycastPos];
+                //var isClockwise = THREE.ShapeUtils.area(pts) < 0;
+                //if (isClockwise === false) {
+                //    vertices[vertices.length] = edge.n1.pos.x;
+                //    vertices[vertices.length] = edge.n1.pos.y;
+                //    vertices[vertices.length] = edge.n1.pos.z;
+                //    vertices[vertices.length] = edge.n2.raycastPos.x;
+                //    vertices[vertices.length] = edge.n2.raycastPos.y;
+                //    vertices[vertices.length] = edge.n2.raycastPos.z;
+                //    vertices[vertices.length] = edge.n1.raycastPos.x;
+                //    vertices[vertices.length] = edge.n1.raycastPos.y;
+                //    vertices[vertices.length] = edge.n1.raycastPos.z;
+                //}
+
+
+                //j = j + 12;
+
+                ////vertices[vertices.length] = edge.n1.pos.y;
+                ////vertices[vertices.length] = edge.n1.pos.z;
+                ////vertices[vertices.length] = intersects[0].point.x;
+                ////vertices[vertices.length] = intersects[0].point.y;
+                ////vertices[vertices.length] = intersects[0].point.z;
+
+                // geometry.vertices.push(
+                //    edge.n1.pos,
+                //    intersects[0].point,
+                //    edge.n2.pos,
+                //    intersects2[0].point
+                //);
+                // var face = new THREE.Face3(j, j + 1, j + 3);                        
+                // geometry.faces.push(face);
+                // face = new THREE.Face3(j, j + 2, j + 3);
+                // geometry.faces.push(face);
+                // j = j + 4;
+            }
+
+
+        } //for loop borderEdges
+        //var positions = new Float32Array(vertices);
+        //var position = new THREE.Float32Attribute(positions, 3);
+        //geometry.addAttribute('position', position);
+
+        var test = notVisitedEdges.slice(0);
+        while (test.length > 0)
+        {
+            //searchNotVistedEdges(notVisitedEdges);
+       
+        
+            for (var i = 0; i < notVisitedEdges.length; i++) {
+                var edge = notVisitedEdges[i];
+                    //if (edge.n1.visited === true && edge.n2.visited === true) {
+                    //    continue;
+                    //}
+                if (edge.n1.visited === true && edge.n2.visited === false) {            
+                    edge.n2.raycastPos = { x: edge.n2.pos.x, y: edge.n2.pos.y, z: edge.n1.raycastPos.z };
+                    edge.n2.visited = true;
+                }
+                else if (edge.n1.visited === false && edge.n2.visited === true) {
+                    edge.n1.raycastPos = { x: edge.n1.pos.x, y: edge.n1.pos.y, z: edge.n2.raycastPos.z };
+                    edge.n1.visited = true;
+                }
+                if (edge.n1.raycastPos && edge.n2.raycastPos) {
+
+                    vertices[vertices.length] = edge.n1.pos.x;
+                    vertices[vertices.length] = edge.n1.pos.y;
+                    vertices[vertices.length] = edge.n1.pos.z;
+                    vertices[vertices.length] = edge.n2.raycastPos.x;
+                    vertices[vertices.length] = edge.n2.raycastPos.y;
+                    vertices[vertices.length] = edge.n2.raycastPos.z;
+                    vertices[vertices.length] = edge.n1.raycastPos.x;
+                    vertices[vertices.length] = edge.n1.raycastPos.y;
+                    vertices[vertices.length] = edge.n1.raycastPos.z;
+
+                    vertices[vertices.length] = edge.n2.pos.x;
+                    vertices[vertices.length] = edge.n2.pos.y;
+                    vertices[vertices.length] = edge.n2.pos.z;
+                    vertices[vertices.length] = edge.n1.pos.x;
+                    vertices[vertices.length] = edge.n1.pos.y;
+                    vertices[vertices.length] = edge.n1.pos.z;
+                    vertices[vertices.length] = edge.n2.raycastPos.x;
+                    vertices[vertices.length] = edge.n2.raycastPos.y;
+                    vertices[vertices.length] = edge.n2.raycastPos.z;
+
+                    test.splice(i, 1);
+                }
+            }
+        }
+       
+        
+        
+       
+        self.postMessage(vertices);
+        self.close();
+       
+      
+    };  
+
+
+   
+
+   
+
+    
+    
+
+    var searchNotVistedEdges = function (edges) {
+        var newNotVisitedEdges = [];
+        for (var i = 0; i < edges.length; i++) {
+
+            var edge = edges[i];
+            if (edge.n1.visited === true && edge.n2.visited === true) {
+                continue;
+            }
+
+            if (edge.n1.visited === true && edge.n2.visited === false) {
+                //edge.n2.raycastPos = edge.n1.raycastPos;               
+                edge.n2.raycastPos = { x: edge.n2.pos.x, y: edge.n2.pos.y, z: edge.n1.raycastPos.z };
+                edge.n2.visited = true;
+            }
+            else if (edge.n1.visited === false && edge.n2.visited === true) {
+                //edge.n1.raycastPos = edge.n2.raycastPos;               
+                edge.n1.raycastPos = { x: edge.n1.pos.x, y: edge.n1.pos.y, z: edge.n2.raycastPos.z };
+                edge.n1.visited = true;
+            }
             if (edge.n1.raycastPos && edge.n2.raycastPos) {
                 ////vertices.push(edge.n1.pos, intersects[0].point);
                 ////vertices.push(intersects[0].point.x, intersects[0].point.y, intersects[0].point.z);
@@ -305,37 +453,22 @@ importScripts('lib/threejs/three.js', 'gba/tasks/RaycasterVertices.js');
                 vertices[vertices.length] = edge.n2.raycastPos.z;
 
 
-
-                j = j + 12;
-
-                ////vertices[vertices.length] = edge.n1.pos.y;
-                ////vertices[vertices.length] = edge.n1.pos.z;
-                ////vertices[vertices.length] = intersects[0].point.x;
-                ////vertices[vertices.length] = intersects[0].point.y;
-                ////vertices[vertices.length] = intersects[0].point.z;
-
-                // geometry.vertices.push(
-                //    edge.n1.pos,
-                //    intersects[0].point,
-                //    edge.n2.pos,
-                //    intersects2[0].point
-                //);
-                // var face = new THREE.Face3(j, j + 1, j + 3);                        
-                // geometry.faces.push(face);
-                // face = new THREE.Face3(j, j + 2, j + 3);
-                // geometry.faces.push(face);
-                // j = j + 4;
+           
             }
 
-
-        } //for loop borderEdges
-        //var positions = new Float32Array(vertices);
-        //var position = new THREE.Float32Attribute(positions, 3);
-        //geometry.addAttribute('position', position);
-
-        self.postMessage(vertices);
-        self.close();
+            if (edge.n1.visited == false && edge.n2.visited == false) {
+                newNotVisitedEdges.push(edge);
+            }
+        }
+        i = i + 1;
+        if (i <= 5) {
+            if (newNotVisitedEdges.length > 0) {
+                searchNotVistedEdges(newNotVisitedEdges);
+            }
+        }
+           
     };
+
    
 
     var i = 0;

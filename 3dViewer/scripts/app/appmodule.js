@@ -56,6 +56,12 @@
             /* Renderer */
             var bgcolor = 0xfdfdfd;//appSettings.Options.bgcolor;
             app.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            // Clipping setup:
+            var Empty = Object.freeze([]);
+            app.renderer.clippingPlanes = Empty; // GUI sets it to globalPlanes
+            app.renderer.localClippingEnabled = true;
+            //app.renderer.shadowMap.enabled = true;
+
             //app.renderer = new THREE.CanvasRenderer({ alpha: true });
             //app.renderer = app.webglAvailable() ? new THREE.WebGLRenderer({ alpha: true }) : new THREE.CanvasRenderer({ alpha: true });
             app.renderer.setSize(app.width, app.height);
@@ -153,7 +159,7 @@
          
         // update label position
         _updateLabelPosition : function () {
-            if (!app.labelVisibility || app.labels.length == 0|| app.controls.gridlayer.objectGroup.visible === false) return;
+            if (!app.labelVisibility || app.labels.length === 0|| app.controls.gridlayer.objectGroup.visible === false) return;
 
             var widthHalf = app.width / 2,
                 heightHalf = app.height / 2,

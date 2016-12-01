@@ -7,7 +7,8 @@ require = {
             //app: 'app',
      
         three: 'app/three',
-        threeCore: 'lib/threejs/three',     
+        //threeCore: 'lib/threejs/three',  
+        threeCore: 'lib/bower/threejs/three',
         //OrbitControls: 'lib/TrackballControls',
         //helvetiker: 'lib/helvetiker_regular',
         jquery: 'lib/jquery/jquery-2.1.4',

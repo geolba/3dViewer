@@ -155,12 +155,18 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
             //}
             //this.options.layers[0].scaleZ(this.value);
             //this.update(this.value);
+            var x2 = x, y2 = y;
             this._map.dataservice.layers.forEach(function (layer) {
-                //if (layer.type === "DxfLayer"){
-                //    layer.filterTest(x, y);
-                //}
-                layer.filter(x, y);
+                if (layer.declaredClass === "DxfLayer") {
+                    layer.filterNewGeometry(x, y);
+                    x = x + 0.025;
+                    y = y - 0.025;
+                }
+                else {
+                    layer.filterMaterial(x, y * -1);
+                }
             }, this);
+
 
             util.showLoading();
             var self = this;

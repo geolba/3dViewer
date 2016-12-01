@@ -22,6 +22,7 @@ define(["threeCore"], function (THREE) {
 
     }
 
+    //Methoden überschreiben: 
     THREE.Raycaster.prototype.identifyObjects = function (objects, recursive) {
 
         var intersects = [];

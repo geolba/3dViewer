@@ -79,15 +79,15 @@
             //var filteredArray = [];
             //var filteredArray = new Float32Array(this.mainGeometry.getAttribute('position').array.length);
             // allocate maximal size
-            var filteredArray = new Float32Array(this.positions.length);
+            var filteredArray = new Float32Array(this.features.length);
             var filteredIndicesArray = [];// new Uint16Array(this.indices.length);
             //var index = this.mainGeometry.getIndex();
             //var indices = index.array;
 
             //var filteredArray = new Float32Array(288);
             //var filteredArray = this.mainGeometry.attributes.position.clone().array;
-            var typedArray = this.positions;
-            var indices = this.indices;
+            var typedArray = this.features;
+            var indices = this.idx;
 
             var x1, y1, z1;
             var x2, y2, z2;
@@ -199,6 +199,12 @@
             return filteredArray;          
         },
 
+
+        filterMaterial: function (filterX, filterY) {
+            this.xLocalPlane.constant = filterX;
+            this.yLocalPlane.constant = filterY;
+        },
+
         //für Buffer:
         filter: function (filterX, filterY) {
             var bufferAttribute = this.mainGeometry.getAttribute('position');
@@ -250,6 +256,9 @@
         initMaterials : function () {
             this.materials = [];
             if (this.materialParameter.length === 0) return;
+            this.xLocalPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 50);
+            //this.addObject(this.xLocalPlane, false);
+            this.yLocalPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 39);
 
             var mat, sum_opacity = 0;
             for (var i = 0, l = this.materialParameter.length; i < l; i++) {
@@ -279,7 +288,11 @@
                 if (m.t) opt.transparent = true;
                 if (m.w) opt.wireframe = true;
                 //opt.wireframe = true;
-                
+
+                // Clipping setup:
+                opt.clippingPlanes = [this.xLocalPlane, this.yLocalPlane];
+                opt.clipIntersection = false;
+                opt.clipShadows = true;
 
                 if (m.materialtypee === Gba3D.MaterialType.MeshLambert) {
                     //if (m.color !== undefined) opt.color = opt.ambient = m.color;

@@ -129,8 +129,8 @@
             var geom = layer.mainGeometry = this.buidldPlaneBufferGeometry(this.plane.width, this.plane.height, widthSegments, heightSegments);// new THREE.PlaneBufferGeometry(this.plane.width, this.plane.height, 11, 7);
 
             //var geom = layer.mainGeometry = planeGeometry.toNonIndexed();
-            this.layer.positions = geom.attributes.position.array;
-            this.layer.indices = geom.getIndex() !== null ? geom.getIndex().array : null;
+            this.layer.features = geom.attributes.position.array;
+            this.layer.idx = geom.getIndex() !== null ? geom.getIndex().array : null;
             var dem_data = this.dem_values;
           
 
