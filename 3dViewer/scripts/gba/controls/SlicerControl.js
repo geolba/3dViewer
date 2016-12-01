@@ -159,12 +159,12 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
             this._map.dataservice.layers.forEach(function (layer) {
                 if (layer.declaredClass === "DxfLayer") {
                     layer.filterNewGeometry(x, y);
-                    x = x + 0.045;
-                    y = y - 0.045;
+                    x = x + 0.025;
+                    y = y - 0.025;
                 }
-                //else {
-                //    layer.filterNewGeometry(x, y);
-                //}
+                else {
+                    layer.filterMaterial(x, y * -1);
+                }
             }, this);
 
 

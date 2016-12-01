@@ -2640,11 +2640,11 @@
         },
 
         _removeQueryableObject: function (object) {
-            //var index = this.queryableObjects.indexOf(item);
-            //if (index != -1)
-            //    this.queryableObjects.splice(index, 1);
+            var index = this.queryableObjects.indexOf(object);
+            if (index != -1)
+                this.queryableObjects.splice(index, 1);
 
-            this.queryableObjects.length = 0;
+            //this.queryableObjects.length = 0;
         },
 
     });
