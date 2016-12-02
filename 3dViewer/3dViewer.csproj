@@ -141,6 +141,7 @@
     <Content Include="dist\helper\Events.js" />
     <Content Include="dist\helper\utilities.js" />
     <Content Include="dist\i18n.js" />
+    <Content Include="dist\lib\bower\threejs\three.js" />
     <Content Include="dist\lib\jquery\jquery-2.1.4.js" />
     <Content Include="dist\lib\jrespond\jRespond.js" />
     <Content Include="dist\lib\leaflet\Class.js" />

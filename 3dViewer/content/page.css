@@ -134,13 +134,15 @@ h1 {
     user-select: none;
 }
 
-header, footer, nav {
+/*header, footer, nav {*/
+header, footer {
     display: block;
     position: absolute;
     left: 0;
     right: 0;
     z-index: 150;
 }
+nav{position:relative;}
 
 footer{
     text-align:center;
@@ -161,9 +163,9 @@ nav .div_nav {
     margin: 10px;
 }
 
-nav .fm_container {
+/*nav .fm_container {
     margin: 0;
-}
+}*/
 
 header, footer {
     background-color: #222;
@@ -186,10 +188,10 @@ footer {
     box-shadow: 0 0 15px -2px black;
 }
 
-nav {
+/*nav {
     background-color: #5e5e5e;
     box-shadow: 0 0 15px -2px black;
-}
+}*/
 
 .main {
     display: block;
@@ -594,7 +596,8 @@ select.radius {
 
     header {
         top: 0;
-        height: 2.5em;        
+        /*height: 2.5em;*/ 
+        height: 2.2em;        
     }
 
     footer {
@@ -602,15 +605,15 @@ select.radius {
         height: 1.5em;
     }
 
-    nav {
+    /*nav {
         top: 2.5em;     
         margin: 0;
         padding: 0;
-        /*height: 2.2em;*/  
+     
          
           height: 2.2em;   
         overflow: hidden;    
-    }
+    }*/
      nav .div_nav {
         width: 98%;
         margin: 0 auto;
@@ -623,7 +626,8 @@ select.radius {
     }
 
     .main {
-        top: 4.7em;
+        /*top: 4.7em;*/
+        top: 2.2em;
         bottom: 1.5em;
     }
 
@@ -826,7 +830,12 @@ select.radius {
     }
 
     nav {
+          display: block;
+    position: fixed;   
+    z-index: 150;
         bottom: 0;
+          left: 0;
+        right: 0;
         height: 2.6em;
         overflow-x: auto;
         overflow-y: hidden;

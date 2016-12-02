@@ -608,7 +608,7 @@
                 //}
             };
             image.src = imageData;
-            texture = new THREE.Texture(image);
+            texture = new THREE.Texture(image);          
             return texture;
         }
 
