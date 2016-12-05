@@ -470,9 +470,10 @@
             });
            
 
-            $("#searchText").change(function (e) {
+            $('input[name=searchText]:radio').on('change', function (e) {
                 e.preventDefault();
-                var value = document.getElementById("searchText").value;
+                //var value = document.getElementById("searchText").value;
+                var value = this.value;// $('.selectopt:checked').val();
                 if (value === "left") {
                     //from east
                     app.camera.position.set(-150, 0, 0);

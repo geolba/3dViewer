@@ -107,7 +107,7 @@
 
         </header>
 
-        
+
 
         <div class='main'>
 
@@ -135,10 +135,17 @@
 
                         <div class="slicer_panel gba_panel noselect">
 
-                            <div class="panel-section section-view">
-                                <h4>View</h4>
-                                <div id="feature-camera-views" class="feature-wrapper inline-block">
-                                    <select id='searchText' class="radius noselect" title='Ansicht auswählen'>
+                            <div class="pure-g panel-section section-view">
+
+                                <h4 class="pure-u-1 pure-u-md-1">View</h4>
+                                <!--<div id="feature-bg-color" class="feature-wrapper  inline-block">
+                                    <label>Bg color</label>
+                                    <input id="ftbgcolor" type="color" name="bgcolor" value="#ffffff" autocomplete="off">
+                                </div>-->
+
+
+                                <div id="feature-camera-views" class="pure-u-1 pure-u-md-1-2 feature-wrapper inline-block">
+                                    <!--<select id='searchText' class="gba-select radius" title='Ansicht auswählen'>
                                         <option selected disabled>
                                             --Auswählen--
                                         </option>
@@ -147,32 +154,46 @@
                                         <option value="front">Front view</option>
                                         <option value="back">Back view</option>
                                         <option value="bottom">Bottom view</option>
-                                    </select>
-                                </div>
-                                <!--<div id="feature-bg-color" class="feature-wrapper  inline-block">
-                                    <label>Bg color</label>
-                                    <input id="ftbgcolor" type="color" name="bgcolor" value="#ffffff" autocomplete="off">
-                                </div>-->
+                                    </select>-->
+                                    <div id='searchText1' class="gba-select radius" tabindex="1">                                       
 
-                                <div id="feature-fullscreen" class="feature-wrapper inline-block">
+                                        <input class="selectopt" name="searchText" type="radio" id="left" value="left" checked>
+                                        <label for="left" class="gba-option-label">Left view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="right" value="right">
+                                        <label for="right" class="gba-option-label">Right view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="front" value="front">
+                                        <label for="front" class="gba-option-label">Front view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="back" value="back">
+                                        <label for="back" class="gba-option-label">Back view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="bottom" value="bottom">
+                                        <label for="bottom" class="gba-option-label">Bottom view</label>
+                                    </div>
+                                </div>
+
+
+                                <div id="feature-fullscreen" class="pure-u-1 pure-u-md-1-2 feature-wrapper inline-block">
                                     <input type="checkbox" id="chkFullscreen" autocomplete="off">
-                                    <label for="chkFullscreen" class="button small radius noselect">Fullscreen</label>
+                                    <label for="chkFullscreen" class="gba-button small radius">Fullscreen</label>
                                 </div>
-                                <div id="feature-wireframe" class="feature-wrapper inline-block">
+                                <div id="feature-wireframe" class="pure-u-1 pure-u-md-1-2 feature-wrapper  inline-block">
                                     <input id="chkWireframe" autocomplete="off" type="checkbox">
-                                    <label for="chkWireframe" class="button small radius noselect">Wireframe</label>
+                                    <label for="chkWireframe" class="gba-button small radius">Wireframe</label>
                                 </div>
-                                <div id="feature-screenshot" class="feature-wrapper inline-block">
-                                    <a id="btnScreenshot" class="button small radius noselect">Export image</a>
+                                <div id="feature-screenshot" class="pure-u-1 pure-u-md-1-2 feature-wrapper  inline-block">
+                                    <label id="btnScreenshot" class="gba-button small radius gba-label">Image</label>
                                 </div>
 
                             </div>
 
-                            <div class="panel-section section-functions">
-                                <h4>Functions</h4>
-                                <div id="feature-grid" class="feature-wrapper inline-block">
+                            <div class="pure-g panel-section section-functions">
+                                <h4 class="pure-u-1 pure-u-md-1">Functions</h4>
+                                <div id="feature-grid" class="pure-u-1 pure-u-md-1-2 feature-wrapper inline-block">
                                     <input type="checkbox" id="chkGrid" autocomplete="off">
-                                    <label for="chkGrid" class="button small radius">Grid</label>
+                                    <label for="chkGrid" class="gba-button small radius">Grid</label>
                                 </div>
                             </div>
 
