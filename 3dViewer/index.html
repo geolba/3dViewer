@@ -35,75 +35,79 @@
 
     <div id="mainWindow">
 
-        <header class="pure-g">           
-            <div id="headerArea" class="pure-u-1 pure-u-md-1">
+        <header class="pure-g">
+
+            <div id="headerArea" class="pure-u-1 pure-u-md-8-24">
                 <div id="legendHeaderText" class="fm_title_bar"></div>
-            </div>          
+            </div>
+
+            <nav class="pure-u-1 pure-u-md-16-24" itemprop="hasPart" itemscope itemtype="http://schema.org/SiteNavigationElement">
+                <div class='div_nav'>
+
+                    <ul class="pure-menu-list">
+
+                        <!-- float left elements ohne gba_trigger und braucht auch kein data-panel  -->
+                        <li class="pure-menu-item float_left">
+                            <a href="http://www.geologie.ac.at/forschung-entwicklung/geologische-3d-modellierung/" target="_blank" class='home_button gba_button'>
+                                <!--<span class='fm_icon fm_home_icon'></span>-->
+                                <span class='fm_icon fa fa-home'></span>
+                                <span class='fm_icon_text text_show'>GBA</span>
+                            </a>
+                        </li>
+
+                        <li class="pure-menu-item float_left">
+                            <a href='#' class='basemap_button gba_button'>
+                                <!--<span class='fm_icon fm_basemap_icon'></span>-->
+                                <i class="fm_icon fa fa-map"></i>
+                                <span class='fm_icon_text text_show'>Map</span>
+                            </a>
+                        </li>
+                        <li class="pure-menu-item float_left">
+                            <a href='#' class='gba_button about_button'>
+                                <!--<span class='fm_icon fm_about_icon'></span>-->
+                                <i class="fm_icon fa fa-question"></i>
+                                <span class='fm_icon_text text_show'>About</span>
+                            </a>
+                        </li>
+
+
+                        <!-- float right elements are displayed in reverse order -->
+                        <li class="pure-menu-item float_right">
+                            <a href='#' class='description_button gba_trigger gba_button' data-panel='description_panel'>
+                                <!--<span class='fm_icon fm_details_icon'></span>-->
+                                <span class='fm_icon fa fa-info'></span>
+                                <span class='fm_icon_text'>Details</span>
+                            </a>
+                        </li>
+                        <li class="pure-menu-item float_right">
+                            <a href='#' class='legend_button gba_trigger gba_button' data-panel='legend_panel'>
+                                <!--<span class='fm_icon fm_legend_icon'></span>-->
+                                <span class='fm_icon fa fa-list-ul'></span>
+                                <span class='fm_icon_text'>Legend</span>
+                            </a>
+                        </li>
+                        <li class="pure-menu-item float_right">
+                            <a href='#' class='slicer_button gba_trigger gba_button' data-panel='slicer_panel'>
+                                <!--<span class='fm_icon fm_slicer_icon'></span>-->
+                                <span class='fm_icon fa fa-gears'></span>
+                                <span class='fm_icon_text'>Slicer</span>
+                            </a>
+                        </li>
+                        <li class="pure-menu-item float_right">
+                            <a href='#' class='share_button gba_trigger gba_button' data-panel='share_panel'>
+                                <!--<span class='fm_icon fm_share_icon'></span>-->
+                                <span class='fm_icon fa fa-share-square-o'></span>
+                                <span class='fm_icon_text'>Share</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
         </header>
 
-        <nav itemprop="hasPart" itemscope itemtype="http://schema.org/SiteNavigationElement">
-            <div class='div_nav'>
-            
-                <ul class="pure-menu-list">
 
-                    <!-- float left elements ohne gba_trigger und braucht auch kein data-panel  -->
-                    <li class="pure-menu-item float_left">
-                        <a href="http://www.geologie.ac.at/forschung-entwicklung/geologische-3d-modellierung/" target="_blank" class='home_button gba_button'>
-                            <!--<span class='fm_icon fm_home_icon'></span>-->
-                            <span class='fm_icon fa fa-home'></span>
-                            <span class='fm_icon_text text_show'>GBA</span>
-                        </a>
-                    </li>
-
-                    <li class="pure-menu-item float_left">
-                        <a href='#' class='basemap_button gba_button'>
-                            <!--<span class='fm_icon fm_basemap_icon'></span>-->
-                            <i class="fm_icon fa fa-map"></i>
-                            <span class='fm_icon_text text_show'>Map</span>
-                        </a>
-                    </li>
-                    <li class="pure-menu-item float_left">
-                        <a href='#' class='gba_button about_button'>
-                            <!--<span class='fm_icon fm_about_icon'></span>-->
-                            <i class="fm_icon fa fa-question"></i>
-                            <span class='fm_icon_text text_show'>About</span>
-                        </a>
-                    </li>
-
-
-                    <!-- float right elements are displayed in reverse order -->
-                    <li class="pure-menu-item float_right">
-                        <a href='#' class='description_button gba_trigger gba_button' data-panel='description_panel'>
-                            <!--<span class='fm_icon fm_details_icon'></span>-->
-                            <span class='fm_icon fa fa-info'></span>
-                            <span class='fm_icon_text'>Details</span>
-                        </a>
-                    </li>
-                    <li class="pure-menu-item float_right">
-                        <a href='#' class='legend_button gba_trigger gba_button' data-panel='legend_panel'>
-                            <!--<span class='fm_icon fm_legend_icon'></span>-->
-                            <span class='fm_icon fa fa-list-ul'></span>
-                            <span class='fm_icon_text'>Legend</span>
-                        </a>
-                    </li>
-                    <li class="pure-menu-item float_right">
-                        <a href='#' class='slicer_button gba_trigger gba_button' data-panel='slicer_panel'>
-                            <!--<span class='fm_icon fm_slicer_icon'></span>-->
-                            <span class='fm_icon fa fa-gears'></span>
-                            <span class='fm_icon_text'>Slicer</span>
-                        </a>
-                    </li>
-                    <li class="pure-menu-item float_right">
-                        <a href='#' class='share_button gba_trigger gba_button' data-panel='share_panel'>
-                            <!--<span class='fm_icon fm_share_icon'></span>-->
-                            <span class='fm_icon fa fa-share-square-o'></span>
-                            <span class='fm_icon_text'>Share</span>
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
 
         <div class='main'>
 
@@ -131,10 +135,17 @@
 
                         <div class="slicer_panel gba_panel noselect">
 
-                            <div class="panel-section section-view">
-                                <h4>View</h4>
-                                <div id="feature-camera-views" class="feature-wrapper inline-block">
-                                    <select id='searchText' class="radius noselect" title='Ansicht auswählen'>
+                            <div class="pure-g panel-section section-view">
+
+                                <h4 class="pure-u-1 pure-u-md-1">View</h4>
+                                <!--<div id="feature-bg-color" class="feature-wrapper  inline-block">
+                                    <label>Bg color</label>
+                                    <input id="ftbgcolor" type="color" name="bgcolor" value="#ffffff" autocomplete="off">
+                                </div>-->
+
+
+                                <div id="feature-camera-views" class="pure-u-1 pure-u-md-1-2 feature-wrapper inline-block">
+                                    <!--<select id='searchText' class="gba-select radius" title='Ansicht auswählen'>
                                         <option selected disabled>
                                             --Auswählen--
                                         </option>
@@ -143,32 +154,46 @@
                                         <option value="front">Front view</option>
                                         <option value="back">Back view</option>
                                         <option value="bottom">Bottom view</option>
-                                    </select>
-                                </div>
-                                <!--<div id="feature-bg-color" class="feature-wrapper  inline-block">
-                                    <label>Bg color</label>
-                                    <input id="ftbgcolor" type="color" name="bgcolor" value="#ffffff" autocomplete="off">
-                                </div>-->
+                                    </select>-->
+                                    <div id='searchText1' class="gba-select radius" tabindex="1">                                       
 
-                                <div id="feature-fullscreen" class="feature-wrapper inline-block">
+                                        <input class="selectopt" name="searchText" type="radio" id="left" value="left" checked>
+                                        <label for="left" class="gba-option-label">Left view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="right" value="right">
+                                        <label for="right" class="gba-option-label">Right view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="front" value="front">
+                                        <label for="front" class="gba-option-label">Front view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="back" value="back">
+                                        <label for="back" class="gba-option-label">Back view</label>
+
+                                        <input class="selectopt" name="searchText" type="radio" id="bottom" value="bottom">
+                                        <label for="bottom" class="gba-option-label">Bottom view</label>
+                                    </div>
+                                </div>
+
+
+                                <div id="feature-fullscreen" class="pure-u-1 pure-u-md-1-2 feature-wrapper inline-block">
                                     <input type="checkbox" id="chkFullscreen" autocomplete="off">
-                                    <label for="chkFullscreen" class="button small radius noselect">Fullscreen</label>
+                                    <label for="chkFullscreen" class="gba-button small radius">Fullscreen</label>
                                 </div>
-                                <div id="feature-wireframe" class="feature-wrapper inline-block">
+                                <div id="feature-wireframe" class="pure-u-1 pure-u-md-1-2 feature-wrapper  inline-block">
                                     <input id="chkWireframe" autocomplete="off" type="checkbox">
-                                    <label for="chkWireframe" class="button small radius noselect">Wireframe</label>
+                                    <label for="chkWireframe" class="gba-button small radius">Wireframe</label>
                                 </div>
-                                <div id="feature-screenshot" class="feature-wrapper inline-block">
-                                    <a id="btnScreenshot" class="button small radius noselect">Export image</a>
+                                <div id="feature-screenshot" class="pure-u-1 pure-u-md-1-2 feature-wrapper  inline-block">
+                                    <label id="btnScreenshot" class="gba-button small radius gba-label">Image</label>
                                 </div>
 
                             </div>
 
-                            <div class="panel-section section-functions">
-                                <h4>Functions</h4>
-                                <div id="feature-grid" class="feature-wrapper inline-block">
+                            <div class="pure-g panel-section section-functions">
+                                <h4 class="pure-u-1 pure-u-md-1">Functions</h4>
+                                <div id="feature-grid" class="pure-u-1 pure-u-md-1-2 feature-wrapper inline-block">
                                     <input type="checkbox" id="chkGrid" autocomplete="off">
-                                    <label for="chkGrid" class="button small radius">Grid</label>
+                                    <label for="chkGrid" class="gba-button small radius">Grid</label>
                                 </div>
                             </div>
 

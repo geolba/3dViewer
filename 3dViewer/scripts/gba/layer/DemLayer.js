@@ -111,7 +111,7 @@
                 y3 = typedArray[v3index + 1];
                 z3 = typedArray[v3index + 2];
 
-                if ((x1 < filterX && x2 < filterX && x3 < filterX) && (y1 > filterY && y2 > filterY && y3 > filterY)) {
+                if (x1 < filterX && x2 < filterX && x3 < filterX && y1 > filterY && y2 > filterY && y3 > filterY) {
                     filteredArray[v1index] = x1;
                     filteredArray[v1index + 1] = y1;
                     filteredArray[v1index + 2] = z1;
@@ -180,7 +180,7 @@
                 z3 = typedArray[i * 3 + 8];
 
                 //if (vertex1x > 20) {
-                if ((x1 < filterX && x2 < filterX && x3 < filterX) && (y1 < filterY && y2 < filterY && y3 < filterY)) {
+                if (x1 < filterX && x2 < filterX && x3 < filterX && y1 < filterY && y2 < filterY && y3 < filterY) {
                    
                     filteredArray[i * 3 + 0] = x1;
                     filteredArray[i * 3 + 1] = y1;
@@ -246,7 +246,7 @@
       
 
         addBlock : function (params, clipped) {
-            var BlockClass = (clipped) ? ClippedDEMBlock : DemBlock;
+            var BlockClass = clipped ? ClippedDEMBlock : DemBlock;
             var block = new BlockClass(params);
             block.layer = this;
             this.blocks.push(block);
@@ -495,11 +495,8 @@
             for (i = 0; i < graph.edges.length; i++) {
                 var edge = graph.edges[i];
                 if (edge.faces.length === 1) {                  
-                    edge.border === true;
-                    geometry.vertices.push(
-	                    edge.n1.pos,
-	                    edge.n2.pos
-                    );                   
+                    edge.border = true;
+                    geometry.vertices.push(edge.n1.pos, edge.n2.pos);
                 }
             }
                   
@@ -598,7 +595,7 @@
        
         
         _loadTextureData : function (imageData) {
-            var texture, image = new Image();
+            var texture, image = document.createElement('img');
             image.onload = function () {
                 texture.needsUpdate = true;
                 app._render();
@@ -609,6 +606,7 @@
             };
             image.src = imageData;
             texture = new THREE.Texture(image);
+            texture.minFilter = THREE.LinearFilter;
             return texture;
         }
 
