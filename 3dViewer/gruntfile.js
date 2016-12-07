@@ -92,7 +92,7 @@ module.exports = function (grunt) {
                     destPrefix: 'scripts/lib/bower'
                 },
                 files: {
-                    'threejs/three.js': 'three.js/build/three.js'
+                    'threejs/three.js': 'three.js/three.js'
                 }
 
             },
