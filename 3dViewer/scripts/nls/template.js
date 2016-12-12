@@ -97,6 +97,11 @@ define('nls/template',{
             zoom: {               
                 zoomInTitle: 'Zoom in',
                 zoomOutTitle: 'Zoom out'
+            },
+            northarrow: {
+                east: 'x',
+                north: 'y',
+                altitude: 'z'
             }
         }
     }),

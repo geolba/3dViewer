@@ -94,6 +94,11 @@ define({
         zoom: {
             zoomInTitle: 'Vergrößern',
             zoomOutTitle: 'Verkleinern '
+        },
+        northarrow: {
+            east: 'Ost',
+            north: 'Nord',
+            altitude: 'Höhe'
         }
     }
 });
