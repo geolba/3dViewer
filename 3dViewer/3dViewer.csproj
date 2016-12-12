@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>_3dViewer</RootNamespace>
     <AssemblyName>3dViewer</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -50,9 +50,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -68,6 +68,10 @@
     <Content Include="content\components\pure\css\pure.css" />
     <Content Include="content\concat.min.css" />
     <Content Include="content\controls.css" />
+    <Content Include="content\fonts.css" />
+    <Content Include="content\fonts\opensans-bold.svg" />
+    <Content Include="content\fonts\opensans-light.svg" />
+    <Content Include="content\fonts\opensans-regular.svg" />
     <Content Include="content\icons\basemap-w.png" />
     <Content Include="content\icons\basemap.png" />
     <Content Include="content\img\border.png" />
@@ -165,6 +169,15 @@
     <Content Include="content\components\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="content\components\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="content\components\pure\css\LICENSE.md" />
+    <Content Include="content\fonts\opensans-bold.eot" />
+    <Content Include="content\fonts\opensans-bold.ttf" />
+    <Content Include="content\fonts\opensans-bold.woff" />
+    <Content Include="content\fonts\opensans-light.eot" />
+    <Content Include="content\fonts\opensans-light.ttf" />
+    <Content Include="content\fonts\opensans-light.woff" />
+    <Content Include="content\fonts\opensans-regular.eot" />
+    <Content Include="content\fonts\opensans-regular.ttf" />
+    <Content Include="content\fonts\opensans-regular.woff" />
     <None Include="dist\_references.js" />
     <Content Include="images\basemap\base_border.jpg" />
     <Content Include="images\basemap\base_geo.jpg" />
@@ -180,7 +193,9 @@
     <Content Include="images\whiter.png" />
     <Content Include="images\whitex.png" />
     <Content Include="index.html" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="LICENSE.md" />
     <Content Include="dist\lib\leaflet\LICENSE.md" />
     <Content Include="dist\lib\proj4js\LICENSE.md" />

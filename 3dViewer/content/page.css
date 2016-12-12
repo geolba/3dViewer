@@ -1,15 +1,28 @@
 ﻿/* Start Reset CSS */
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strong, sub, sup, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    /*font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;*/
+    font-family: 'Open Sans', sans-serif;
     font-weight: normal;
     font-style: normal;
     color: #222;
@@ -46,17 +59,20 @@ table {
     margin: 2px;
 }
 
-html, body {
+html, body
+{ 
     height: 100%;
     width: 100%;
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
+    text-size-adjust: 100%;  
+      font-family: 'Open Sans', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em, th, a {
+h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em, th, a, button, input, select, textarea, .pure-g [class *= "pure-u"], .pure-g-r [class *= "pure-u"]  {
     font-weight: normal;
     font-style: normal;
-    font-family: Arial, Helvetica, sans-serif;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+       font-family: 'Open Sans', sans-serif;
 }
 
 fieldset, img, hr {
@@ -607,8 +623,7 @@ footer {
     }
 
 
-    .gba_button {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    .gba_button {      
         font-size: 1em;
         font-weight: bold;
         
@@ -890,8 +905,8 @@ footer {
 
     nav {
           display: block;
-    position: fixed;   
-    z-index: 150;
+        position: fixed;   
+        z-index: 150;
         bottom: 0;
           left: 0;
         right: 0;
@@ -927,7 +942,7 @@ footer {
         height: 100%;
         margin: 0;*/
         /*padding: 5px 5px;*/
-            padding: .5em 1em;
+            padding: .5em .65em;
     }
 
     /*.gba_button .fm_icon, .gba_button:hover .fm_icon {
@@ -1078,7 +1093,4 @@ table.attrs tr td:first-child {
 @import url("controls.css");
 @import url("rangeslider.css");
 @import url("slicer.css");
-@import url("mobile_popup.css");
-@import url("components/font-awesome/css/font-awesome.css");
-@import url("components/pure/css/pure.css");
-@import url("components/pure/css/grids-responsive.css");*/
+@import url("mobile_popup.css");*/

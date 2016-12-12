@@ -1411,9 +1411,10 @@
 
             }//for loop
 
-            var indices2 = new Uint32Array(filteredIndicesArray);
-            //this.mainGeometry.index.array = indices2;
-
+            //var TypeArray = filteredIndicesArray.length > 65535 ? Uint32Array : Uint16Array;
+            //var indices2 = new TypeArray(filteredIndicesArray);
+            var indices2 = new Uint16Array(filteredIndicesArray);
+           
             //return filteredArray;
             var newEditedTypedArray = new Float32Array(filteredArray);
             return { typedarray: newEditedTypedArray, indicesArray: indices2 };
@@ -1430,21 +1431,22 @@
 
             this.mainGeometry !== null && this.mainGeometry.dispose();
             var geometry = this.mainGeometry = new THREE.BufferGeometry();
-            geometry.dynamic = true;
+            //geometry.dynamic = true;
 
             //this.mainGeometry.removeAttribute('position');
             var results = this.getFilteredNewIndexedArray(filterX, filterY);
           
             var positions = this.positions = results.typedarray;
-            var bufferAttribute = new THREE.BufferAttribute(results.typedarray, 3);
+            var bufferAttribute = new THREE.Float32Attribute(results.typedarray, 3);
             bufferAttribute.needsUpdate = true;
             //this.mainGeometry.addAttribute('position', new THREE.BufferAttribute(results.typedarray, 3).setDynamic(true));
             this.mainGeometry.addAttribute('position', bufferAttribute);
-
-            //this.mainGeometry.index.array = indices2;
+         
             var indices = this.indices = results.indicesArray;
-            var index = new THREE.BufferAttribute(indices, 1).setDynamic(true);
-            this.mainGeometry.setIndex(index);
+            //var TypeArray = results.indicesArray.length > 65535 ? Uint32Array : Uint16Array;
+            //var indices = this.indices = new TypeArray(results.indicesArray);
+            var index = new THREE.BufferAttribute(indices, 1);//.setDynamic(true);
+            geometry.setIndex(index);
 
             this.mainGeometry.computeVertexNormals(); // computed vertex normals are orthogonal to the face f       
             this.mainGeometry.computeBoundingBox();
@@ -1571,22 +1573,24 @@
 
         //build BufferGeometry with Index
         build: function (app_scene) {
-            //this.layers = layers;       
-            // non-indexed buffer geometry
+           
             var geometry = this.mainGeometry = new THREE.BufferGeometry();
-            geometry.dynamic = true;
+            //geometry.dynamic = true;
 
             // number of triangles
             //var NUM_TRIANGLES = this.features.length;
 
             var positions = this.positions = new Float32Array(this.features);          
-            var position = new THREE.Float32Attribute(positions, 3).setDynamic(true);
+            //var position = new THREE.Float32Attribute(positions, 3);//.setDynamic(true);
+            var position = new THREE.Float32Attribute(this.features, 3);
             geometry.addAttribute('position', position);
 
-            //var indices = this.indices;
-            var indices = this.indices = new Uint32Array(this.idx);
-            var index = new THREE.BufferAttribute(indices, 1).setDynamic(true);
-            geometry.setIndex(index);
+            //var TypeArray = this.idx.length > 65535 ? Uint32Array : Uint16Array;
+            //var indices = this.indices = new TypeArray(this.idx);
+            var indices = this.indices = new Uint16Array(this.idx);
+            var index = new THREE.BufferAttribute(indices, 1);//.setDynamic(true);
+            geometry.setIndex(index);           
+            //geometry.setIndex((this.idx.length > 65535 ? THREE.Uint32Attribute : THREE.Uint16Attribute)(this.idx, 1));
 
             // set the normals
             geometry.computeVertexNormals(); // computed vertex normals are orthogonal to the face f
@@ -1616,7 +1620,6 @@
             //}
 
             this.buildGraph();
-            ////this.setQuadTrees();
         },       
                
         //old build BufferGeometry without Index
