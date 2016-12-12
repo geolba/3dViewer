@@ -17,7 +17,7 @@ require = {
         //proj4js: "proj4js-amd"
     },
     //debug: true,
-    urlArgs: "version=1.11",
+    urlArgs: "version=1.12",
     shim: {
         'threeCore': { exports: 'THREE' },
         //'OrbitControls': { deps: ['threeCore'], exports: 'THREE' },       
