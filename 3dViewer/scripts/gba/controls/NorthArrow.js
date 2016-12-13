@@ -1,5 +1,5 @@
-﻿define('gba/controls/NorthArrow', ['three', "lib/leaflet/Class", "helper/utilities"],
-    function (THREE, Class, util) {
+﻿define('gba/controls/NorthArrow', ['three', "lib/leaflet/Class", "helper/utilities", "i18n!nls/template"],
+    function (THREE, Class, util, i18n) {
         "use strict";
 
        
@@ -49,9 +49,9 @@
                 this.parentElement = parentElement;
 
                 this.f = [
-                    { a: ["x"], cl: "red-label", centroid: [[7, 0, 0]] },
-                    { a: ["y"], cl: "green-label",  centroid: [[0,7,0]] },
-                    { a: ["z"], cl: "blue-label", centroid: [[0, 0, 7]] }
+                    { a: [i18n.widgets.northarrow.east], cl: "red-label", centroid: [[7, 0, 0]] },
+                    { a: [i18n.widgets.northarrow.north], cl: "green-label", centroid: [[0, 7, 0]] },
+                    { a: [i18n.widgets.northarrow.altitude], cl: "blue-label", centroid: [[0, 0, 7]] }
                 ];
 
                 var zFunc, getPointsFunc = function (f) { return f.centroid; };

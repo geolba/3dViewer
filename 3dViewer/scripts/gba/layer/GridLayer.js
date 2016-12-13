@@ -1,5 +1,5 @@
-﻿define('gba/layer/GridLayer', ['three', 'gba/layer/Layer', 'app/commonConfig'],
-    function (THREE, Layer, Gba3D) {
+﻿define('gba/layer/GridLayer', ['three', 'gba/layer/Layer', 'app/commonConfig', 'i18n!nls/template'],
+    function (THREE, Layer, Gba3D, i18n) {
         "use strict";
 
        
@@ -109,22 +109,14 @@
                     vertices.push(-size, position, j, size, position, j);//waagrecht    
                 }
 
-                //var j = -height;
-                //do {
-                //    j += step
-                //    if (j > height) {
-                //        j = height;
-                //    }
-                //    vertices.push(-size, position, j, size, position, j);//waagrecht
-                //} while (j < height);
-
-                               
-
                 var geometry = new THREE.BufferGeometry();
                 geometry.addAttribute('position', new THREE.Float32Attribute(vertices, 3));
                 //geometry.addAttribute('color', new THREE.Float32Attribute(colors, 3));
 
-                var material = new THREE.LineBasicMaterial({ vertexColors: THREE.VertexColors });
+                var material = new THREE.LineBasicMaterial({
+                    linewidth: 10,
+                    color: 0xA0A1A3
+                });
 
                 //THREE.LineSegments.call(this, geometry, material);
                  var lineSegments = new THREE.LineSegments(geometry, material);
@@ -133,7 +125,6 @@
 
                  this.objectGroup.add(lineSegments);
                  return lineSegments;
-                //this.getPane().add(this.geometry);
             },
 
             buildLabels: function (parent, parentElement) {
@@ -141,7 +132,8 @@
                 this.parentElement = parentElement;
                 var width = 80;
                 //label
-                this.f = [                    
+                this.f = [
+                     { a: [i18n.widgets.gridlayer.east], cl: "red-label", h: 0.0, centroid: [[0, width / 2 + 15, this.height]], axis: true },
                     { a: [this._map.getMapX(-10)], cl: "red-label", h: 0.0, centroid: [[-10, width / 2, this.height]] },
                     { a: [this._map.getMapX(-20)], cl: "red-label", h: 0.6, centroid: [[-20, width / 2, this.height]] },
                     { a: [this._map.getMapX(-30)], cl: "red-label", h: 0.6, centroid: [[-30, width / 2, this.height]] },
@@ -154,6 +146,7 @@
                     { a: [this._map.getMapX(40)], cl: "red-label", h: 0.6, centroid: [[40, width / 2, this.height]] },
                     { a: [this._map.getMapX(50)], cl: "red-label", h: 0.6, centroid: [[50, width / 2, this.height]] },
 
+                      { a: [i18n.widgets.gridlayer.north], cl: "green-label", h: 0.0, centroid: [[-(this._map.length / 2) - 15, 0, this.height]], axis: true },
                     { a: [this._map.getMapY(-10)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -10, this.height]] },
                     { a: [this._map.getMapY(-20)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -20, this.height]] },
                     { a: [this._map.getMapY(-30)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), -30, this.height]] },
@@ -164,6 +157,7 @@
                     { a: [this._map.getMapY(30)], cl: "green-label", h: 0.6, centroid: [[-(this._map.length / 2), 30, this.height]] },
                     { a: [this._map.getMapY(40)], cl: "green-label", h: 0.6, hs: -4, centroid: [[-(this._map.length / 2), 40, this.height]] },
 
+                       { a: [i18n.widgets.gridlayer.altitude], cl: "blue-label", h: 0.0, centroid: [[-(this._map.length / 2), -width / 2, 0]], axis: true },
                     { a: [this._map.getMapZ(-10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2) - 1, -width / 2, -10]] },
                     { a: [this._map.getMapZ(-20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -20]] },
                     { a: [this._map.getMapZ(-30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },                  
@@ -210,6 +204,12 @@
                 e.style.display = (this.objectGroup.visible) ? "block" : "none";
                 this.labelParentElement = e; //lable parent div for this layer
 
+                //// create div element for label
+                //var e = document.createElement("div");
+                //e.appendChild(document.createTextNode("x-Achse"));
+                //e.className = "red-label";// "label";
+                //this.labelParentElement.appendChild(e);
+
 
                 for (var i = 0, l = this.f.length; i < l; i++) {
                     var f = this.f[i];
@@ -237,17 +237,18 @@
                         var z = labelHeightFunc(f, pt);
                         var pt0 = new THREE.Vector3(pt[0], pt[1], z[0]);    // bottom
                         var pt1 = new THREE.Vector3(pt[0] + horizontalShiftLabel, pt[1], z[1]);    // top
-
-                        // create connector
-                        var geom = new THREE.Geometry();
-                        geom.vertices.push(pt1, pt0);
-                        var conn = new THREE.Line(geom, line_mat);
-                        conn.userData.layerId = this.index;
-                        conn.userData.featureId = i;
-                        this.labelConnectorGroup.add(conn);
+                        // create connector - not for axis 
+                        if (f.axis !== true) {                               
+                            var geom = new THREE.Geometry();
+                            geom.vertices.push(pt1, pt0);
+                            var conn = new THREE.Line(geom, line_mat);
+                            conn.userData.layerId = this.index;
+                            conn.userData.featureId = i;
+                            this.labelConnectorGroup.add(conn);
+                        }
 
                         f.aElems.push(e);
-                        //f.labelDiv = e;
+                        ////f.labelDiv = e;
                         f.aObjs.push(conn);
                         this.labels.push({ labelDiv: e, obj: conn, pt: pt1 });
                     }

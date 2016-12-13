@@ -56,8 +56,8 @@ span.gba-span-hidemenu {
 
 /*Slicer Menü-Oberfläche*/
 .gba-slicer-menu {
-    background-color: rgb(250,250,250);
-    background-color: rgba(250,250,250,0.8); 
+    /*background-color: rgb(250,250,250);
+    background-color: rgba(250,250,250,0.8);*/ 
     text-align: center;  
     padding: 20px;    
     color: #333;
