@@ -99,6 +99,11 @@ define({
             east: 'Ost',
             north: 'Nord',
             altitude: 'Höhe'
+        },
+        gridlayer: {
+            east: 'Längengrad',
+            north: 'Breitengrad',
+            altitude: 'Seehöhe'
         }
     }
 });

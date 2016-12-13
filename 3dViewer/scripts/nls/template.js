@@ -102,6 +102,11 @@ define('nls/template',{
                 east: 'x',
                 north: 'y',
                 altitude: 'z'
+            },
+            gridlayer: {
+                east: 'longitude',
+                north: 'latitude',
+                altitude: 'elevation'
             }
         }
     }),
