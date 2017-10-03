@@ -196,11 +196,9 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="LICENSE.md" />
     <Content Include="dist\lib\leaflet\LICENSE.md" />
     <Content Include="dist\lib\proj4js\LICENSE.md" />
     <Content Include="dist\lib\requirejs\LICENSE.md" />
-    <None Include="Properties\PublishProfiles\3dViewer_ArvArcgis.pubxml" />
     <Content Include="scripts\counting.js" />
     <Content Include="scripts\gba\controls\BarChart.js" />
     <Content Include="scripts\gba\controls\BasemapDialog.js" />
@@ -241,7 +239,6 @@
     <Content Include="scripts\helper\domEvent.js" />
     <Content Include="scripts\gba\controls\HomeButton.js" />
     <Content Include="scripts\gba\controls\MyZoom.js" />
-    <None Include="Properties\PublishProfiles\local 3d viewer.pubxml" />
     <None Include="scripts\lib\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="scripts\gba\layer\DxfLayer.js" />
     <Content Include="scripts\helper\domUtil.js" />
