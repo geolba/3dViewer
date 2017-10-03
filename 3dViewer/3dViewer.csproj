@@ -196,7 +196,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="LICENSE.md" />
     <Content Include="dist\lib\leaflet\LICENSE.md" />
     <Content Include="dist\lib\proj4js\LICENSE.md" />
     <Content Include="dist\lib\requirejs\LICENSE.md" />
