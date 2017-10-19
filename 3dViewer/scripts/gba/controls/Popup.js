@@ -7,8 +7,8 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
    *
    * Popup
    *
-   */  
-      
+   */
+
     var Popup = Class.extend({
 
         declaredClass: "helper.Popup",
@@ -33,7 +33,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             //this.initialize();
             util.mixin(this, options);
             this.source = source;
-           
+
         },
 
         addTo: function (map) {
@@ -61,7 +61,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
                 return;
             }
             this.map = map;
-            var container = this.domNode =  document.getElementById(this.source);
+            var container = this.domNode = document.getElementById(this.source);
             var b = this._nls = util.mixin({}, N.widgets.popup);
             var d = this.domNode;
             d.classList.add("gba-popup");
@@ -105,8 +105,8 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
 
             this._toggleVisibility(false);
             return container;
-        },      
-     
+        },
+
         show: function (a) {
             this._clearContent();
             if (this.popupWindow) {
@@ -117,7 +117,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
                     //var p = b._getFrameWidth();
                     //if (-1 !== p && (d.x %= p, 0 > d.x && (d.x += p), b.width > p))
                     //    for (b = (b.width - p) / 2; d.x < b;) d.x += p;
-                   
+
                     this._maximized && this.restore();
                     this._setPosition(d);
                     //this._maximized ? this.restore() : this._setPosition(d);
@@ -132,7 +132,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             }
         },
 
-        hide: function (e) {         
+        hide: function (e) {
             if (this.isShowing) {
                 (this._toggleVisibility(false));
             }
@@ -191,10 +191,10 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
                 //    bottom: null
                 //});
                 $(this._positioner).css({
-                        "left": "",
-                        "right": "",
-                        "top": "",
-                        "bottom": ""
+                    "left": "",
+                    "right": "",
+                    "top": "",
+                    "bottom": ""
                 });
                 this._savedWidth = $(this._sizers).css("width");
                 this._savedHeight = $(this._contentPane).css('max-height'); // n.get(this._contentPane, "maxHeight");
@@ -204,7 +204,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
                 $(this._contentPane).css({
                     "maxHeight": d2 - 65 + "px",
                     "height": d2 - 65 + "px"
-                  
+
                 });
                 this._showPointer("");
                 //this._unfollowMap();              
@@ -214,7 +214,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
         },
 
         restore: function () {
-           
+
             if (this.map && this._maximized &&
                 this.popupWindow) {
                 this._maximized = false;
@@ -233,13 +233,13 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
                 //this._followMap();             
                 $(this.domNode).removeClass("gbaPopupMaximized");
                 //this.onRestore()
-            }            
+            }
         },
 
         _toggleSize: function () {
             this._maximized ? this.restore() : this.maximize();
         },
-       
+
         setTitle: function (a) {
             if (this.popupWindow) {
                 //if (!u.isDefined(a) || "" === a) a = "\x26nbsp;";
@@ -251,7 +251,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
         },
 
         setContent: function (a) {
-           
+
             if (this.popupWindow) {
                 //if (!u.isDefined(a) ||
                 //    "" === a) a = "\x26nbsp;";
@@ -269,7 +269,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             }
         },
 
-        _clearContent: function () {            
+        _clearContent: function () {
             $(this._contentPane).html('');
         },
 
@@ -293,20 +293,20 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
                 e = 0,
                 f = 0,
                 h = this.position(this.domElement, false);
-                var r = h.w,
-                g = h.h,
-                l = "Left",
-                m = "bottom",
-                s = this.getContentBox(this._positioner),
-                q = s.w / 2,
-                y = s.h / 2,
-                v = 349;// n.get(this._sizers[0], "height") + this._maxHeight + n.get(this._sizers[2], "height"),
-                var z = v / 2,
-                t = 0,
-                u = 0,
-                w = c,
-                x = b,
-                k = "auto";// this.anchor.toLowerCase();
+            var r = h.w,
+            g = h.h,
+            l = "Left",
+            m = "bottom",
+            s = this.getContentBox(this._positioner),
+            q = s.w / 2,
+            y = s.h / 2,
+            v = 349;// n.get(this._sizers[0], "height") + this._maxHeight + n.get(this._sizers[2], "height"),
+            var z = v / 2,
+            t = 0,
+            u = 0,
+            w = c,
+            x = b,
+            k = "auto";// this.anchor.toLowerCase();
             if ("auto" === k) {
                 //if (k = F.getBox) k = k(), t = Math.max(k.l,
                 //    h.x), r = Math.min(k.l + k.w, h.x + h.w), u = Math.max(k.t, h.y), g = Math.min(k.t + k.h, h.y + h.h), w += h.x, x += h.y;
@@ -348,7 +348,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             //        right: null,
             //        bottom: null
             //    });
-            $(this.domNode).css({ left: c, top : b, right : "", bottom : "", position: 'absolute' });
+            $(this.domNode).css({ left: c, top: b, right: "", bottom: "", position: 'absolute' });
             c = {
                 left: "",
                 right: "",
@@ -371,7 +371,7 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             //"Right" === a || "Left" === a ? (a = a.toLowerCase(), e.add(this._outerPointer, a)) : e.add(this._pointer, a)
             "Right" === a || "Left" === a ? (a = a.toLowerCase(), $(this._outerPointer).addClass(a)) : $(this._pointer).addClass(a);
         },
-       
+
         position: function (/*DomNode*/ node) {
             node = node;
             //var db = win.body(node.ownerDocument),
@@ -380,35 +380,35 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             return ret;
         },
 
-        getContentBox : function (node){
+        getContentBox: function (node) {
             // summary:
             //		Returns an object that encodes the width, height, left and top
             //		positions of the node's content box, irrespective of the
             //		current box model.
             // node: DOMNode
-            
+
             // clientWidth/Height are important since the automatically account for scrollbars
             // fallback to offsetWidth/Height for special cases (see #3378)
             node = node;
             //var s = computedStyle || style.getComputedStyle(node);
             var w = node.clientWidth, h;
             //var pe = geom.getPadExtents(node, s);
-            var pe = { b : 0, h: 0, l : 0, r : 0, t : 0, w : 0 };
+            var pe = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };
             //var be = geom.getBorderExtents(node, s);
             var be = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };
-            if(!w){
+            if (!w) {
                 w = node.offsetWidth;
                 h = node.offsetHeight;
-            }else{
+            } else {
                 h = node.clientHeight;
                 be.w = be.h = 0;
-            }           
-            return {l: pe.l, t: pe.t, w: w - pe.w - be.w, h: h - pe.h - be.h};
+            }
+            return { l: pe.l, t: pe.t, w: w - pe.w - be.w, h: h - pe.h - be.h };
         },
 
-        destroy: function () {          
+        destroy: function () {
             //this.cleanup();
-            this.isShowing && this.hide();          
+            this.isShowing && this.hide();
             //for (var i = 0; i < this._eventConnections.length; i ++)
             //{
             //    var f = this._eventConnections[i];
@@ -418,9 +418,9 @@ define('gba/controls/Popup', ["jquery", "lib/leaflet/Class", "helper/utilities",
             domEvent.off(this._maxButton, 'click', this._toggleSize, this);
             this.map.off('mouse-pan', this.hide, this);
             //C.destroy(this.domNode);
-            this.domNode.parentNode.removeChild(this.domNode);        
+            this.domNode.parentNode.removeChild(this.domNode);
             this._sizers = this._contentPane = this._positioner = this._pointer = this._outerPointer = this._title = this._prevFeatureButton = this._nextFeatureButton = this._spinner = this._eventConnections = this._nls = this._maxButton = this._closeButton = null;
-        } 
+        }
 
     });
 

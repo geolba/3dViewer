@@ -2,12 +2,12 @@
     function (THREE, Layer, Gba3D, i18n) {
         "use strict";
 
-       
+
         var GridLayer = Layer.extend({
 
             //constructor: GridLayer,
             init: function (size, step, position, height) {
-               
+
                 this.visible = true;
                 this.opacity = 1;
                 this.objectGroup = new THREE.Group();
@@ -19,16 +19,16 @@
 
 
                 this.height = height || 30;
-              
+
                 this.declaredClass = "GridLayer";
-              
+
                 //for labeling
-                this.l = { i: 0, v: 4.99999999998, ht:3 };//ht:3, ht:1 an der Ebene
+                this.l = { i: 0, v: 4.99999999998, ht: 3 };//ht:3, ht:1 an der Ebene
                 this.labels = [];
                 this.scale = 1;
             },
 
-            toggle: function(){
+            toggle: function () {
                 var visible = !this.objectGroup.visible;
                 this.objectGroup.visible = visible;
                 //this._map.update();
@@ -46,7 +46,7 @@
                 if (this.labels.length != 0) {
                     this.labelConnectorGroup.scale.z = z;
 
-                   
+
                     //for (var i = 0, len = this.f.length; i < len; i++) {
                     //    var feat = this.f[i];
                     //    var labelDiv = feat.labelDiv;
@@ -58,8 +58,8 @@
             },
 
             onRemove: function (map) {
-          
-                this.getPane().remove(this.objectGroup); 
+
+                this.getPane().remove(this.objectGroup);
             },
 
             onAdd: function (map) {
@@ -105,7 +105,7 @@
                 }
 
                 for (var j = -height; j <= height; j += step) {
-                //for (var j = height; j >= -height; j -= step) {
+                    //for (var j = height; j >= -height; j -= step) {
                     vertices.push(-size, position, j, size, position, j);//waagrecht    
                 }
 
@@ -114,17 +114,20 @@
                 //geometry.addAttribute('color', new THREE.Float32Attribute(colors, 3));
 
                 var material = new THREE.LineBasicMaterial({
-                    linewidth: 10,
+                    linewidth: 1,
                     color: 0xA0A1A3
                 });
+                // var material = new THREE.LineBasicMaterial({
+                //vertexColors: THREE.VertexColors
+                //});
 
                 //THREE.LineSegments.call(this, geometry, material);
-                 var lineSegments = new THREE.LineSegments(geometry, material);
+                var lineSegments = new THREE.LineSegments(geometry, material);
                 //this.visible = false;
                 //this.geometry.visible = this.visible;
 
-                 this.objectGroup.add(lineSegments);
-                 return lineSegments;
+                this.objectGroup.add(lineSegments);
+                return lineSegments;
             },
 
             buildLabels: function (parent, parentElement) {
@@ -160,11 +163,11 @@
                        { a: [i18n.widgets.gridlayer.altitude], cl: "blue-label", h: 0.0, centroid: [[-(this._map.length / 2), -width / 2, 0]], axis: true },
                     { a: [this._map.getMapZ(-10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2) - 1, -width / 2, -10]] },
                     { a: [this._map.getMapZ(-20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -20]] },
-                    { a: [this._map.getMapZ(-30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },                  
+                    { a: [this._map.getMapZ(-30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, -30]] },
                     { a: [this._map.getMapZ(0)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 0]] },
                     { a: [this._map.getMapZ(10)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 10]] },
                     { a: [this._map.getMapZ(20)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 20]] },
-                    { a: [this._map.getMapZ(30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 30]] }                   
+                    { a: [this._map.getMapZ(30)], cl: "blue-label", ht: 1, hs: -2, centroid: [[-(this._map.length / 2), -width / 2, 30]] }
                 ];
 
                 var zFunc, getPointsFunc = function (f) { return f.centroid; };
@@ -227,7 +230,7 @@
                     var pts = getPointsFunc(f);
                     for (var j = 0, m = pts.length; j < m; j++) {
                         var pt = pts[j];
-                     
+
                         // create div element for label
                         var e = document.createElement("div");
                         e.appendChild(document.createTextNode(text));
@@ -238,7 +241,7 @@
                         var pt0 = new THREE.Vector3(pt[0], pt[1], z[0]);    // bottom
                         var pt1 = new THREE.Vector3(pt[0] + horizontalShiftLabel, pt[1], z[1]);    // top
                         // create connector - not for axis 
-                        if (f.axis !== true) {                               
+                        if (f.axis !== true) {
                             var geom = new THREE.Geometry();
                             geom.vertices.push(pt1, pt0);
                             var conn = new THREE.Line(geom, line_mat);
@@ -256,7 +259,7 @@
 
             },
 
-            _createTextLabel: function() {
+            _createTextLabel: function () {
                 var div = document.createElement('div');
                 div.display = "block";
                 div.className = 'text-label';
@@ -272,14 +275,14 @@
                 return {
                     element: div,
                     parent: false,
-                    position: new THREE.Vector3(20,30,60),
-                    setHTML: function(html) {
+                    position: new THREE.Vector3(20, 30, 60),
+                    setHTML: function (html) {
                         this.element.innerHTML = html;
                     },
-                    setParent: function(threejsobj) {
+                    setParent: function (threejsobj) {
                         this.parent = threejsobj;
                     },
-                    updatePosition: function() {
+                    updatePosition: function () {
                         //if(parent) {
                         //    this.position.copy(this.parent.position);
                         //}
@@ -288,10 +291,10 @@
                         this.element.style.left = coords2d.x + 'px';
                         this.element.style.top = coords2d.y + 'px';
                     },
-                    get2DCoords: function(position, camera) {
+                    get2DCoords: function (position, camera) {
                         var vector = position.project(camera);
-                        vector.x = (vector.x + 1)/2 * window.innerWidth;
-                        vector.y = -(vector.y - 1)/2 * window.innerHeight;
+                        vector.x = (vector.x + 1) / 2 * window.innerWidth;
+                        vector.y = -(vector.y - 1) / 2 * window.innerHeight;
                         return vector;
                     }
                 };

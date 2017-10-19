@@ -1,6 +1,6 @@
-﻿define('gba/controls/Coordinates',[
+﻿define('gba/controls/Coordinates', [
     "lib/leaflet/Control", "helper/dom", "helper/domEvent", "jquery", "lib/proj4js/proj4js-amd", 'three'
-], 
+],
 function (
    Control, dom, domEvent, $, Proj4js, THREE
 ) {
@@ -19,7 +19,7 @@ function (
 
         onAdd: function (map) {
             //this._container = L.DomUtil.create('div', 'gba-control-coordinates');
-            this._container = dom.createDom("div", { "class": "gba-control-coordinates" });          
+            this._container = dom.createDom("div", { "class": "gba-control-coordinates" });
             //map.on('mousemove', this._onMouseMove, this);
             map.on('mouse-move', this._onMouseMove, this);
             //this._container.innerHTML = this.options.emptyString;

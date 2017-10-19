@@ -13,39 +13,39 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
             //    LAYERS: []
             //},
 
-            options: {             
-                trackResize: true                
+            options: {
+                trackResize: true
             },
 
             datalayers: [],
 
-            getMapX:function(x){
+            getMapX: function (x) {
                 x = x / this.scale + this.origin.x;
                 var dest = new Proj4js.Proj("EPSG:4326");
                 var source = new Proj4js.Proj(this.crs);
                 var minPoint = { x: x, spatialReference: { wkid: 31256 } };
                 var point84 = Proj4js.transform(source, dest, minPoint);
-                x=  point84.x;
+                x = point84.x;
                 return (Math.round(x * 100) / 100);
             },
 
-            getMapY:function(y){
+            getMapY: function (y) {
                 y = y / this.scale + this.origin.y;
                 var dest = new Proj4js.Proj("EPSG:4326");
                 var source = new Proj4js.Proj(this.crs);
                 var minPoint = { y: y, spatialReference: { wkid: 31256 } };
                 var point84 = Proj4js.transform(source, dest, minPoint);
-                y=  point84.y;
+                y = point84.y;
                 return (Math.round(y * 100) / 100);
             },
 
-            getMapZ:function(z){
-                z = z / this.zScale + this.origin.z;              
+            getMapZ: function (z) {
+                z = z / this.zScale + this.origin.z;
                 return parseInt(z, 10);
             },
 
-            init: function (camera, scene, domElement,container, dataservice) {
-              //call parent constructor
+            init: function (camera, scene, domElement, container, dataservice) {
+                //call parent constructor
                 OrbitControls.prototype.init.call(this, camera, scene, domElement);
 
                 //initialize additional properties
@@ -84,7 +84,7 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                     { "name": "1GE_GBA_500k_Surface_Geology", "type": "MapServer", 'image': 'base_geo.jpg', 'title': 'Surface Geology' }
                     ]
                 };
-               
+
                 //this.domElement.style.cursor = "crosshair";  
 
                 unload.addOnWindowUnload(this, this.destroy);
@@ -188,7 +188,7 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
 
                 //layer._mapToAdd = this;
                 layer.index = id;
-        
+
                 //if (layer.beforeAdd) {
                 //    layer.beforeAdd(this);
                 //}
@@ -227,7 +227,7 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
 
                 return this;
             },
-            
+
             hasLayer: function (layer) {
                 return !!layer && (util.stamp(layer) in this._layers);
             },
@@ -238,7 +238,7 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                 }
                 return this;
             },
-            
+
             getCenter: function () { // (Boolean) -> LatLng
                 //this._checkIfLoaded();
 
@@ -247,7 +247,7 @@ define('gba/controls/Map', ["lib/threejs/OrbitControls", "helper/dom", "gba/cont
                 //}
                 return this.target;
             }
-                      
+
 
         });
 

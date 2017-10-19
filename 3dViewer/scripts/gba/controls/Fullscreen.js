@@ -6,13 +6,13 @@ define('gba/controls/Fullscreen', ["jquery", "lib/leaflet/Class", "helper/domUti
    * @class Fullscreen
    *
    * 
-   */  
-      
+   */
+
     var Fullscreen = Class.extend({
 
         //statische Klassenvriablen und Methoden:
         statics: {
-          
+
             create: function (options) {
                 var oControls = new Fullscreen(options);
                 return oControls;
@@ -25,7 +25,7 @@ define('gba/controls/Fullscreen', ["jquery", "lib/leaflet/Class", "helper/domUti
             this.fsEnabled = (document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen);
             this.container = document.getElementById(options.containerSelector);
             this.chkFullscreen = document.getElementById(options.checkboxId);
-                       
+
             domEvent.on(this.chkFullscreen, 'change', this.toggle, this);
 
             // Update checkbox when toggle fulscreen outside           
@@ -37,7 +37,7 @@ define('gba/controls/Fullscreen', ["jquery", "lib/leaflet/Class", "helper/domUti
         },
 
         toggle: function (e) {
-         
+
             e.preventDefault();
             if (e.target.checked) {
                 if (this.fsEnabled) {
@@ -66,7 +66,7 @@ define('gba/controls/Fullscreen', ["jquery", "lib/leaflet/Class", "helper/domUti
                 element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
             }
         },
-        
+
         exitFullscreen: function () {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
@@ -79,21 +79,21 @@ define('gba/controls/Fullscreen', ["jquery", "lib/leaflet/Class", "helper/domUti
             }
         },
 
-        update: function (e) {            
+        update: function (e) {
             if (document.fullScreenElement
-                    || document.webkitIsFullScreen 
-                    || document.mozFullScreen 
-                    || document.msFullscreenElement){
+                    || document.webkitIsFullScreen
+                    || document.mozFullScreen
+                    || document.msFullscreenElement) {
 
                 this.chkFullscreen.checked = true;
             }
-            else{
+            else {
                 this.chkFullscreen.checked = false;
                 //tools.rmClass(self.container, 'view-fullscreen');
                 domUtil.removeClass(this.container, "view-fullscreen");
             }
         }
- 
+
 
     });
 

@@ -4,7 +4,7 @@
     //Edge.prototype = {
     var Edge = Class.extend({
 
-        init : function(n1, n2) {
+        init: function (n1, n2) {
             this.n1 = n1;
             this.n2 = n2;
             this.faces = [];

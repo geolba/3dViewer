@@ -24,7 +24,7 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
         init: function (options) {
 
             util.setOptions(this, options);
-           
+
         },
         //addTo: function (map) {
         //    this._map = map;
@@ -44,7 +44,7 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
         //},
 
         onAdd: function (map) {
-          
+
             //var container = this._container = document.getElementById('range-slider-3');
             var container = null;//this._container = dom.createDom("div", { "class": "gba-control-slicer" });
             ////button:
@@ -57,25 +57,25 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
             //this._less = dom.createDom("span", { "class": "gba-span-hidemenu", title: "schließe Slicer-Menü" }, this._container);
             //domEvent.on(this._less, 'click', this._show, this);
 
-           
+
             //this._menu = dom.createDom('div', { "class": "gba-menu" }, document.getElementsByClassName('mapDesktop')[0]);
             //var rangeSlider = dom.createDom('div', { "class": 'slicerDesktop' }, document.getElementById('slicerPanel'));
-            this._slicerMenu = dom.createDom('div', {id: "range-slider", "class": 'gba-slicer-menu' }, document.getElementById('range-slider'));
+            this._slicerMenu = dom.createDom('div', { id: "range-slider", "class": 'gba-slicer-menu' }, document.getElementById('range-slider'));
             dom.createDom("span", { innerHTML: "SLICER", "class": "gbaLegendServiceLabel" }, this._slicerMenu);
 
             var table = dom.createDom('table', { width: "95%" }, this._slicerMenu);
             var tblBody = dom.createDom("tbody", {}, table);
-          
+
             var sliderValue1 = Math.round(this._map.dataservice.width / 2);
             var row = dom.createDom("tr", {}, tblBody);
             var leftTd = dom.createDom("td", { align: "left", style: "width:20px;" }, row);
-            dom.createDom("span", { innerHTML: "x",  }, leftTd);
+            dom.createDom("span", { innerHTML: "x", }, leftTd);
             var rightTd = dom.createDom("td", { align: "left" }, row);
             this.slider1 = new RangeSlider(rightTd, {
                 vertical: false,
                 value: sliderValue1,
                 max: sliderValue1, min: -sliderValue1,
-                id:"slider1"
+                id: "slider1"
             });
 
             var sliderValue2 = Math.round(this._map.dataservice.height / 2);
@@ -87,7 +87,7 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
                 vertical: false,
                 value: -sliderValue2,
                 max: sliderValue2, min: -sliderValue2,
-                inverse:true,
+                inverse: true,
                 id: "slider2"
             });
 
@@ -118,18 +118,18 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
             this.toggle();
         },
 
-        _toggleVisibility: function (visible) {          
+        _toggleVisibility: function (visible) {
             this._setVisibility(visible);
             this.isShowing = visible;
-         
+
         },
         _setVisibility: function (addOrRemove) {
             ////n.set(this.domNode, "visibility", addOrRemove ? "visible" : "hidden");
             //$(this._slicerMenu).css("visibility", addOrRemove ? "visible" : "hidden");
-            
+
             this._slicerMenu.style.visibility = addOrRemove ? "visible" : "hidden";
         },
-        
+
         toggle: function () {
             //var pos = this.getPosition();
             //var corner = this._map._controlCorners[pos];
@@ -138,11 +138,11 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
             if (domUtil.hasClass(this._container, className)) {
                 domUtil.removeClass(this._container, className);
                 //corner.classList.remove(className);
-             
-            } else {               
+
+            } else {
                 domUtil.addClass(this._container, className);
                 //corner.classList.add(className);
-              
+
             }
         },
 
@@ -195,7 +195,7 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
                 //var borderControl = new BorderControl(app.dataservice.layers, {}).addTo(app.controls);
                 self._map.update();
             }).fail(function (event) {
-                util.hideLoading();               
+                util.hideLoading();
             });
 
 
@@ -205,7 +205,7 @@ function (Control, RangeSlider, dom, domEvent, util, domUtil) {
 
         onRemove: function (map) {
             domEvent.off(this._less, 'click', this._show, this);
-           
+
             this.slider1.off("slide", this._updateValue, this);
             this.slider2.off("slide", this._updateValue, this);
 

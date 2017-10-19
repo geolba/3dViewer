@@ -14,7 +14,7 @@ function (Control, $, logger, N, util, dom, domEvent) {
         },
 
         //constructor:
-        init: function (baseLayers,overlays, options) {
+        init: function (baseLayers, overlays, options) {
             // mix in settings and default options           
             util.setOptions(this, options);
 
@@ -54,21 +54,22 @@ function (Control, $, logger, N, util, dom, domEvent) {
                 name: layer.name,
                 overlay: overlay
             };
+            layer.on('visibility-change', this._update, this);
             //if (this.options.autoZIndex && layer.setZIndex) {
             //    this._lastZIndex++;
             //    layer.setZIndex(this._lastZIndex);
             //}
-        },        
+        },
 
         _initLayout: function () {
             var className = 'gba-controllayers';
             var container = this._container = dom.createDom("div", { "class": className });
-           
+
             domEvent.on(container, 'click', domEvent.stopPropagation);
 
             var layerContainer = this._layerContainer = dom.createDom('div', { "class": className + '-container' }, this._container);
 
-            if (this.options.collapsed) {              
+            if (this.options.collapsed) {
                 domEvent
                      .on(this._container, 'mouseenter', this._expand, this)
                      .on(this._container, 'mouseleave', this._collapse, this);
@@ -122,7 +123,7 @@ function (Control, $, logger, N, util, dom, domEvent) {
             //dom.setProperties(legendEntryRow, { style: "display: row-table;" });
             var chkDataCell = dom.createDom("td", { "class": "checkboxFive" }, legendEntryRow);
             var lblDataCell = dom.createDom("td", {}, legendEntryRow);
-         
+
 
             var input = dom.createDom("input", { type: 'checkbox', checked: checked, id: util.stamp(obj.layer) }, chkDataCell);
             input.layerId = util.stamp(obj.layer);
@@ -133,25 +134,25 @@ function (Control, $, logger, N, util, dom, domEvent) {
             //legend entry label
             var _table = dom.createDom("table", { width: "95%", dir: "ltr" }, lblDataCell);
             var _tbody = dom.createDom("tbody", {}, _table);
-            var _tr = dom.createDom("tr", {}, _tbody);           
+            var _tr = dom.createDom("tr", {}, _tbody);
             var _td = dom.createDom("td", { innerHTML: obj.name, align: this.alignRight ? "right" : "left" }, _tr);
 
 
 
-          
+
             return legendEntryRow;
 
         },
 
         //_addOpacitySlider: function (obj) {
-         
+
         //    var container = obj.overlay ? this._overlaysList : this._baseLayersList;
         //    //container.appendChild(legendEntryRow);
 
         //    var legendEntryRow = dom.createDom("tr", { style: "display: row-table; height: 20px;" }, container);          
         //    var sliderDataCell = dom.createDom("td", {}, legendEntryRow);
 
-          
+
         //    var slider = dom.createDom('input', { "class": 'gba-slider' }, sliderDataCell);
         //    //if (this.options.orientation === 'vertical') { this.slider.setAttribute("orient", "vertical"); }
         //    //this.slider.setAttribute("title", this.options.title);
@@ -165,7 +166,7 @@ function (Control, $, logger, N, util, dom, domEvent) {
 
 
 
-          
+
         //    return legendEntryRow;
 
         //},
@@ -174,19 +175,19 @@ function (Control, $, logger, N, util, dom, domEvent) {
             //var label = document.createElement('label');
             //label.htmlFor = util.stamp(obj.layer);
 
-            var chkLabel = dom.createDom("label", { for: util.stamp(obj.layer) });           
-         
+            var chkLabel = dom.createDom("label", { for: util.stamp(obj.layer) });
+
             var input;
             var checked = obj.layer.visible;//this._map.hasLayer(obj.layer);
 
-            if (obj.overlay) {             
+            if (obj.overlay) {
                 input = dom.createDom("input", { type: 'checkbox', checked: checked, id: util.stamp(obj.layer), 'className': 'gba-controllayers-selector' }, chkLabel);
                 input.layerId = util.stamp(obj.layer);
             }
             else {
                 input = util.createRadioElement('gba-base-layers', checked);
             }
-           
+
 
             //input.layerId = util.stamp(obj.layer);
             domEvent.on(input, 'click', this._onInputClick, this);
@@ -215,21 +216,21 @@ function (Control, $, logger, N, util, dom, domEvent) {
                 if (input.type == 'checkbox' && layerId === input.layerId) {
                     obj = this._layers[input.layerId];
                     var isChecked = input.checked;
-                    obj.layer.setVisible(isChecked);                  
+                    obj.layer.setVisible(isChecked);
                 }
             }
-          
+
 
             this._handlingClick = false;
             this._map.update();
             //this._refocusOnMap();
         },
 
-        _expand: function () {          
+        _expand: function () {
             this._container.classList.add("gba-controllayers-expanded");
         },
 
-        _collapse: function () {          
+        _collapse: function () {
             this._container.classList.remove("gba-controllayers-expanded");
         }
 

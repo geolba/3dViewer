@@ -1,10 +1,10 @@
-﻿define('gba/geometry/Node', ["lib/leaflet/Class",'three'], function (Class, THREE) {
+﻿define('gba/geometry/Node', ["lib/leaflet/Class", 'three'], function (Class, THREE) {
     "use strict";
 
     //Node.prototype = {
     var Node = Class.extend({
 
-        init : function(pos, id) {
+        init: function (pos, id) {
             this.pos = pos;
             this.id = id;
             this.edges = [];
@@ -21,7 +21,7 @@
             return new this.constructor(this.pos, this.id);
 
         },
-        findEdgeWith : function(n) {
+        findEdgeWith: function (n) {
             for (var i = 0; i < this.edges.length; i++) {
                 var edge = this.edges[i];
                 if (edge.n1 == n || edge.n2 == n) {
@@ -31,7 +31,7 @@
             return null;
         },
         //findEdgeWithD: function (n) {
-           
+
         //    var result = this.edges.hasOwnProperty(n.id) ? this.edges[n.id] : null;
         //    return result;
         //},

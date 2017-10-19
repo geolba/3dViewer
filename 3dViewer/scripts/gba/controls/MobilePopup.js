@@ -12,11 +12,11 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
     var MobilePopup = Class.extend({
 
         declaredClass: "gba.controls.MobilePopup",
-        
+
         init: function (options, source) {
             util.mixin(this, options);
             this.source = source;
-        },   
+        },
 
         addTo: function (map) {
             this._map = map;
@@ -50,9 +50,9 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
                                     '<div class="titleButton arrow hidden"></div>' +
                                 '</div>' +
                             '</div>' +
-                            
+
                             //'<div class="esriMobilePopupInfoView"></div>' +
-	                       
+
                             '<div class="pointer top hidden"></div>' +
                             '<div class="pointer bottom hidden"></div>';
 
@@ -65,7 +65,7 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
 
             this._eventConnections = [
                 domEvent.on(this._closeButton, 'click', this.hide, this),
-                domEvent.on(this._arrowButton, "click", this._toggleView, this)              
+                domEvent.on(this._arrowButton, "click", this._toggleView, this)
             ];
             map.on("mouse-pan", this.hide, this);
 
@@ -98,8 +98,8 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
             //$(this._contentPane).css("display", "none");
         },
 
-        setTitle: function (a) {         
-                this._title.innerHTML = a;
+        setTitle: function (a) {
+            this._title.innerHTML = a;
         },
 
         show: function (a) {
@@ -122,7 +122,7 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
                 this._toggleVisibility(true);
                 this.isShowing = !0
             }
-           
+
         },
 
         hide: function () {
@@ -131,13 +131,13 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
                 this.isShowing = false;
                 //this.onHide();   
                 //this._clearContent();
-            }         
+            }
         },
 
         destroy: function () {
             //this.map && this.unsetMap();          
             this.isShowing && this.hide();
-           
+
             //q.forEach(this._eventConnections, b.disconnect);
             domEvent.off(this._closeButton, 'click', this.hide, this);
             domEvent.off(this._arrowButton, "click", this._toggleView, this);
@@ -145,7 +145,7 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
             domEvent.off(this._closeNavButton, 'click', this._closePopupNavigation, this);
             domEvent.off(this._toggleNavButton, 'click', this._togglePopupNavigation, this);
             this.map.off('mouse-pan', this.hide, this);
-          
+
             this.domNode.parentNode.removeChild(this.domNode);
             this._title = this._pointerTop = this._pointerBottom = this._arrowButton = this._closeButton = this._eventConnections = null;
         },
@@ -157,7 +157,7 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
         },
 
         _setVisibility: function (addOrRemove) {
-                   
+
             $(this.domNode).css("visibility", addOrRemove ? "visible" : "hidden");
             ////e.toggle(this.domNode, "esriPopupVisible", addOrRemove)
             //$(this.domNode).toggleClass("gbaPopupVisible", addOrRemove);
@@ -169,28 +169,29 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
             //this.hide();
 
             //g.show(this.popupNavigationBar.container);
-            $(this.popupNavigationBar).css("display", "block");         
+            $(this.popupNavigationBar).css("display", "block");
             $(this.popupInfoView).css("display", "block");
             //0 <= this.selectedIndex && this.setContent(this.features[this.selectedIndex].getContent())
         },
 
         _initPopupInfoView: function () {
             this.popupInfoView = dom.createDom("div", {
-                'class': "mobileInfoView", 
-                innerHTML:'<div class="mobileInfoViewItem"></div>'
-                }, document.body);
+                'class': "mobileInfoView",
+                innerHTML: '<div class="mobileInfoViewItem"></div>'
+            }, document.body);
             domUtil.addClass(this.popupInfoView, "mobilePopupInfoView");
             //this._contentPane = a[1]._node;
             this._contentPane = this.popupInfoView.getElementsByClassName("mobileInfoViewItem")[0];
-           
+
         },
 
-        _initPopupNavigationBar: function () {
+        _initPopupNavigationBar: function () {           
+            var imagePath = util.rootFolder() + "images/";
             this.popupNavigationBar = dom.createDom("div", {
                 'class': 'mobileNavigationBar',
                 innerHTML:
-                    '<div class="mobileNavigationItem left"><img src="images/whitex.png" style="width: 100%; height: 100%;"></div>' +
-                    '<div class="mobileNavigationItem right"><img src="images/whitedown.png" style="width: 100%; height: 100%;"></div>'
+                    '<div class="mobileNavigationItem left"><img src=' + imagePath + 'whitex.png style="width: 100%; height: 100%;"></div>' +
+                    '<div class="mobileNavigationItem right"><img src=' + imagePath + 'whitedown.png style="width: 100%; height: 100%;"></div>'
             }, document.body);
             this._closeNavButton = this.popupNavigationBar.getElementsByClassName("mobileNavigationItem")[0];
             this._toggleNavButton = this.popupNavigationBar.getElementsByClassName("mobileNavigationItem")[1];
@@ -204,13 +205,13 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
             $(this.popupNavigationBar).css("display", "none");
         },
 
-        _closePopupNavigation: function(){
+        _closePopupNavigation: function () {
             $(this.popupInfoView).css("display", "none");
             $(this.popupNavigationBar).css("display", "none");
             this.hide();
         },
 
-        _togglePopupNavigation: function(){
+        _togglePopupNavigation: function () {
             $(this.popupInfoView).css("display", "none");
             $(this.popupNavigationBar).css("display", "none");
             this.show(this.location);
@@ -261,13 +262,13 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
 
 
 
-         
+
         },
 
-        getContentBox: function (node) {         
-            node = node;         
-            var w = node.clientWidth, h;         
-            var pe = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };           
+        getContentBox: function (node) {
+            node = node;
+            var w = node.clientWidth, h;
+            var pe = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };
             var be = { b: 0, h: 0, l: 0, r: 0, t: 0, w: 0 };
             if (!w) {
                 w = node.offsetWidth;
@@ -282,7 +283,7 @@ define('gba/controls/MobilePopup', ["jquery", "lib/leaflet/Class", "helper/utili
         _updateUI: function () {
             var a = "\x26nbsp;";
             var c = "\x26nbsp;";
-            var d = this.features;  
+            var d = this.features;
             d && 1 <= d.length ? ($(this._arrowButton).removeClass("hidden")) : ($(this._arrowButton).addClass("hidden"));
             this.setTitle(a, c);
         }

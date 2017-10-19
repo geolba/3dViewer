@@ -4,7 +4,7 @@
 function (Events, $, util, dom, domEvent) {
     'use strict';
     var ControlButton = Events.extend({
-      
+
         options: {
             position: 'topright',
         },
@@ -30,7 +30,7 @@ function (Events, $, util, dom, domEvent) {
             var container = this._container = this.onAdd(map);
             var pos = this.getPosition();//"topright"
             var corner = map._controlCorners[pos];
-         
+
             $(container).addClass('gba-control');
 
             if (pos.indexOf('bottom') !== -1) {
@@ -46,19 +46,19 @@ function (Events, $, util, dom, domEvent) {
         onAdd: function (map) {
             //this._map = map;
             var className = this.options.className;
-            
+
             var container = this._container = dom.createDom("div", { "class": className });
             this._button = this._createButton(
                     //this.options.zoomInText, this.options.zoomInTitle,
-                    this.options.innerHtml?  this.options.innerHtml : "", this.options.zoomInTitle,
+                    this.options.innerHtml ? this.options.innerHtml : "", this.options.zoomInTitle,
                     className + '-in', container, this._zoomIn, this);
-            
+
             return this._container;
         },
 
         _createButton: function (html, title, className, container, fn, context) {
-          
-            var link = dom.createDom("span", { "class": className, innerHTML: html, title: title }, container);  
+
+            var link = dom.createDom("span", { "class": className, innerHTML: html, title: title }, container);
             var stop = domEvent.stopPropagation;
             domEvent
                 .on(link, 'click', stop)
@@ -71,9 +71,9 @@ function (Events, $, util, dom, domEvent) {
         },
 
         _fireClick: function (e) {
-            this.emit('click');           
+            this.emit('click');
         },
-     
+
 
     });
 
