@@ -6,9 +6,9 @@
 
         /**
     	 * constructor: BoreHole
-    	 */       
+    	 */
         init: function (app_scene, color, x, z, val, valcolor, render, html_label, titles, minScaleVal, valHeight) {
-          
+
             // The render type - can be light and full
             this.renderType = render;
             ////the 3D cube object
@@ -66,7 +66,7 @@
             this.renderType = "light";
 
             // Material for the bars with transparency
-            var material = new THREE.MeshLambertMaterial({            
+            var material = new THREE.MeshLambertMaterial({
                 color: color,
                 //specular: 0x999999,
                 //shininess: 100,            
@@ -108,7 +108,7 @@
             //target.add(this.barobj);
             this.addObject(barobj);
 
-         
+
 
 
 
@@ -187,46 +187,46 @@
         },
 
         // function to show the label
-        showLabel : function( posx, posy){
-  
+        showLabel: function (posx, posy) {
+
             // Shows 3D label if set
-            if( this.hasLabel ) {
+            if (this.hasLabel) {
                 this.labelobj.visible = true;
             }
-    
+
             // Shows HTML Label if set - uses jquery for DOM manipulation
-            if ( this.hasHTMLLabel ) {
-                this.hasHTMLLabel.html( this.titles.row + 
-                                        '<p>' + this.titles.col + ': '+val+'</p>' );
+            if (this.hasHTMLLabel) {
+                this.hasHTMLLabel.html(this.titles.row +
+                                        '<p>' + this.titles.col + ': ' + val + '</p>');
                 this.hasHTMLLabel.show();
                 // Back transformation of the coordinates
-                posx = ( ( posx + 1 ) * window.innerWidth / 2 );
-                posy = - ( ( posy - 1 ) * window.innerHeight / 2 );
-                this.hasHTMLLabel.offset( { left: posx, top: posy } );
+                posx = ((posx + 1) * window.innerWidth / 2);
+                posy = -((posy - 1) * window.innerHeight / 2);
+                this.hasHTMLLabel.offset({ left: posx, top: posy });
             }
-    
+
         },
-  
+
         // function to hide the label
-        hideLabel : function(){
-    
+        hideLabel: function () {
+
             // Hides 3D label if set
-            if( this.hasLabel ) {
+            if (this.hasLabel) {
                 this.labelobj.visible = false;
             }
-    
+
             //// Hides HTML Label if set - uses jquery for DOM manipulation
             //if ( this.hasHTMLLabel ) {
             //    this.hasHTMLLabel.hide();
             //}
-    
+
         },
-  
-        reposition : function ( x, y, z ){
+
+        reposition: function (x, y, z) {
             this.objectGroup.position.set(x, y, z); //+ (this.height)/2);//35);
         },
-  
-        reorientation : function ( x, y, z ){
+
+        reorientation: function (x, y, z) {
             this.objectGroup.rotation.set(x, y, z);
         }
 
