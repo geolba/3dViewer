@@ -2,77 +2,77 @@
     function (Class, $, DemLayer, DxfLayer, util, domUtil) {
         "use strict";
 
-    /**
-     * This is our classes constructor; unlike AS3 this is where we define our member properties (fields).
-     * To differentiate constructor functions from regular functions, by convention we start the function 
-     * name with a capital letter.  This informs users that they must invoke the Person function using
-     * the `new` keyword and treat it as a constructor (ie: it returns a new instance of the Class).
-     */
-    //    function Dataservice(options) {
+        /**
+         * This is our classes constructor; unlike AS3 this is where we define our member properties (fields).
+         * To differentiate constructor functions from regular functions, by convention we start the function 
+         * name with a capital letter.  This informs users that they must invoke the Person function using
+         * the `new` keyword and treat it as a constructor (ie: it returns a new instance of the Class).
+         */
+        //    function Dataservice(options) {
 
-    //    if (!(this instanceof Dataservice)) {
-    //        throw new TypeError("Dataservice constructor cannot be called as a function.");
-    //    }
+        //    if (!(this instanceof Dataservice)) {
+        //        throw new TypeError("Dataservice constructor cannot be called as a function.");
+        //    }
 
-    //    // properties  
-       
-    //    //util.mixin(this.config, defaults);
-    //    ////for (var k in params) {
-    //    ////    this[k] = params[k];
-    //    ////}
-    //    util.mixin(this, options);
+        //    // properties  
 
-    //    //var w = (this.config.baseExtent[2] - this.config.baseExtent[0]);
-    //    //var h = (this.config.baseExtent[3] - this.config.baseExtent[1]);
-    //    //this.height = this.config.width * h / w;
-    //    //this.scale = this.config.width / w;
-    //    //this.zScale = this.scale * this.config.zExaggeration;
+        //    //util.mixin(this.config, defaults);
+        //    ////for (var k in params) {
+        //    ////    this[k] = params[k];
+        //    ////}
+        //    util.mixin(this, options);
 
-    //    //this.origin = {
-    //    //    x: this.config.baseExtent[0] + w / 2,
-    //    //    y: this.config.baseExtent[1] + h / 2,
-    //    //    z: -this.config.zShift
-    //    //};
+        //    //var w = (this.config.baseExtent[2] - this.config.baseExtent[0]);
+        //    //var h = (this.config.baseExtent[3] - this.config.baseExtent[1]);
+        //    //this.height = this.config.width * h / w;
+        //    //this.scale = this.config.width / w;
+        //    //this.zScale = this.scale * this.config.zExaggeration;
 
-    //    this.layers = [];
-    //    this.models = [];
-    //    this.images = [];
-    //    //this.name = "";
+        //    //this.origin = {
+        //    //    x: this.config.baseExtent[0] + w / 2,
+        //    //    y: this.config.baseExtent[1] + h / 2,
+        //    //    z: -this.config.zShift
+        //    //};
 
-    //    // private members    
-      
-    //}
+        //    this.layers = [];
+        //    this.models = [];
+        //    this.images = [];
+        //    //this.name = "";
 
-    /**
-     * Adding static properties is as simple as adding them directly to the constructor
-     * function directly.
-     */
+        //    // private members    
+
+        //}
+
+        /**
+         * Adding static properties is as simple as adding them directly to the constructor
+         * function directly.
+         */
         //Dataservice.RETIREMENT_AGE = 60;
         //Dataservice.LAYERS = [];
 
-    /**
-     * Public Static methods are defined in the same way; here's a static constructor for our Person class
-     * which also sets the person's age.
-     */
-    //Dataservice.create = function (name, age) {
-    //    var result = new Dataservice(name);
-    //    result.setAge(age);
-    //    return result;
-    //};
+        /**
+         * Public Static methods are defined in the same way; here's a static constructor for our Person class
+         * which also sets the person's age.
+         */
+        //Dataservice.create = function (name, age) {
+        //    var result = new Dataservice(name);
+        //    result.setAge(age);
+        //    return result;
+        //};
 
-  
 
-    /**
-     * The prototype is a special type of Object which is used as a the blueprint for all instances
-     * of a given Class; by defining functions and properties on the prototype we reduce memory
-     * overhead.  We can also achieve inheritance by pointing one classes' prototype at another, for
-     * example, if we introduced a BankManager class which extended our Person class, we could write:
-     *
-     *	`BankManager.prototype = Person.prototype`
-     *	`BankManager.prototype.constructor = BankManager`   
-     */
 
-    //Dataservice.prototype = {
+        /**
+         * The prototype is a special type of Object which is used as a the blueprint for all instances
+         * of a given Class; by defining functions and properties on the prototype we reduce memory
+         * overhead.  We can also achieve inheritance by pointing one classes' prototype at another, for
+         * example, if we introduced a BankManager class which extended our Person class, we could write:
+         *
+         *	`BankManager.prototype = Person.prototype`
+         *	`BankManager.prototype.constructor = BankManager`   
+         */
+
+        //Dataservice.prototype = {
         var Dataservice = Class.extend({
 
             //statische Klassenvriablen und Methoden:
@@ -82,7 +82,7 @@
 
             config: {},
 
-     
+
             //constructor: Dataservice,  
             init: function (options) {
                 if (!(this instanceof Dataservice)) {
@@ -107,7 +107,7 @@
                 this.images = [];
             },
 
-            /**
+            /*
            * All methods added to a Class' prototype are public (visible); they are able to 
            * access the properties and methods of the Person class via the `this` keyword.  
            */
@@ -129,21 +129,21 @@
                 //return $.when(_init());
             },
 
-            /**
+            /*
             * private method for initializing
             */
             _getTouch: function () {
                 var deferred = $.Deferred();
 
-             
+
                 var dirNode = document.getElementsByTagName("body")[0];
-               
+
                 //if (this.config.i18n.isRightToLeft) {
                 if (util.hasTouch()) {
                     //dirNode.setAttribute("dir", "ltr");
                     domUtil.addClass(dirNode, "touch");
                 }
-                else{
+                else {
                     domUtil.addClass(dirNode, "notouch");
                 }
 
@@ -155,23 +155,29 @@
             _requestProject: function () {
                 // 1) create the jQuery Deferred object that will be used
                 var deferred = $.Deferred();
+                //var dataPath = $UrlHelper.resolve('~');
+                var dataPath = util.rootFolder();              
 
-                this.requestUrl = "data/dem.json?_";  // _getEndpoint(self.StartUri);
-                //var date = new Date(); // grabbing the date as of this second it gets run
-                var dataRequest = $.ajax({
-                    //context: this,
+                //var sPageURL = window.location.href;
+                //var number = sPageURL.substring(sPageURL.lastIndexOf('/') + 1);              
+                //this.requestUrl = dataPath + "Dataset/View?id=" + number;// "/Dataset/View";  // _getEndpoint(self.StartUri);
+                this.requestUrl = dataPath + "data/dem.json?_";
+
+                var dataRequest = $.ajax({                  
                     type: "GET",
                     contentType: "application/json",//tell the server we're looking for json
-                    url: this.requestUrl,// + date.getTime(),          
-                    //cache: false,
-                    dataType: 'json',
-                    //jsonpCallback: 'jsonCallback'
+                    url: this.requestUrl,// + date.getTime(), 
+                    dataType: 'json'
+                 
                 });
 
                 dataRequest.done($.proxy(dataRequestSucceeded, this))
                .fail(dataRequestFailed);
 
                 function dataRequestSucceeded(data) {
+                    if (typeof data != 'object') {
+                        data = jQuery.parseJSON(data);
+                    }                  
                     this.images = data.images;
 
 
@@ -186,8 +192,8 @@
                     this.zExaggeration = data.zExaggeration;
 
 
-                    var w = (this.baseExtent[2] - this.baseExtent[0]);
-                    var h = (this.baseExtent[3] - this.baseExtent[1]);
+                    var w = this.baseExtent[2] - this.baseExtent[0];
+                    var h = this.baseExtent[3] - this.baseExtent[1];
                     this.height = this.width * h / w;
                     this.scale = this.width / w;
                     this.zScale = this.scale * this.zExaggeration;
@@ -292,8 +298,8 @@
 
             setAge: function (value) {
                 // Ensure the supplied value is numeric.
-                if (typeof (value) !== 'number') {
-                    throw new TypeError(typeof (value) + " is not a number.");
+                if (typeof value !== 'number') {
+                    throw new TypeError(typeof value + " is not a number.");
                 }
 
                 // Ensure the supplied value is valid.
@@ -326,5 +332,5 @@
 
         });
 
-    return Dataservice;
-});
+        return Dataservice;
+    });

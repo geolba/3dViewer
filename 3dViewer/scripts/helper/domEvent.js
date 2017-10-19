@@ -11,7 +11,7 @@ define('helper/domEvent',
                 return obj[key];
             };
         }());
-        
+
         /* inspired by John Resig and dojo addEvent implementations */
         var domEvent = {
 
@@ -24,7 +24,7 @@ define('helper/domEvent',
                 if (obj[key]) { return this; }
 
                 handler = function (e) {
-                    return fn.call(context || obj, e ||domEvent._getEvent());
+                    return fn.call(context || obj, e || domEvent._getEvent());
                 };
 
                 //if (L.Browser.pointer && type.indexOf('touch') === 0) {
@@ -54,14 +54,14 @@ define('helper/domEvent',
                         obj.addEventListener(newType, handler, false);
 
                     }
-                    //else if (type === 'click' && L.Browser.android) {
-                    //    originalHandler = handler;
-                    //    handler = function (e) {
-                    //        return L.DomEvent._filterClick(e, originalHandler);
-                    //    };
+                        //else if (type === 'click' && L.Browser.android) {
+                        //    originalHandler = handler;
+                        //    handler = function (e) {
+                        //        return L.DomEvent._filterClick(e, originalHandler);
+                        //    };
 
-                    //    obj.addEventListener(type, handler, false);
-                    //}
+                        //    obj.addEventListener(type, handler, false);
+                        //}
                     else {
                         obj.addEventListener(type, handler, false);
                     }
@@ -81,7 +81,7 @@ define('helper/domEvent',
 
                 var id = stampForFn(fn);
                 var key = '_gba_' + type + id;
-                 var handler = obj[key];
+                var handler = obj[key];
 
                 if (!handler) { return this; }
 
@@ -162,7 +162,7 @@ define('helper/domEvent',
                 // reset when checking, as it's only used in map container and propagates outside of the map
                 this._skipEvents[e.type] = false;
                 return skipped;
-            }           
+            }
 
         };
         //alias
@@ -170,4 +170,4 @@ define('helper/domEvent',
         domEvent.off = domEvent.removeListener;
 
         return domEvent;
-});
+    });

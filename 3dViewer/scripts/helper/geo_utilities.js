@@ -5,14 +5,14 @@ define('helper/geo_utilities',
 
         //constant static variable
         var LOADING_ID_PREFIX = "loading_";
-       
+
         var geo_util = {
-            
-            calculateDistance: function(a, b) {
-                    var xd = b.x - a.y;
-                    var yd = b.y - a.y;
-                    return Math.sqrt(xd * xd + yd * yd);
-            } ,
+
+            calculateDistance: function (a, b) {
+                var xd = b.x - a.y;
+                var yd = b.y - a.y;
+                return Math.sqrt(xd * xd + yd * yd);
+            },
 
             clip: function (subjectPolygon, clipPolygon) {
                 var clip1, clip2, s, e;
@@ -106,7 +106,7 @@ define('helper/geo_utilities',
                 // if line1 and line2 are segments, they intersect if both of the above are true
                 return result;
             }
-            
+
         };
 
         return geo_util;

@@ -18,7 +18,7 @@
 
         return -1;
     }
-  
+
     function alias(name) {
         return function aliasClosure() {
             return this[name].apply(this, arguments);
@@ -29,7 +29,7 @@
 
     //EventEmitter.prototype = {
     var Evented = Class.extend({
-     
+
         //constructor: EventEmitter,
         init: function () {
             //this.name = "test";
@@ -87,39 +87,39 @@
             //types = util.splitWords(types);
 
             //for (i = 0, len = types.length; i < len; i++) {
-                event = {
-                    action: fn,
-                    context: context || this                   
-                };
-                type = evt;// types[i];
+            event = {
+                action: fn,
+                context: context || this
+            };
+            type = evt;// types[i];
 
-                if (contextId) {
-                    // store listeners of a particular context in a separate hash (if it has an id)
-                    // gives a major performance boost when removing thousands of map layers
+            if (contextId) {
+                // store listeners of a particular context in a separate hash (if it has an id)
+                // gives a major performance boost when removing thousands of map layers
 
-                    indexKey = type + '_idx';
-                    indexLenKey = indexKey + '_len';
+                indexKey = type + '_idx';
+                indexLenKey = indexKey + '_len';
 
-                    typeIndex = events[indexKey] = events[indexKey] || {};
+                typeIndex = events[indexKey] = events[indexKey] || {};
 
-                    if (!typeIndex[contextId]) {
-                        typeIndex[contextId] = [];
+                if (!typeIndex[contextId]) {
+                    typeIndex[contextId] = [];
 
-                        // keep track of the number of keys in the index to quickly check if it's empty
-                        events[indexLenKey] = (events[indexLenKey] || 0) + 1;
-                    }
-
-                    typeIndex[contextId].push(event);
-
-
+                    // keep track of the number of keys in the index to quickly check if it's empty
+                    events[indexLenKey] = (events[indexLenKey] || 0) + 1;
                 }
-                else {
-                    events[type] = events[type] || [];
-                    events[type].push(event);
-                }
+
+                typeIndex[contextId].push(event);
+
+
+            }
+            else {
+                events[type] = events[type] || [];
+                events[type].push(event);
+            }
             //}
 
-                return this;
+            return this;
         },
 
         /**
@@ -168,7 +168,7 @@
         //            else {
         //                listeners[key].push(event);
         //            }
-                    
+
         //        }
         //    }
 
@@ -198,37 +198,37 @@
 
             //for (i = 0, len = types.length; i < len; i++) {
             type = evt;//types[i];
-                indexKey = type + '_idx';
-                indexLenKey = indexKey + '_len';
+            indexKey = type + '_idx';
+            indexLenKey = indexKey + '_len';
 
-                typeIndex = events[indexKey];
+            typeIndex = events[indexKey];
 
-                if (!fn) {
-                    // clear all listeners for a type if function isn't specified
-                    delete events[type];
-                    delete events[indexKey];
-                    delete events[indexLenKey];
+            if (!fn) {
+                // clear all listeners for a type if function isn't specified
+                delete events[type];
+                delete events[indexKey];
+                delete events[indexLenKey];
 
-                }
-                else {
-                    listeners = contextId && typeIndex ? typeIndex[contextId] : events[type];
+            }
+            else {
+                listeners = contextId && typeIndex ? typeIndex[contextId] : events[type];
 
-                    if (listeners) {
-                        for (j = listeners.length - 1; j >= 0; j--) {
-                            if ((listeners[j].action === fn) && (!context || (listeners[j].context === context))) {
-                                removed = listeners.splice(j, 1);
-                                // set the old action to a no-op, because it is possible
-                                // that the listener is being iterated over as part of a dispatch
-                                //removed[0].action = util.falseFn;
-                            }
-                        }
-
-                        if (context && typeIndex && (listeners.length === 0)) {
-                            delete typeIndex[contextId];
-                            events[indexLenKey]--;
+                if (listeners) {
+                    for (j = listeners.length - 1; j >= 0; j--) {
+                        if ((listeners[j].action === fn) && (!context || (listeners[j].context === context))) {
+                            removed = listeners.splice(j, 1);
+                            // set the old action to a no-op, because it is possible
+                            // that the listener is being iterated over as part of a dispatch
+                            //removed[0].action = util.falseFn;
                         }
                     }
+
+                    if (context && typeIndex && (listeners.length === 0)) {
+                        delete typeIndex[contextId];
+                        events[indexLenKey]--;
+                    }
                 }
+            }
             //}
 
             return this;
@@ -260,7 +260,7 @@
         //    return this;
         //},
 
-        off : alias('removeListener'),
+        off: alias('removeListener'),
 
         /**
         * Removes all listeners from a specified event.
@@ -378,7 +378,7 @@
         },
 
     });
-     
+
     return Evented;
 
 });
