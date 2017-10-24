@@ -4,21 +4,21 @@
     //Mesh.prototype = {
     var Graph = Class.extend({
 
-        init : function() {
+        init: function () {
             this.faces = [];
             this.nodes = {};//[];
             //this.nodes = [];
             this.edges = [];
         },
 
-        addNode : function(pos, id) {
+        addNode: function (pos, id) {
             var node = new Node(pos, id);
             //this.nodes.push(node);
             this.nodes[id] = node;
             return node;
         },
 
-        addEdge : function(n1, n2) {
+        addEdge: function (n1, n2) {
             var edge = new Edge(n1, n2);
             this.edges.push(edge);
 
@@ -30,7 +30,7 @@
             return edge;
         },
 
-        addFaceFromNodes : function(nodes) {
+        addFaceFromNodes: function (nodes) {
             var edges = [];
             var edge;
             for (var i = 0; i < nodes.length; i++) {

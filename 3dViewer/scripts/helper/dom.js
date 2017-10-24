@@ -2,7 +2,7 @@
 define('helper/dom',
     ["jquery"], function ($) {
 
-       
+
         var dom = {
 
             //create: function (tagName, className, container) {
@@ -14,10 +14,10 @@ define('helper/dom',
             //    return el;
             //},
 
-            getDocument : function() {
+            getDocument: function () {
                 return document;
             },
-            byId : function(id, doc){
+            byId: function (id, doc) {
                 // inline'd type check.
                 // be sure to return null per documentation, to match IE branch.
                 return ((typeof id == "string") ? (doc || document).getElementById(id) : id) || null; // DOMNode
@@ -39,14 +39,14 @@ define('helper/dom',
              *     childNodes instead.
              * @return {Element} Reference to a DOM node
              */
-            createDom : function(tagName, opt_attributes, parent_node) {
+            createDom: function (tagName, opt_attributes, parent_node) {
                 return dom._createDom(document, arguments);
             },
-            _escapeHtml: function(str) {
+            _escapeHtml: function (str) {
                 if (str) return $('<div />').html(str).text();
             },
 
-            _createDom: function(doc, args) {
+            _createDom: function (doc, args) {
                 var tagName = args[0];
                 var attributes = args[1];
                 //var var_args =  args[2];
@@ -81,9 +81,9 @@ define('helper/dom',
                     if ($.type(attributes) === "string") {
                         element.className = attributes;
                     }
-                    //else if ($.isArray(attributes)) {
-                    //    //goog.dom.classes.add.apply(null, [element].concat(attributes));
-                    //}
+                        //else if ($.isArray(attributes)) {
+                        //    //goog.dom.classes.add.apply(null, [element].concat(attributes));
+                        //}
                     else {
                         dom.setProperties(element, attributes);
                     }
@@ -98,10 +98,10 @@ define('helper/dom',
                 return element;
             },
 
-            setProperties : function(element, properties) {
+            setProperties: function (element, properties) {
                 //goog.object.forEach(properties, function(val, key) {
-                $.each( properties, function( key, val ) {
-              
+                $.each(properties, function (key, val) {
+
                     if (key === 'style') {
                         element.style.cssText = val;
                     }
@@ -113,7 +113,7 @@ define('helper/dom',
                     }
                     else if (key in dom.ATTRIBUTE_MAP) {
                         element.setAttribute(dom.ATTRIBUTE_MAP[key], val);
-                    }                   
+                    }
                     else {
                         element[key] = val;
                     }

@@ -60,9 +60,9 @@ define('gba/tasks/BoreholeIdentify', ["jquery", "three"
             //var z = this.camera.position.z;
 
             var vector = new THREE.Vector3(mouseXForRay, mouseYForRay, z);
-            vector.unproject(this.camera);           
+            vector.unproject(this.camera);
             vector.sub(this.camera.position);
-            vector.normalize();           
+            vector.normalize();
             var raycaster = new THREE.Raycaster(this.camera.position, vector);
 
 
@@ -172,7 +172,7 @@ define('gba/tasks/BoreholeIdentify', ["jquery", "three"
 
             var _queryableObjects = [];
             this.layers.forEach(function (layer) {
-                if (layer.visible && layer.queryableObjects.length) {              
+                if (layer.visible && layer.queryableObjects.length) {
                     _queryableObjects = _queryableObjects.concat(layer.queryableObjects);
                 }
             });

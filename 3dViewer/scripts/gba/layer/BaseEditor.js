@@ -5,11 +5,11 @@ define('gba/layer/BaseEditor', ["lib/leaflet/Class", "gba/layer/LayerGroup", "he
 
         var Editable = {
 
-                makeCancellable: function (e) {
-                    e.cancel = function () {
-                        e._cancelled = true;
-                    };
-                }
+            makeCancellable: function (e) {
+                e.cancel = function () {
+                    e._cancelled = true;
+                };
+            }
         };
         var BaseEditor = Class.extend({
 
@@ -49,7 +49,7 @@ define('gba/layer/BaseEditor', ["lib/leaflet/Class", "gba/layer/LayerGroup", "he
 
             drawing: function () {
                 return !!this._drawing;
-            },          
+            },
 
             fireAndForward: function (type, e) {
                 e = e || {};
@@ -70,8 +70,8 @@ define('gba/layer/BaseEditor', ["lib/leaflet/Class", "gba/layer/LayerGroup", "he
                 this.fireAndForward('editable:editing');
             },
 
-          
-            
+
+
 
             onDrawingMouseDown: function (e) {
                 this.fireAndForward('editable:drawing:mousedown', e);
@@ -82,7 +82,8 @@ define('gba/layer/BaseEditor', ["lib/leaflet/Class", "gba/layer/LayerGroup", "he
             },
 
             startDrawing: function () {
-                if (!this._drawing){ this._drawing = 1;// L.Editable.FORWARD;
+                if (!this._drawing) {
+                    this._drawing = 1;// L.Editable.FORWARD;
                 }
                 this.mapTool.registerForDrawing(this);
                 this.onStartDrawing();
@@ -159,9 +160,9 @@ define('gba/layer/BaseEditor', ["lib/leaflet/Class", "gba/layer/LayerGroup", "he
                 this.marker.setPopupChartData(data);
                 this.marker.openPopup();
 
-             
 
-                  
+
+
             },
 
             connect: function (e) {
@@ -169,7 +170,7 @@ define('gba/layer/BaseEditor', ["lib/leaflet/Class", "gba/layer/LayerGroup", "he
                 // no mousemove.
                 if (e) this.marker._latlng = { x: e.x, y: e.y, z: e.z }; //e.latlng;
                 //this.marker.update();
-                
+
                 //L.Editable.BaseEditor.prototype.connect.call(this, e);
                 this.mapTool.connectCreatedToMap(this.marker);
                 //this.mapTool.editLayer.addLayer(this.editLayer);

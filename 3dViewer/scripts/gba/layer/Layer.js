@@ -1,8 +1,8 @@
 ﻿
-define('gba/layer/Layer', ["helper/Events", "gba/controls/BoreholePopup",  "helper/utilities",], function (Events, BoreholePopup, util) {
-    "use strict"; 
-   
-    
+define('gba/layer/Layer', ["helper/Events", "gba/controls/BoreholePopup", "helper/utilities", ], function (Events, BoreholePopup, util) {
+    "use strict";
+
+
 
 
     var Layer = Events.extend({
@@ -54,7 +54,7 @@ define('gba/layer/Layer', ["helper/Events", "gba/controls/BoreholePopup",  "help
             //map.fire('layeradd', { layer: this });
         },
 
-        
+
         // @method bindPopup(content: String|HTMLElement|Function|Popup, options?: Popup options): this
         // Binds a popup to the layer with the passed `content` and sets up the
         // neccessary event listeners. If a `Function` is passed it will receive
@@ -65,16 +65,16 @@ define('gba/layer/Layer', ["helper/Events", "gba/controls/BoreholePopup",  "help
                 //util.setOptions(content, options);
                 this._popup = content;
                 content._source = this;
-            }         
+            }
 
-                if (!this._popup) {
-                    //this._popup = new L.Popup(options, this);
-                    this._popup = new BoreholePopup({ }, this);
-                    this._popup.addTo(this._map);
-                    this._popup.setChartContent(content);
-                }
-               
-            
+            if (!this._popup) {
+                //this._popup = new L.Popup(options, this);
+                this._popup = new BoreholePopup({}, this);
+                this._popup.addTo(this._map);
+                this._popup.setChartContent(content);
+            }
+
+
 
             if (!this._popupHandlersAdded) {
                 this.on("click", this.openPopup, this); //remove: this.closePopup  //move: this._movePopup
@@ -87,7 +87,7 @@ define('gba/layer/Layer', ["helper/Events", "gba/controls/BoreholePopup",  "help
 
             return this;
         },
-        setPopupChartData: function(content){
+        setPopupChartData: function (content) {
             this._popup.setChartContent(content);
         },
         openPopup: function () {

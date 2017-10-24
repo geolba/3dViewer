@@ -7,8 +7,8 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
    *
    * Dialog
    *
-   */  
-      
+   */
+
     var Dialog = Class.extend({
 
         //constructor: Dialog,
@@ -31,7 +31,7 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
             this.domNode.appendChild(this.dialogDiv);
 
             this.closeDiv = document.createElement('div');
-            this.closeDiv.innerHTML  = "&times;";
+            this.closeDiv.innerHTML = "&times;";
             this.closeDiv.setAttribute('class', 'close');
             this.dialogDiv.appendChild(this.closeDiv);
             this.titleBar = document.createElement('div');
@@ -40,7 +40,7 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
             this.dialogDiv.appendChild(this.titleBar);
 
             var popupbody = document.createElement('div');
-            popupbody.innerHTML = '<div id="popupcontent">fhfghj tzutrutru</div>'+
+            popupbody.innerHTML = '<div id="popupcontent">fhfghj tzutrutru</div>' +
                                    '<div id="pageinfo">' +
                                         '<h1>About</h1>' +
                                         '<div id="about">' +
@@ -104,9 +104,9 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
          '</div>'
         ].join('\n'),
 
-       
+
         show: function (obj, title) {
-            var isHelp = obj === undefined ? true: false;
+            var isHelp = obj === undefined ? true : false;
             //// first time we show the dialog, there's some initialization stuff to do
             //if (!this._alreadyInitialized) {
             //    this._setup();
@@ -120,7 +120,7 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
                 //content.style.display = "none";
                 //document.getElementById("pageinfo").style.display = "block";
             }
-         
+
             //$('#pageinfo').style.display = "none";
             if (obj instanceof HTMLElement) {
                 content.innerHTML = "";
@@ -130,12 +130,12 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
                 content.innerHTML = obj;
             }
             content.style.display = "block";
-          
+
             //document.getElementById("popupbar").innerHTML = title || "";
             //document.getElementById("popup").style.display = "block";
 
 
-       
+
 
             ////Cancel the link behavior
             //e.preventDefault();
@@ -161,7 +161,7 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
             $(id).css('top', winH / 2 - $(id).height() / 2);
             $(id).css('left', winW / 2 - $(id).width() / 2);
 
-          
+
             document.getElementById("popupbar").innerHTML = title || this.defaultTitle;
             //document.getElementById("popupbar").innerHTML = this.title || "";
             if (!isHelp) {
@@ -175,7 +175,7 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
             //$(id).fadeIn(2000);
             $(this.dialogDiv).fadeIn(2000);
         },
-        
+
         hide: function (e) {
             // summary:
             //		Hide the dialog
@@ -189,7 +189,7 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
             var lines = [
                 "I : Show Page Info",
                "W : Wireframe Mode",
-               "Shift + R : Reset Canvas"              
+               "Shift + R : Reset Canvas"
             ];
             var html = '<table>';
             lines.forEach(function (line) {
@@ -205,20 +205,20 @@ define('gba/controls/Dialog', ["jquery", "lib/leaflet/Class"
                     var p = line.split(":");
                     html += "<tr><td>" + p[0].trim() + "</td><td>" + p[1].trim() + "</td></tr>";
                 }
-            });    
+            });
             html += "</table>";
 
             var list = '<li id="leftMouse"><img src="content/img/leftMouse.png"> Rotate 3D Model</li>' +
             '<li id="middleMouse"><img src="content/img/middleMouse.png"> Zoom 3D Model</li>' +
             '<li id="rightMouse"><img src="content/img/rightMouse.png"> Pan 3D Model</li>';
             html += list;
-                    
+
 
             return html;
         }
 
     });
-   
+
 
     return Dialog;
 

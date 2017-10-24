@@ -60,7 +60,7 @@
                     var x = ix * segment_width - width_half;
 
                     vertices[offset] = x;
-                    vertices[offset + 1] = -y;                   
+                    vertices[offset + 1] = -y;
                     vertices[offset + 2] = this.layer.materialParameter[0].bottomZ;
 
                     normals[offset + 2] = 1;
@@ -122,7 +122,7 @@
             var widthSegments = xPixel - 1; //this.width = xPixel
             var yPixel = this.height;
             var heightSegments = yPixel - 1;
-            
+
             //appSettings.Options.exportMode = true;
             var PlaneGeometry = (appSettings.Options.exportMode) ? THREE.PlaneGeometry : THREE.PlaneBufferGeometry;
             //var geom = layer.mainGeometry = new PlaneGeometry(this.plane.width, this.plane.height, widthSegments, heightSegments);
@@ -132,7 +132,7 @@
             this.layer.features = geom.attributes.position.array;
             this.layer.idx = geom.getIndex() !== null ? geom.getIndex().array : null;
             var dem_data = this.dem_values;
-          
+
 
             ////// Filling of the DEM plane
             //var vertices = geom.attributes.position.array;
@@ -148,9 +148,9 @@
             var i, j, l;
             if (appSettings.Options.exportMode) { //PlaneGeometry
                 if (dem_data.length > 0) {
-                    for (i = 0, l = geom.vertices.length; i < l; i++) {                  
+                    for (i = 0, l = geom.vertices.length; i < l; i++) {
                         geom.vertices[i].z = dem_data[i];
-                    }                   
+                    }
                 }
                 else {
                     for (i = 0, l = geom.vertices.length; i < l; i++) {
@@ -179,7 +179,7 @@
                 //layer.positions = bufferAttribute.clone().array;
                 ////defaultVertices = planeGeometry.attributes.position.clone().array;
             }
-          
+
 
             // Calculate normals
             //if (layer.shading) {
@@ -197,7 +197,7 @@
 
             var mesh = layer.mainMesh = new THREE.Mesh(geom, layer.materials[this.mIndex].mat);
             //mesh.name = "Oberkante";
-            
+
             //mesh.matrixAutoUpdate = true;
 
             //var egh = new THREE.EdgesHelper(mesh, 0x00ffff);
@@ -210,7 +210,7 @@
             this.obj = mesh;
             layer.addObject(mesh);
             //layer.mainMesh = mesh;
-           
+
         },
 
         extrudeBottomPlane: function (layer, material, bottomZ) {
@@ -245,7 +245,7 @@
                 }
             }
             mesh = new THREE.Mesh(geom_fr, material);
-            mesh.position.y = -this.plane.height / 2;           
+            mesh.position.y = -this.plane.height / 2;
             mesh.rotateOnAxis(appSettings.uv.i, HALF_PI);
             layer.addObject(mesh, false);
             this.aObjs.push(mesh);
@@ -286,7 +286,7 @@
             this.aObjs.push(mesh);
 
             // bottom
-            var geom = new THREE.PlaneBufferGeometry(this.plane.width, this.plane.height, widthSegments, heightSegments); 
+            var geom = new THREE.PlaneBufferGeometry(this.plane.width, this.plane.height, widthSegments, heightSegments);
             var mesh = new THREE.Mesh(geom, material);
             mesh.position.z = bottomZ;
             layer.addObject(mesh, false);
@@ -404,24 +404,24 @@
 
             var geom = new THREE.PlaneBufferGeometry(this.plane.width, this.plane.height, widthSegments, heightSegments);
 
-                var dem_data = this.bottomData;
+            var dem_data = this.bottomData;
 
-                //mesh.position.z = bottomZ;
+            //mesh.position.z = bottomZ;
             //mesh.rotateOnAxis(appSettings.uv.i, Math.PI);
-                //// Filling of the DEM plane
-                var vertices = geom.attributes.position.array;
-                for (var i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {
-                    // x
-                    //vertices[i] = defaultVertices[i] + (rand(-opts.variance.x, opts.variance.x));
-                    // y
-                    //vertices[i + 1] =
+            //// Filling of the DEM plane
+            var vertices = geom.attributes.position.array;
+            for (var i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {
+                // x
+                //vertices[i] = defaultVertices[i] + (rand(-opts.variance.x, opts.variance.x));
+                // y
+                //vertices[i + 1] =
 
-                    //z
-                    vertices[j + 2] = dem_data[i];
-                }
-          
+                //z
+                vertices[j + 2] = dem_data[i];
+            }
 
-            mesh = new THREE.Mesh(geom, material);          
+
+            mesh = new THREE.Mesh(geom, material);
             layer.addObject(mesh, false);
             this.aObjs.push(mesh);
         }

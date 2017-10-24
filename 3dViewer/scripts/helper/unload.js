@@ -1,4 +1,4 @@
-﻿define('helper/unload',["helper/domEvent"], function (domEvent) {
+﻿define('helper/unload', ["helper/domEvent"], function (domEvent) {
 
     // module:
     //		helper/unload
@@ -12,12 +12,12 @@
         //		and on(window, "beforeunload", func) instead.
 
         addOnWindowUnload: function (/*Object|Function?*/ obj, /*String|Function?*/ functionName) {
-                
+
             domEvent.on(win, "unload", unload.hitch(obj, functionName));
         },
 
         addOnUnload: function (/*Object?|Function?*/ obj, /*String|Function?*/ functionName) {
-           
+
             domEvent.on(win, "beforeunload", unload.hitch(obj, functionName));
         },
 
@@ -28,7 +28,7 @@
             //		Item to test.
             return (typeof it == "string" || it instanceof String); // Boolean
         },
-        hitch: function (scope, method) {           
+        hitch: function (scope, method) {
             //if (arguments.length > 2) {
             //    return lang._hitchArgs.apply(dojo, arguments); // Function
             //}
@@ -43,7 +43,7 @@
             }
             return !scope ? method : function () { return method.apply(scope, arguments || []); }; // Function
         }
-    }; 
+    };
 
     return unload;
 

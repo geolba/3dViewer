@@ -68,7 +68,7 @@ function ($, THREE, Events, Marker, LayerGroup, BoreholeIdentify, util, domUtil)
             return new LayerGroup().addTo(this.map);
         },
         createFeaturesLayer: function () {
-            return  new LayerGroup().addTo(this.map);
+            return new LayerGroup().addTo(this.map);
         },
 
         blockEvents: function () {
@@ -202,7 +202,7 @@ function ($, THREE, Events, Marker, LayerGroup, BoreholeIdentify, util, domUtil)
             domUtil.removeClass(this.map.container, 'measure-enabled');
             this.featuresLayer.clearLayers();
             //this.fireAndForward('hidemeasure');
-            if (this._drawingEditor){
+            if (this._drawingEditor) {
                 this._drawingEditor.cancelDrawing();
             }
         },

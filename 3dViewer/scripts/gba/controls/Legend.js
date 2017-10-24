@@ -7,8 +7,8 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
    *
    * Dialog
    *
-   */  
-      
+   */
+
     var Legend = Class.extend({
 
         init: function (layers, map) {
@@ -17,7 +17,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
 
             this.id = 'legendDiv';
             ////build html:
-            this.ownerDocumentBody = document.getElementById(this.id); 
+            this.ownerDocumentBody = document.getElementById(this.id);
             this._createLegend(layers);
 
             //map.on('border-change', this.refresh.bind(this));
@@ -76,7 +76,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                 layer.legendResponse = legendResponse;
 
                 //WebService-Überschrift generieren:
-                this.newDiv = dom.createDom('div', { id: this.id + "_" + layer.index }, this.ownerDocumentBody);             
+                this.newDiv = dom.createDom('div', { id: this.id + "_" + layer.index }, this.ownerDocumentBody);
                 //var table = dom.createDom('table', { width: "95%" }, this.newDiv);
                 //var tblBody = dom.createDom("tbody", {}, table);
                 //var row = dom.createDom("tr", {}, tblBody);
@@ -106,7 +106,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                             }
                         }, this);
                     }
-                    //DxfLayer:
+                        //DxfLayer:
                     else {
                         if ("DxfLayer" === layer.declaredClass) {
 
@@ -116,8 +116,8 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
 
                 }
 
-                if (b === true) {                   
-                    dom.setProperties(document.getElementById(this.id + "_" + layer.index), { style: "display: block;" });                   
+                if (b === true) {
+                    dom.setProperties(document.getElementById(this.id + "_" + layer.index), { style: "display: block;" });
                     dom.setProperties(document.getElementById(this.id + "_msg"), { style: "display: none;" });
                 }
             }
@@ -133,7 +133,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
             var _id, _class1, _attributes, _refNode, _tr;
             //if (layerInfo.subLayerIds) {
             //}
-                //einfache layer und sichtbare sub-layer:
+            //einfache layer und sichtbare sub-layer:
             if (!layerInfo.subLayerIds) {
                 //nicht sichtbare Layer/Sublayer ausschließen:
                 if (mainLayer.visibleLayers && -1 === ("," + webservicelayer.visibleLayers + ",").indexOf("," + layerInfo.id + ",")) {
@@ -151,19 +151,19 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                 }
                 _attributes = { id: _id, style: "display: visible;", "class": _class1 };
                 _refNode = -1 === parentLayerId ? d : dom.byId(this.id + "_" + webservicelayer.id + "_" + parentLayerId + "_group");
-              
+
                 grundDiv = dom.createDom("div", _attributes, _refNode);
                 //domStyle.set(dom.byId(_id), "display", "visible");
                 dom.setProperties(document.getElementById(_id), { style: "display: visible;" });
 
-               //unnötig
+                //unnötig
                 var _table = dom.createDom("tbody", {}, dom.createDom("table", { width: "95%", "class": "gbaLegendLayerLabel" }, grundDiv));
                 _tr = dom.createDom("tr", {}, _table);
                 dom.createDom("td", { innerHTML: layerInfo.name ? layerInfo.name : "", align: this.alignRight ? "right" : "left" }, _tr);
-               
+
                 //e = e || this._buildLegendItems_Tools(layer, b, grundDiv);
                 e = this._buildLayerLegendItems(mainLayer, layerInfo, grundDiv);
-            //}
+                //}
             }
 
             return e;
@@ -202,12 +202,12 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                 //dom.createDom("tr", { "class": "RowToClick" }, _tbody);
                 ////domConstruct.create("td", { innerHTML: '', align: this.alignRight ? "right" : "left" }, _tr);
                 var rowVisibility = "row-table";
-               
+
                 //array.forEach(legendResponsesForLayer, function (legendResponseRow) {
                 //$.each(legendResponsesForLayer, function (index, legendResponseRow) {
                 legendResponsesForLayer.forEach(function (legendResponseRow) {
                     hasLegendResponse = true;
-                    this._buildRowCheckbox(legendResponseRow, _tbody, webservicelayer, layerInfo.id, rowVisibility);                    
+                    this._buildRowCheckbox(legendResponseRow, _tbody, webservicelayer, layerInfo.id, rowVisibility);
                 }, this);
             }
 
@@ -235,7 +235,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                 imgDataCell = dom.createDom("td", { width: 25 }, legendEntryRow);
                 lblDataCell = dom.createDom("td", {}, legendEntryRow);
             }
-           
+
             //var checkbox = dom.createDom("input", { type: 'checkbox', checked: webservicelayer.visible, "id": webservicelayer.index }, chkDataCell); 
             //var stop = domEvent.stopPropagation;
             //domEvent
@@ -247,7 +247,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
             //        this.map.update();
             //    }, this);
             //var chkLabel = dom.createDom("label", { for: webservicelayer.index }, chkDataCell);         
-           
+
 
 
             //legend entry image:
@@ -305,7 +305,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                 webservicelayer.setVisible(checkbox.checked);
             };
             dom.createDom("label", { for: webservicelayer.index }, chkDataCell);
-            
+
 
 
             //legend entry image:
@@ -314,7 +314,7 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
             //dom.createDom("img", { src: imgSrc, border: 0, style: "opacity:" + webservicelayer.opacity }, imgDataCell);
             var color = this._zfill(webservicelayer.materialParameter[0].color.toString(16), 6); //webservicelayer.materialParameter[0].color;
 
-            dom.createDom("div", { style: "width: 20px; height: 20px; background-color:#"+ color + "; opacity:" + webservicelayer.opacity }, imgDataCell);
+            dom.createDom("div", { style: "width: 20px; height: 20px; background-color:#" + color + "; opacity:" + webservicelayer.opacity }, imgDataCell);
 
             //legend entry label
             var _table = dom.createDom("table", { width: "95%", dir: "ltr" }, lblDataCell);
@@ -322,15 +322,15 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
             var _tr = dom.createDom("tr", {}, _tbody);
             //dom.createDom("td", { innerHTML: legendResponseRow.label, align: this.alignRight ? "right" : "left" }, _tr);
             var _td = dom.createDom("td", { innerHTML: webservicelayer.name, align: this.alignRight ? "right" : "left" }, _tr);
-            var span = dom.createDom("span", { "class": "tooltip",title: "Beschreibung...", innerHTML: " info" }, _td);
+            var span = dom.createDom("span", { "class": "tooltip", title: "Beschreibung...", innerHTML: " info" }, _td);
         },
 
-        _zfill: function(num, len) {
+        _zfill: function (num, len) {
             return (Array(len).join("0") + num).slice(-len);
         },
 
         _buildManuallyLegendResponseImg: function () {
-        
+
             var legendResponse = {
                 "layers": [
                  {
@@ -348,17 +348,17 @@ define('gba/controls/Legend', ["jquery", "lib/leaflet/Class", "helper/dom", "hel
                           "contentType": "image/png",
                           "height": 20,
                           "width": 20
-                      }                     
+                      }
                      ]
                  }
                 ]
             };
-          
+
             return legendResponse;
         },
 
     });
-    
+
     return Legend;
 
 

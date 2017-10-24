@@ -1,6 +1,6 @@
 ﻿// Filename: RangeSlider.js 
 define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom", "helper/domEvent", 'helper/domUtil', "helper/utilities", "helper/mixin"
-], function (Class,$, dom, domEvent, domUtil, util, mixin) {
+], function (Class, $, dom, domEvent, domUtil, util, mixin) {
     "use strict";
     /**
    * @class BootstrapSlider
@@ -19,7 +19,7 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
         options: {
             value: 0, // set default value on initiation from `0` to `100` (percentage based)
             vertical: false, // vertical or horizontal?
-            orientation:"horizontal",
+            orientation: "horizontal",
             rangeClass: "", // add extra custom class for the range slider track
             draggerClass: "",// add extra custom class for the range slider dragger
             //min: -50,
@@ -35,15 +35,16 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
             this.value = this.options.value;
 
             this.element = elem;
-          
+
             //this._initLayout();
-            this.picker = dom.createDom("div",{ "class":'slider', innerHTML:
-							'<div class="range-slider-track">' +
-								'<div class="slider-selection"></div>' +
-								'<div class="slider-handle"></div>' +
-								'<div class="slider-handle"></div>' +
-							'</div>' +
-							'<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            this.picker = dom.createDom("div", {
+                "class": 'slider', innerHTML:
+                                '<div class="range-slider-track">' +
+                                    '<div class="slider-selection"></div>' +
+                                    '<div class="slider-handle"></div>' +
+                                    '<div class="slider-handle"></div>' +
+                                '</div>' +
+                                '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
 
             }, this.element);
 
@@ -56,7 +57,7 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
 
             if (this.orientation === "horizontal") {
                 domUtil.addClass(this.picker, "slider-horizontal");
-					//.addClass('slider-horizontal')
+                //.addClass('slider-horizontal')
                 //.css('width', this.element.outerWidth());             
                 //$(this.picker).css('width', $(this.element).outerWidth());
                 //this.picker.style.width = this.element['offsetWidth'] + 'px';
@@ -96,7 +97,7 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
                     domUtil.addClass(this.handle1, "round");
                     domUtil.addClass(this.handle2, "round");
                     break;
-                case 'triangle':                 
+                case 'triangle':
                     domUtil.addClass(this.handle1, "triangle");
                     domUtil.addClass(this.handle2, "triangle");
                     break;
@@ -131,10 +132,10 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
             //this.formater = options.formater;
 
             this.layout();
-         
+
             domEvent.on(this.picker, "mousedown", this.mousedown, this);
             domUtil.addClass(this.tooltip, "hide");
-							
+
         },
 
         layout: function () {
@@ -145,26 +146,26 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
             //    this.selectionElStyle.top = Math.min(this.percentage[0], this.percentage[1]) + '%';
             //    this.selectionElStyle.height = Math.abs(this.percentage[0] - this.percentage[1]) + '%';
             //}
-           
-                this.selectionElStyle.left = Math.min(this.percentage[0], this.percentage[1]) + '%';
-                this.selectionElStyle.width = Math.abs(this.percentage[0] - this.percentage[1]) + '%';
-           
+
+            this.selectionElStyle.left = Math.min(this.percentage[0], this.percentage[1]) + '%';
+            this.selectionElStyle.width = Math.abs(this.percentage[0] - this.percentage[1]) + '%';
+
             //if (this.range) {
             //    this.tooltipInner.text(
-			//		this.formater(this.value[0]) +
-			//		' : ' +
-			//		this.formater(this.value[1])
-			//	);
+            //		this.formater(this.value[0]) +
+            //		' : ' +
+            //		this.formater(this.value[1])
+            //	);
             //    this.tooltip[0].style[this.stylePos] = this.size * (this.percentage[0] + (this.percentage[1] - this.percentage[0]) / 2) / 100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight() / 2 : this.tooltip.outerWidth() / 2) + 'px';
             //} else {
             //    this.tooltipInner.text(
-			//		this.formater(this.value[0])
-			//	);
+            //		this.formater(this.value[0])
+            //	);
             //    this.tooltip[0].style[this.stylePos] = this.size * this.percentage[0] / 100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight() / 2 : this.tooltip.outerWidth() / 2) + 'px';
             //}
         },
 
-       
+
         mousedown: function (ev) {
 
             // Touch: Get the original event:
@@ -199,7 +200,7 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
             //if (this.options.inverse === true) {
             //    val = val * -1;
             //}
-           
+
             this.emit("slide", val);
             return false;
         },
@@ -225,11 +226,11 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
             this.layout();
             var val = this.calculateValue();
             //this.element
-			//	.trigger({
-			//	    type: 'slide',
-			//	    value: val
-			//	})
-			//	.data('value', val)
+            //	.trigger({
+            //	    type: 'slide',
+            //	    value: val
+            //	})
+            //	.data('value', val)
             //	.prop('value', val);
             //if (this.options.inverse === true) {
             //    val = val * -1;
@@ -239,7 +240,7 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
         },
 
         mouseup: function (ev) {
-            
+
             domEvent.off(this.picker, "mousemove", this.mousemove, this);
             domEvent.off(this.picker, 'mouseup', this.mouseup, this);
             domEvent.off(this.picker, 'mouseleave', this.onMouseLeave, this);
@@ -251,12 +252,12 @@ define('gba/controls/RangeSlider', ["lib/leaflet/Class", "jquery", "helper/dom",
             this.element;
             var val = this.calculateValue();
             //this.element
-			//	.trigger({
-			//	    type: 'slideStop',
-			//	    value: val
-			//	})
-			//	.data('value', val)
-           // //	.prop('value', val);
+            //	.trigger({
+            //	    type: 'slideStop',
+            //	    value: val
+            //	})
+            //	.data('value', val)
+            // //	.prop('value', val);
             this.emit("changed", val);
             return false;
         },

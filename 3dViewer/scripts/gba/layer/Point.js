@@ -1,7 +1,7 @@
 ﻿define('gba/layer/Point', ["lib/leaflet/Class", "helper/utilities", ], function (Class, util) {
-    "use strict"; 
-   
-    
+    "use strict";
+
+
 
 
     var Point = Class.extend({

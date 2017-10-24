@@ -22,7 +22,7 @@ define('gba/tasks/DxfIdentify', ["jquery", "three"
     DxfIdentify.prototype = {
 
         config: {},
-        
+
         constructor: DxfIdentify,
 
         execute: function (params) {
@@ -108,7 +108,7 @@ define('gba/tasks/DxfIdentify', ["jquery", "three"
             return deferred.promise();
         },
 
-        _highlightFeature : function (layerId, featureId) {
+        _highlightFeature: function (layerId, featureId) {
             //if (app.highlightObject) {
             //    // remove highlight object from the scene
             //    app.scene.remove(app.highlightObject);
@@ -119,7 +119,7 @@ define('gba/tasks/DxfIdentify', ["jquery", "three"
 
             if (layerId === null) return;
             var layer = this.layers[layerId];
-            if (layer === undefined) return;           
+            if (layer === undefined) return;
             var f;
             if (layer.features) {
                 f = layer.features[featureId];
@@ -157,18 +157,18 @@ define('gba/tasks/DxfIdentify', ["jquery", "three"
             var _queryableObjects = [];
             if (this.layer.visible && this.layer.queryableObjects.length) {
                 _queryableObjects = _queryableObjects.concat(this.layer.queryableObjects);
-            }  
+            }
             return _queryableObjects;
         },
-        _getQueryableObjects2 : function () {
-           
+        _getQueryableObjects2: function () {
+
             var _queryableObjects = [];
             this.layers.forEach(function (layer) {
                 if (layer.visible && layer.queryableObjects.length) {
                     _queryableObjects = _queryableObjects.concat(layer.queryableObjects);
                 }
             });
-            
+
             return _queryableObjects;
         },
 

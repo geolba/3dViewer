@@ -1,14 +1,14 @@
 ﻿// Filename: MobileDialog.js 
-define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom", "helper/domEvent"
-], function ($, Class, dom, domEvent) {
+define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom", "helper/domEvent", "helper/utilities"
+], function ($, Class, dom, domEvent, util) {
     "use strict";
     /**
    * @class MobileDialog
    *
    * Dialog
    *
-   */  
-      
+   */
+
     var MobileDialog = Class.extend({
 
         defaultTitle: '3DViewer',
@@ -30,42 +30,7 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
             //this.domNode.setAttribute('id', 'popup');
             this.domNode = dom.createDom("div", { class: "popup" }, this.ownerDocumentBody);
             //this.domNode.setAttribute('id', 'popup');
-
-            //this.dialogDiv = dom.createDom("div", {
-            //    //class: "fm_basemap_list fm_overlay", 
-            //    //class: "fm_about fm_overlay", 
-            //    class: this.options.klass + " fm_overlay",
-            //    innerHTML: '<div id="popupbar"><b class="popuptitle">Help</b><div class="popup_close"></div></div>' +
-
-            //        //'<div id="basemapList" class="fm_handle"></div>' +
-            //         '<div id="popupcontent" class="fm_handle"></div>' +
-
-            //        '<div class="pageinfo">' +
-            //                            '<h1>About</h1>' +
-            //                            '<div id="about">' +
-            //                                                    "This project is using the following libraries:" +
-            //                                "<ul>" +
-
-            //                                    '<li>three.js + OrbitControls.js <a href="http://threejs.org/" target="_blank">http://threejs.org/</a>' +
-            //                                    ' <a href="./dist/lib/threejs/LICENSE.txt" target="_blank" class="license">MIT LICENSE</a></li>' +
-
-            //                                      '<li id="lib_jquery">jQuery <a href="https://jquery.org/" target="_blank">https://jquery.org/</a>' +
-            //                                ' <a href="https://jquery.org/license/" target="_blank" class="license">MIT LICENSE</a></li>' +
-
-            //                                '<li>RequireJS <a href="http://requirejs.org/" target="_blank">http://requirejs.org/</a>' +
-            //                                ' <a href="./dist/lib/requirejs/LICENSE.md" target="_blank" class="license">MIT LICENSE</a></li>' +
-
-            //                                '<li id="lib_proj4js">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a>' +
-            //                                ' <a href="./dist/lib/proj4js/LICENSE.md" target="_blank" class="license">LGPL LICENSE</a></li>' +
-
-            //                                 '<li id="lib_leaflet">leaflet - class.js and control.js <a href="http://leafletjs.com/" target="_blank">http://leafletjs.com/</a>' +
-            //                                ' <a href="./dist/lib/leaflet/LICENSE.md" target="_blank" class="license">LICENSE</a></li>' +
-
-            //                                '</ul>' +
-            //                            '</div>' +
-            //                        '</div>'
-            //}, this.domNode);
-
+                       
             this.dialogDiv = dom.createDom("div", {
                 //class: "fm_basemap_list fm_overlay", 
                 //class: "fm_about fm_overlay", 
@@ -101,7 +66,7 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
                                             ' <a href="https://jquery.org/license/" target="_blank" class="license">MIT LICENSE</a></li>' +
 
                                             '<li>RequireJS <a href="http://requirejs.org/" target="_blank">http://requirejs.org/</a>' +
-                                            ' <a href="./dist/lib/requirejs/LICENSE.md" target="_blank" class="license">MIT LICENSE</a></li>' +
+                                            ' <a href="https://github.com/requirejs/requirejs/blob/master/LICENSE" target="_blank" class="license">MIT LICENSE</a></li>' +
 
                                             '<li id="lib_proj4js">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a>' +
                                             ' <a href="./dist/lib/proj4js/LICENSE.md" target="_blank" class="license">LGPL LICENSE</a></li>' +
@@ -116,14 +81,14 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
                                             ' <a href="http://fontawesome.io/license" target="_blank" class="license">Font: SIL OFL 1.1, CSS: MIT License</a></li>' +
 
                                             '</ul>' +
-                                        '</div>' 
+                                        '</div>'
             }, this.dialogDiv);
-         
+
             //this.closeDiv = dom.byId("closeBtn");
             //this.closeDiv = this.domNode.getElementsByClassName("popup_close")[0];        
             domEvent.on(popup_close, 'click', this.hide, this);
-          
-           
+
+
         },
 
         hide: function (e) {
@@ -131,7 +96,7 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
             //		Hide the dialog
             //Cancel the link behavior
             var test = this;
-            if(e) e.preventDefault();
+            if (e) e.preventDefault();
 
             //$('.fm_overlay').hide();
             //$('.' + this.options.klass).hide();
@@ -141,7 +106,7 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
 
         show: function (html, title) {
             var isHelp = html === undefined ? true : false;
-         
+
 
             //var content = document.getElementById("basemapList");//später popupcontent
             var popupcontent = this.popupcontent;// document.getElementById("popupcontent");
@@ -183,31 +148,33 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
         },
 
         _help: function () {
-            var lines = [
-                "I : Show Page Info",
-               "W : Wireframe Mode",
-               "Shift + R : Reset Canvas"
-            ];
-            var html = '<table>';
-            lines.forEach(function (line) {
-                if (line.trim() === "") return;
+            //var lines = [
+            //    "I : Show Page Info",
+            //   "W : Wireframe Mode",
+            //   "Shift + R : Reset Canvas"
+            //];
+            //var html = '<table>';
+            //lines.forEach(function (line) {
+            //    if (line.trim() === "") return;
 
-                if (line[0] === "*") {
-                    html += '<tr><td colspan="2" class="star">' + line.substr(1).trim() + "</td></tr>";
-                }
-                else if (line.indexOf(":") === -1) {
-                    html += '<tr><td colspan="2">' + line.trim() + "</td></tr>";
-                }
-                else {
-                    var p = line.split(":");
-                    html += "<tr><td class='star'>" + p[0].trim() + "</td> <td class='star'>" + p[1].trim() + "</td></tr>";
-                }
-            });
-            html += "</table>";
-
-            var list = '<ul><li id="leftMouse"><img src="content/img/leftMouse.png"> Rotate 3D Model</li>' +
-            '<li id="middleMouse"><img src="content/img/middleMouse.png"> Zoom 3D Model</li>' +
-            '<li id="rightMouse"><img src="content/img/rightMouse.png"> Pan 3D Model</li></ul>';
+            //    if (line[0] === "*") {
+            //        html += '<tr><td colspan="2" class="star">' + line.substr(1).trim() + "</td></tr>";
+            //    }
+            //    else if (line.indexOf(":") === -1) {
+            //        html += '<tr><td colspan="2">' + line.trim() + "</td></tr>";
+            //    }
+            //    else {
+            //        var p = line.split(":");
+            //        html += "<tr><td class='star'>" + p[0].trim() + "</td> <td class='star'>" + p[1].trim() + "</td></tr>";
+            //    }
+            //});
+            //html += "</table>";
+            var html = "";
+            //var imagePath = $UrlHelper.resolve('~') + "content/img/";
+            var imagePath = util.rootFolder() + "content/img/";
+            var list = '<ul><li id="leftMouse"><img src=' + imagePath + 'leftMouse.png> Rotate 3D Model</li>' +
+            '<li id="middleMouse"><img src=' + imagePath + 'middleMouse.png> Zoom 3D Model</li>' +
+            '<li id="rightMouse"><img src=' + imagePath + 'rightMouse.png> Pan 3D Model</li></ul>';
             html += list;
 
 

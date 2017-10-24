@@ -4,7 +4,7 @@
     function Raycaster(origin, direction, near, far) {
 
         //this.ray = new THREE.Ray(origin, direction);
-       
+
 
         this.near = near || 0;
         this.far = far || Infinity;
@@ -31,9 +31,9 @@
 
         /**
     	 * constructor: Raycaster
-    	 */       
+    	 */
         //init: function (origin, direction, near, far) {
-          
+
         //   this.ray = new THREE.Ray(origin, direction);
 
         //    this.near = near || 0;
@@ -56,7 +56,7 @@
             this.direction = direction;
             //this.faces = faces;
             this.check = check != undefined ? check : true;
-          
+
             var intersects = [];
 
             if (Array.isArray(faces) === false) {
@@ -65,7 +65,7 @@
             }
             for (var i = 0, l = faces.length; i < l; i++) {
                 //this.intersectObject(faces[i], this, intersects);
-               
+
                 //var xMax = Math.max(faces[i].nodes[0].x, faces[i].nodes[1].x, faces[i].nodes[2].x);
                 //if (xMax < origin.x) {
                 //    continue;
@@ -82,13 +82,13 @@
             return intersects;
         },
 
-        identifyObjects: function (objects,origin, direction, check) {
+        identifyObjects: function (objects, origin, direction, check) {
             //this.ray = new THREE.Ray(origin, direction);
             this.origin = origin;
             this.direction = direction;
             //this.faces = faces;
             this.check = check != undefined ? check : true;
-          
+
             var intersects = [];
 
             if (Array.isArray(objects) === false) {
@@ -103,13 +103,13 @@
             return intersects;
         },
 
-        intersectObject: function( object, raycaster, intersects) {
+        intersectObject: function (object, raycaster, intersects) {
             if (object.visible === false) { return; }
             //object.raycast(raycaster, intersects);
             this.raycast(object, intersects);
         },
 
-      
+
 
         containsPoint: function (box) {
 
@@ -125,39 +125,39 @@
         },
 
         raycast3: function (face, intersects, i) {
-            
+
 
             //var geometry = object.geometry;
             //var material = object.material;
             //var matrixWorld = object.matrixWorld;
-         
 
-                    
+
+
             var intersectionPoint = new THREE.Vector3(this.origin.x, this.origin.y, 0);
 
             var vA = face.nodes[0].pos;
             var vB = face.nodes[1].pos;
             var vC = face.nodes[2].pos;
 
-                 
 
-                  
-                   
+
+
+
             //intersection = this.checkBufferGeometryIntersection(object, positions, a, b, c);
 
             var intersection = this.checkIntersection(face, vA, vB, vC, intersectionPoint);
-                   
+
             if (intersection) {
-                intersection.faceIndex =i; // triangle number in indices buffer semantics
+                intersection.faceIndex = i; // triangle number in indices buffer semantics
                 intersects.push(intersection);
             }
 
-            
+
 
         },
 
         raycast: function (object, intersects) {
-            
+
 
             var geometry = object.geometry;
             var material = object.material;
@@ -172,7 +172,7 @@
             //if (this.ray.intersectsSphere(sphere) === false) {
             //    return;
             //}
-            if(this.check){
+            if (this.check) {
                 if (this.containsPoint(geometry.boundingBox) === false) {
                     return;
                 }
@@ -184,7 +184,7 @@
                 var a, b, c;
                 var index = geometry.index;
                 var attributes = geometry.attributes;
-                var positions = attributes.position.array;              
+                var positions = attributes.position.array;
                 //var positions = this.origin.x <= 0 ? attributes.firstArray.array : attributes.secondArray.array;
 
                 //if (attributes.uv !== undefined) {
@@ -230,19 +230,19 @@
 
         },
 
-        checkBufferGeometryIntersection: function( object, positions, a, b, c ) {
+        checkBufferGeometryIntersection: function (object, positions, a, b, c) {
             //var vA = new THREE.Vector3();
             //var vB = new THREE.Vector3();
             //var vC = new THREE.Vector3();
             var intersectionPoint = new THREE.Vector3(this.origin.x, this.origin.y);
 
-		    this.vA.fromArray( positions, a * 3 );
-            this.vB.fromArray( positions, b * 3 );
-            this.vC.fromArray( positions, c * 3 );
+            this.vA.fromArray(positions, a * 3);
+            this.vB.fromArray(positions, b * 3);
+            this.vC.fromArray(positions, c * 3);
 
-            var intersection = this.checkIntersection( object, this.vA, this.vB, this.vC, intersectionPoint );
+            var intersection = this.checkIntersection(object, this.vA, this.vB, this.vC, intersectionPoint);
 
-            if ( intersection ) {
+            if (intersection) {
 
                 //if ( uvs ) {
 
@@ -263,9 +263,9 @@
 
         },
 
-       
 
-        checkIntersection: function( object, pA, pB, pC, point ) {
+
+        checkIntersection: function (object, pA, pB, pC, point) {
             //var intersectionPointWorld = new THREE.Vector3();
 
             //var intersect;
@@ -285,7 +285,7 @@
                 if (this.pointInTriangleBoundingBox(pA.x, pA.y, pB.x, pB.y, pC.x, pC.y)) {
                     intersect = this.intersectTriangle(pA, pB, pC, false, point);
                 }
-               
+
             }
 
             //}
@@ -305,51 +305,46 @@
             };
 
         },
-      
+
 
         //first method:
-        pointInTriangle1: function(x1, y1, x2, y2, x3, y3, x, y)
-        {
-            var denominator = ((y2 - y3)*(x1 - x3) + (x3 - x2)*(y1 - y3));
-            var a = ((y2 - y3)*(x - x3) + (x3 - x2)*(y - y3)) / denominator;
-            var b = ((y3 - y1)*(x - x3) + (x1 - x3)*(y - y3)) / denominator;
+        pointInTriangle1: function (x1, y1, x2, y2, x3, y3, x, y) {
+            var denominator = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3));
+            var a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denominator;
+            var b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denominator;
             var c = 1 - a - b;
- 
+
             return 0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1;
         },
         //second method:
-        pointInTriangle2: function(x1, y1, x2, y2, x3, y3, x, y)
-        {
-            var denominator = (x1*(y2 - y3) + y1*(x3 - x2) + x2*y3 - y2*x3);
-            var t1 = (x*(y3 - y1) + y*(x1 - x3) - x1*y3 + y1*x3) / denominator;
-            var t2 = (x*(y2 - y1) + y*(x1 - x2) - x1*y2 + y1*x2) / -denominator;
+        pointInTriangle2: function (x1, y1, x2, y2, x3, y3, x, y) {
+            var denominator = (x1 * (y2 - y3) + y1 * (x3 - x2) + x2 * y3 - y2 * x3);
+            var t1 = (x * (y3 - y1) + y * (x1 - x3) - x1 * y3 + y1 * x3) / denominator;
+            var t2 = (x * (y2 - y1) + y * (x1 - x2) - x1 * y2 + y1 * x2) / -denominator;
             var s = t1 + t2;
- 
+
             return 0 <= t1 && t1 <= 1 && 0 <= t2 && t2 <= 1 && s <= 1;
         },
 
         //third method
-        pointInTriangle: function(x1, y1, x2, y2, x3, y3, x, y)
-        {
+        pointInTriangle: function (x1, y1, x2, y2, x3, y3, x, y) {
             var checkSide1 = this.side(x1, y1, x2, y2, x, y) >= 0;
             var checkSide2 = this.side(x2, y2, x3, y3, x, y) >= 0;
             var checkSide3 = this.side(x3, y3, x1, y1, x, y) >= 0;
             return checkSide1 && checkSide2 && checkSide3;
         },
-        side: function(x1, y1, x2, y2, x, y)
-        {
-            return (y2 - y1)*(x - x1) + (-x2 + x1)*(y - y1);
+        side: function (x1, y1, x2, y2, x, y) {
+            return (y2 - y1) * (x - x1) + (-x2 + x1) * (y - y1);
         },
 
         //pre-check
-        pointInTriangleBoundingBox: function(x1, y1, x2, y2, x3, y3)
-        {
+        pointInTriangleBoundingBox: function (x1, y1, x2, y2, x3, y3) {
             var xMin = Math.min(x1, Math.min(x2, x3)) - EPSILON;
             var yMin = Math.min(y1, Math.min(y2, y3)) - EPSILON;
 
-            var xMax = Math.max(x1, Math.max(x2, x3)) + EPSILON;           
+            var xMax = Math.max(x1, Math.max(x2, x3)) + EPSILON;
             var yMax = Math.max(y1, Math.max(y2, y3)) + EPSILON;
-                              
+
             return !(this.origin.x < xMin || this.origin.x > xMax || this.origin.y < yMin || this.origin.y > yMax);
             //var xIntersects = (this.origin.x < xMax) && (this.origin.x > xMin);
             //if (xIntersects === true) {
@@ -359,9 +354,9 @@
             //    }
             //}
             //return false;
-            
+
         },
-     
+
         intersectTriangle: function () {
 
             // Compute the offset origin, edges, and normal.
@@ -456,7 +451,7 @@
 
         }
 
-        
+
     };
 
     return Raycaster;

@@ -1,9 +1,9 @@
 ﻿//Contents of nls/template.js
-define('nls/template',{
+define('nls/template', {
     // root is mandatory.
     root: ({
         viewer: {
-          
+
             terms: {
                 narrower: "narrower concepts",
                 activeNarrower: "including narrower concepts",
@@ -35,11 +35,11 @@ define('nls/template',{
                 '</table>'
             },
             footer: {
-                    owner: "GBA",
-                    actualYear: "&#169; " + new Date().getFullYear() + " GBA",
-                    contact: "Contact",
-                    accessConstraints: "Terms of use",
-                    disclaimer: "Disclaimer"
+                owner: "GBA",
+                actualYear: "&#169; " + new Date().getFullYear() + " GBA",
+                contact: "Contact",
+                accessConstraints: "Terms of use",
+                disclaimer: "Disclaimer"
             },
             buttons: {
                 btnClearFilter: "Clear"
@@ -71,20 +71,20 @@ define('nls/template',{
                 NLS_pagingInfo: "(${index} of ${total})",
                 NLS_attach: "Attachments"
             },
-            boreholepopup: {              
-                NLS_searching: "Searching",              
-                NLS_close: "Close",             
+            boreholepopup: {
+                NLS_searching: "Searching",
+                NLS_close: "Close",
                 NLS_maximize: "Maximize",
                 NLS_minimize: "Minimize"
             },
             boreholetool: {
-                title:"borehole tool"
+                title: "borehole tool"
             },
             home: {
                 button: "Home",
                 title: "Default extent"
             },
-            more: {                
+            more: {
                 moreInfo: "More controls",
                 moreButton: "&dArr;",
                 lessInfo: "Hide controls",
@@ -94,7 +94,7 @@ define('nls/template',{
                 showBorder: "extrude",
                 hideBorder: "hide border"
             },
-            zoom: {               
+            zoom: {
                 zoomInTitle: 'Zoom in',
                 zoomOutTitle: 'Zoom out'
             },

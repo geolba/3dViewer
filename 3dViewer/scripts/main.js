@@ -1,4 +1,13 @@
-﻿// Start the app
+﻿/*
+ * 3dViewer library
+ * Copyright (c) 2014-2017, Geologische Bundesanstalt (GBA)
+ * Authors: Arno Kaimbacher
+ * All Rights Reserved.
+ * Use, reproduction, distribution, and modification of this code is subject to the terms and
+ * conditions of the MIT license, available at http://www.opensource.org/licenses/mit-license.php
+ *
+ */
+//main module 
 //require(['app/Project', 'app/DemLayer', 'helper/utilities', 'app/appmodule', 'jquery'], function (Project, DemLayer, util, app, $) {
 define('main', ['app/Dataservice', 'helper/utilities', 'app/appmodule', 'jquery'], function (Dataservice, util, app, $) {
 

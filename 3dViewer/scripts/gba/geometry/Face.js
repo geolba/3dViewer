@@ -4,7 +4,7 @@
     //Face.prototype = {
     var Face = Class.extend({
 
-        init : function(nodes, edges) {
+        init: function (nodes, edges) {
             this.nodes = nodes;
             this.edges = edges;
         }

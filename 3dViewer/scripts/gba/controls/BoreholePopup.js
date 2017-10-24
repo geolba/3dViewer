@@ -20,16 +20,16 @@ define('gba/controls/BoreholePopup', [
 
     //var proto = Events.prototype;
     //var Mixin = { Events: proto };
-      
+
     var BoreholePopup = Control.extend({
 
         includes: mixin.Events,
-       
-        declaredClass: "gba.controls.BoreholePopup",     
+
+        declaredClass: "gba.controls.BoreholePopup",
 
         //visibleWhenEmpty: true, //!0,
         //hideDelay: 1000, //1E3,
-       
+
         options: {
             position: 'topleft',
             width: '300px',
@@ -41,7 +41,7 @@ define('gba/controls/BoreholePopup', [
             //this.initialize();
             //util.mixin(this, options);
             this._innerHTML = "Es wurde noch keine Bohrloch ausgewählt!";
-            util.setOptions(this, options); 
+            util.setOptions(this, options);
             //this._startPosition = -(parseInt(this.options.width, 10));
             //this._isLeftPosition = true;
             this._hasContent = false;
@@ -52,7 +52,7 @@ define('gba/controls/BoreholePopup', [
         //addTo: function (map) {
         //    this._map = map;
         //    this._container = this.onAdd(map);
-           
+
         //    //var pos = this.getPosition();//"topright"
         //    //var corner = map._controlCorners[pos];
 
@@ -78,7 +78,7 @@ define('gba/controls/BoreholePopup', [
             //var container = this.domNode =  document.getElementById(this.source);
             var b = this._nls = util.mixin({}, N.widgets.boreholepopup);
 
-           
+
             var container = this._container = dom.createDom("div", { "class": "gba-control-borehole" });
 
             //button:
@@ -105,8 +105,8 @@ define('gba/controls/BoreholePopup', [
             //this._minimizeButton = dom.createDom('div', {
             //    "class": "close", innerHTML: "<", title: b.NLS_minimize
             //}, this._menu);         
-         
-          
+
+
             this._contenLable = dom.createDom('lable', { innerHTML: "Virtuelles Bohrprofil laut Modell <br /> (Höhenangaben in m Seehöhe)" },
                 this._body);
 
@@ -115,7 +115,7 @@ define('gba/controls/BoreholePopup', [
             this._contentPane.innerHTML = this._innerHTML;
             this._contentPane.style.clear = 'both';
 
-           
+
 
             domEvent
                 //.on(this._maxButton, 'click', domEvent.stopPropagation)
@@ -133,14 +133,14 @@ define('gba/controls/BoreholePopup', [
                    this._close,
                    this);
 
-                  
+
             this._toggleVisibility(false);
             return container;
-        },      
+        },
 
         show: function (a) {
             //this._clearContent();
-            this._toggleVisibility(true);   
+            this._toggleVisibility(true);
             //this._animate(true);
         },
 
@@ -156,7 +156,7 @@ define('gba/controls/BoreholePopup', [
 
         _setContent: function (innerHTML) {
 
-           
+
 
             if (innerHTML instanceof HTMLElement) {
                 this._contentPane.innerHTML = "";
@@ -173,9 +173,9 @@ define('gba/controls/BoreholePopup', [
         setChartContent: function (data) {
             this._contentPane.innerHTML = "";
 
-            var valTextColor = "ffffff";         
+            var valTextColor = "ffffff";
             this.barChart = new BarChart("d17100",
-                                   320, valTextColor, 'full',                                                                
+                                   320, valTextColor, 'full',
                                      400);
             this.barChart.draw(data);
             this._contentPane.appendChild(this.barChart._container);
@@ -185,7 +185,7 @@ define('gba/controls/BoreholePopup', [
             this._hasContent = true;
         },
 
-        _close: function(){
+        _close: function () {
             this._clearContent();
             this._toggleVisibility(false);
             this.emit("closed");
@@ -193,14 +193,14 @@ define('gba/controls/BoreholePopup', [
 
         _clearContent: function () {
             $(this._contentPane).html('');
-            this._hasContent = false;            
+            this._hasContent = false;
         },
 
         _toggleVisibility: function (visible) {
-           
+
             this._setVisibility(visible);
             this.isShowing = visible;
-           
+
         },
 
         _setVisibility: function (addOrRemove) {
@@ -213,10 +213,10 @@ define('gba/controls/BoreholePopup', [
             if (addOrRemove == true) {
                 maxButtonVisible = !addOrRemove;
             }
-            //if remove , then max Button only visible if popup has content
+                //if remove , then max Button only visible if popup has content
             else if (addOrRemove == false) {
                 maxButtonVisible = this._hasContent;
-            }            
+            }
             $(this._maxButton).css("visibility", maxButtonVisible ? "visible" : "hidden");
         },
 
@@ -235,7 +235,7 @@ define('gba/controls/BoreholePopup', [
             //this.getContainer().parentNode.removeChild(this.getContainer());
             this._innerHTML = this._hasContent = this._nls = this._menu = this._body = this._contenLable = this._contentPane = this._maxButton = this._clearButton = null;
         }
-        
+
     });
 
     return BoreholePopup;

@@ -10,11 +10,11 @@
         init: function (color, val, valcolor, render, valHeight) {
 
             // The render type - can be light and full
-            this.renderType = render;         
+            this.renderType = render;
             // the 3D object for the text label
             this.labelobj = null;
             // should we set the wireframe
-            this.hasWireframe = false;          
+            this.hasWireframe = false;
             //this.val = val;          
             ////this.h = 0.5;
 
@@ -27,7 +27,7 @@
             //this.lumcolor = colorLuminance(color, 0.5);
             //this.darklumcolor = colorLuminance(color, -0.3);
             this.valcolor = parseInt(valcolor, 16);
-                       
+
             this.alignRight = false;
 
             //var container = this._container = dom.createDom("table", { "class": "chartTable" });
@@ -45,7 +45,7 @@
             //this.animationInterval = 100;
             //this.animationSteps = 10;
             var container = this._container = dom.createDom("canvas", { "class": "chartCanvas" });
-           
+
         },
 
         addBar: function (barHeight, color, name) {
@@ -63,8 +63,8 @@
                 barColor = "#" + this._zfill(color.toString(16), 6); //webservicelayer.materialParameter[0].color;
             }
 
-           
-            var _tr = dom.createDom("tr", {style: "width:100px;"}, this._container);
+
+            var _tr = dom.createDom("tr", { style: "width:100px;" }, this._container);
             var _profileColumn = dom.createDom("td", {}, _tr);
             //var span = dom.createDom("span", { "class": "tooltip", title: "Beschreibung...", innerHTML: " info" }, _td);
             var geometry = dom.createDom("div", {
@@ -132,7 +132,7 @@
             //  maxBarHeight);
 
             // For each bar
-            for (var i = 0; i < arr.length; i ++) {
+            for (var i = 0; i < arr.length; i++) {
 
                 var color = arr[i].color;
                 var barColor = "";
@@ -156,14 +156,14 @@
 
                 var x = this.margin;// this.margin + i * this.width / numOfBars
                 var y = graphAreaHeight - barHeight;
-                if (i == 0){
-                    this.startPointY = y +(barHeight);
+                if (i == 0) {
+                    this.startPointY = y + (barHeight);
                 }
-             
+
 
 
                 // Draw bar color if it is large enough to be visible
-                if (barHeight > border * 2) {                 
+                if (barHeight > border * 2) {
 
                     ctx.fillStyle = barColor;// gradient;
                     // Fill rectangle with gradient
@@ -172,14 +172,14 @@
                       barWidth - border * 2,
                       barHeight - border * 2);
                 }
-                
+
 
                 // Write bar value
                 if (barHeight > border + 9) {
-                ctx.fillStyle = "#333";
-                ctx.font = "bold 9px sans-serif";
-                //ctx.textAlign = "center";
-                // Use try / catch to stop IE 8 from going to error town
+                    ctx.fillStyle = "#333";
+                    ctx.font = "bold 9px sans-serif";
+                    //ctx.textAlign = "center";
+                    // Use try / catch to stop IE 8 from going to error town
                     try {
                         if (arr[i].name !== "Basement") {
                             ctx.fillText("Mächtigkeit " + arr[i].name + ": " + Math.round(arr[i].dist),//.toFixed(2),
@@ -192,9 +192,9 @@
                               x + 30,
                               y + (barHeight / 2) + 4.5);
                         }
+                    }
+                    catch (ex) { }
                 }
-                catch (ex) { }
-            }
 
                 graphAreaHeight = graphAreaHeight - (barHeight - (border / 2));
 
@@ -240,7 +240,7 @@
 
         },
 
-        getStatTable: function (arr){
+        getStatTable: function (arr) {
             var statTable = dom.createDom("table", { "class": "chartTable" });
             var _headerRow = dom.createDom("tr", { style: "width:100px;" }, statTable);
             var _profileHeaderColumn = dom.createDom("th", {}, _headerRow);
@@ -258,8 +258,8 @@
 
             // For each bar
             //for (var i = 0; i < arr.length; i++) {
-            for (var i = arr.length -1; i >= 0; i--) {
-               
+            for (var i = arr.length - 1; i >= 0; i--) {
+
                 var color = arr[i].color;
                 var barColor = "";
                 if (typeof color === "string") {

@@ -4,7 +4,9 @@
   "dependencies": {
     "font-awesome": "4.6.1",
     "pure": "0.6.0",
-    "three.js": "0.82.0"
+    "three.js": "^0.87.0",
+    "requirejs": "^2.3.5",
+    "jquery": "^3.2.1"
   },
   "exportsOverride": {
     "font-awesome": {
