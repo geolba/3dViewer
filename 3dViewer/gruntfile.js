@@ -1,6 +1,24 @@
 ﻿/// <vs />
 module.exports = function (grunt) {
+    grunt.loadNpmTasks('grunt-string-replace');
+    grunt.loadNpmTasks('grunt-bowercopy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+
     grunt.initConfig({
+
+        'string-replace': {
+            dist: {
+                src: './dist/calc.js',
+                dest: './dist/calc.js',
+                options: {
+                    replacements: [{
+                        pattern: '../bower_components/three.js/three.js',
+                        replacement: 'threeLib.js'
+                    }]
+                }
+            }
+        },
 
         clean: {
             // clean the output directory before each build
@@ -20,13 +38,21 @@ module.exports = function (grunt) {
                 options: {
                     //keepBuildDir: false,
                     optimizeCss: "default",
-                    cssIn: "content/page.css",
-                    out: "content/concat.min.css"
+                    cssIn: "content/app.css",
+                    out: "content/app.min.css"
                 }
             },
+            compileLibStyles: {
+                    options: {
+                        //keepBuildDir: false,
+                            optimizeCss: "default",
+                            cssIn: "content/lib.css",
+                            out: "content/lib.min.css"
+                }
+                        },
             compileScripts: {
                 options: {
-                    mainConfigFile: "scripts/config.js",
+                    mainConfigFile: "scripts/buildconfig.js",
                     //appDir: "src",
                     // base path for the r.js compiler to use
                     baseUrl: "scripts",
@@ -41,61 +67,36 @@ module.exports = function (grunt) {
                     paths: {
                         // --- start THREE sub-components
                         three: 'app/three',
-                        threeCore: 'lib/threejs/three',
-                        //OrbitControls: 'lib/TrackballControls',                      
-                        jquery: 'lib/jquery/jquery-2.1.4',                     
-                        i18n: "i18n"
+                        threeLib: '../bower_components/three.js/three',
+                        require: '../bower_components/requirejs/require',
+                        jquery: '../bower_components/jquery/dist/jquery',
+                        //i18n: "i18n"
                     },
                     modules: [{
                        name: "main",
                        exclude: [
                            "jquery",                          
                            //"i18n",
-                           "threeCore",
+                           "threeLib",
                            "lib/threejs/OrbitControls",
                            "lib/proj4js/proj4js-amd",
                            "lib/leaflet/Class",
                            "lib/leaflet/Control",
                            "lib/jrespond/jRespond"
                            //"nls/template"                          
-                       ]
+                       ]                        
                     }]
 
                 }
             }
         },
         
-        bower: {
-            install: {
-                options: {
-                    //Whether you want to run bower install task itself 
-                    install: true,
-                    targetDir: 'content/components',
-                    //Will clean target dir before running install.
-                    cleanTargetDir: true,
-                    layout: 'byComponent'
-                    //layout: function (type, component, source) {
-                    //    return type;
-                    //}
-                }
-            }
-        },
-        
-        bowercopy: {
-
+             
+        'bowercopy': {
             options: {
                 // Bower components folder will be removed afterwards
                 clean: false
-            },
-            js: {
-                options: {
-                    destPrefix: 'scripts/lib/bower'
-                },
-                files: {
-                    'threejs/three.js': 'three.js/three.js'
-                }
-
-            },
+            },          
             css: {
                 options: {
                     destPrefix: 'content/components'
@@ -123,17 +124,11 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.loadNpmTasks('grunt-bowercopy');
-
-    // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-bower-task');
- 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
+   
 
     //alaiases:
     //clean esri folder & download esri js files
     //grunt.registerTask('cleanUnnecessaryFiles', ['clean:uncompressed', 'clean:intellisense']);
-    grunt.registerTask('buildDist', ['requirejs:compileStyles', 'requirejs:compileScripts', 'clean:uncompressed', 'clean:intellisense']);
+    grunt.registerTask('build', ['clean:dist','bowercopy:css', 'requirejs:compileStyles', 'requirejs:compileLibStyles', 'requirejs:compileScripts', 'string-replace:dist']);
 
 };

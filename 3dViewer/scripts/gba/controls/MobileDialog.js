@@ -30,42 +30,7 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
             //this.domNode.setAttribute('id', 'popup');
             this.domNode = dom.createDom("div", { class: "popup" }, this.ownerDocumentBody);
             //this.domNode.setAttribute('id', 'popup');
-
-            //this.dialogDiv = dom.createDom("div", {
-            //    //class: "fm_basemap_list fm_overlay", 
-            //    //class: "fm_about fm_overlay", 
-            //    class: this.options.klass + " fm_overlay",
-            //    innerHTML: '<div id="popupbar"><b class="popuptitle">Help</b><div class="popup_close"></div></div>' +
-
-            //        //'<div id="basemapList" class="fm_handle"></div>' +
-            //         '<div id="popupcontent" class="fm_handle"></div>' +
-
-            //        '<div class="pageinfo">' +
-            //                            '<h1>About</h1>' +
-            //                            '<div id="about">' +
-            //                                                    "This project is using the following libraries:" +
-            //                                "<ul>" +
-
-            //                                    '<li>three.js + OrbitControls.js <a href="http://threejs.org/" target="_blank">http://threejs.org/</a>' +
-            //                                    ' <a href="./dist/lib/threejs/LICENSE.txt" target="_blank" class="license">MIT LICENSE</a></li>' +
-
-            //                                      '<li id="lib_jquery">jQuery <a href="https://jquery.org/" target="_blank">https://jquery.org/</a>' +
-            //                                ' <a href="https://jquery.org/license/" target="_blank" class="license">MIT LICENSE</a></li>' +
-
-            //                                '<li>RequireJS <a href="http://requirejs.org/" target="_blank">http://requirejs.org/</a>' +
-            //                                ' <a href="./dist/lib/requirejs/LICENSE.md" target="_blank" class="license">MIT LICENSE</a></li>' +
-
-            //                                '<li id="lib_proj4js">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a>' +
-            //                                ' <a href="./dist/lib/proj4js/LICENSE.md" target="_blank" class="license">LGPL LICENSE</a></li>' +
-
-            //                                 '<li id="lib_leaflet">leaflet - class.js and control.js <a href="http://leafletjs.com/" target="_blank">http://leafletjs.com/</a>' +
-            //                                ' <a href="./dist/lib/leaflet/LICENSE.md" target="_blank" class="license">LICENSE</a></li>' +
-
-            //                                '</ul>' +
-            //                            '</div>' +
-            //                        '</div>'
-            //}, this.domNode);
-
+                       
             this.dialogDiv = dom.createDom("div", {
                 //class: "fm_basemap_list fm_overlay", 
                 //class: "fm_about fm_overlay", 
@@ -101,7 +66,7 @@ define('gba/controls/MobileDialog', ["jquery", "lib/leaflet/Class", "helper/dom"
                                             ' <a href="https://jquery.org/license/" target="_blank" class="license">MIT LICENSE</a></li>' +
 
                                             '<li>RequireJS <a href="http://requirejs.org/" target="_blank">http://requirejs.org/</a>' +
-                                            ' <a href="./dist/lib/requirejs/LICENSE.md" target="_blank" class="license">MIT LICENSE</a></li>' +
+                                            ' <a href="https://github.com/requirejs/requirejs/blob/master/LICENSE" target="_blank" class="license">MIT LICENSE</a></li>' +
 
                                             '<li id="lib_proj4js">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a>' +
                                             ' <a href="./dist/lib/proj4js/LICENSE.md" target="_blank" class="license">LGPL LICENSE</a></li>' +

@@ -800,10 +800,9 @@ define('lib/threejs/OrbitControls',
                 this.emit('touchend');
                 state = STATE.NONE;
             },          
+   
             
-
         });
         
-        return THREE.OrbitControls;
-        
+        return THREE.OrbitControls;        
 });

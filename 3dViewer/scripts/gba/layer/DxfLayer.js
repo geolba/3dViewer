@@ -1949,7 +1949,7 @@
                     var index = b.geometry.index.array;
                     var vertices = b.geometry.attributes.position.array;
 
-                    this.work({ file: util.scriptFolder() + 'counting.js', args: { borderEdges: borderEdges, vertices: vertices, index: index, check: check } }).then(function (data) {
+                    this.work({ file: util.scriptFolder() + 'calc.js', args: { borderEdges: borderEdges, vertices: vertices, index: index, check: check } }).then(function (data) {
                         //Worker completed successfully
                         //console.log(data);
                         //document.getElementById("footerText").innerHTML = data.length;

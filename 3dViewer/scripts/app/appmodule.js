@@ -50,9 +50,7 @@
                 document.getElementById('legendHeaderText').innerHTML = title;
                 //document.getElementById('descriptionText').innerHTML = description;
                 document.getElementById('footerText').innerHTML = i18n.viewer.footer.owner;
-                //document.getElementById('creativeCommons').innerHTML = app._createCreativeCommonLogo('Copyright GBA, http://creativecommons.org/licenses/by-nc-nd/3.0/at/'); // configOptions.accessConstraints;
-
-
+               
                 /* Renderer */
                 var bgcolor = 0xfdfdfd;//appSettings.Options.bgcolor;
                 app.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -857,7 +855,7 @@
                         var link = '<a rel="license" href="' + url + '" target="_blank">' +
                            '<img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="content/img/cc_logo.png" />' +
                            '</a>';// +               
-                        var copyrightText = " &#8701; Klicken Sie hier zu Datennutzung und copyright";// url.replace("http://creativecommons.org/licenses/", "");
+                        var copyrightText = " &#8701; Klicken Sie hier zu Datennutzung und copyright";
                         copyrightText = "<span>" + copyrightText + "</span>";
                         return link + " " + copyrightText;
                     }

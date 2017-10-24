@@ -1,6 +1,6 @@
 ﻿// As THREE.js comes with many addons/plugins mix them all into one three object here
 //define(["threeCore", "OrbitControls"], function (threeCore) {
-define(["threeCore"], function (THREE) {
+define(["threeLib"], function (THREE) {
 
     function intersectObject(object, raycaster, intersects, recursive) {
 

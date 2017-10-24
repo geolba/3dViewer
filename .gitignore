@@ -4,6 +4,7 @@
 # User-specific files
 *.suo
 *.user
+*.userosscache
 *.sln.docstates
 
 # Build results
@@ -126,7 +127,8 @@ publish/
 ## TODO: Comment the next line if you want to checkin your
 ## web deploy settings but do note that will include unencrypted
 ## passwords
-#*.pubxml
+*.pubxml
+*.publishproj
 
 # NuGet Packages Directory
 packages/*
@@ -192,3 +194,5 @@ ModelManifest.xml
 /.vs/Image Optimizer/cache-lossless.txt
 /3dViewer/content/concat.min.css
 /3dViewer/bower_components/
+/3dViewer/content/lib.min.css
+/3dViewer/content/app.min.css
